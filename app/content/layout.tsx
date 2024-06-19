@@ -4,6 +4,7 @@ import Image from 'next/image';
 import React, { ReactNode } from 'react';
 import { RiMenuFill } from 'react-icons/ri';
 import { motion } from 'framer-motion';
+import ThemeToggle from '@/components/ThemeToggle';
 
 interface ContentLayoutProps {
   children: ReactNode;
@@ -48,9 +49,10 @@ export default function ContentLayout({ children }: ContentLayoutProps) {
             <Image src="/image.png" alt="Logo image" width={80} height={70} className='rounded-lg shadow-md' />
           </div>
           <div className="flex-none hidden lg:block">
-            <ul className="menu menu-horizontal text-xl text-blue-500">
+            <ul className="menu menu-horizontal text-xl">
               {/* Navbar menu content here */}
               {links}
+              <ThemeToggle />
             </ul>
           </div>
         </div>
@@ -61,8 +63,9 @@ export default function ContentLayout({ children }: ContentLayoutProps) {
       </div> 
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label> 
-        <ul className="menu p-4 w-52 h-screen flex justify-center bg-blue-500 text-white text-xl">
+        <ul className="menu p-4 w-60 h-screen flex items-center justify-center bg-blue-500 text-white text-2xl">
           {/* Sidebar content here */}
+          <ThemeToggle />
           {links}
         </ul>
       </div>
