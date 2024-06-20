@@ -3,7 +3,6 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { Typewriter } from "react-simple-typewriter";
-import ButtonWrapper from "../sub/SpotlightButton";
 
 export function LampDemo() {
   return (
@@ -70,7 +69,7 @@ export function LampDemo() {
           href="https://drive.google.com/file/d/1W-zqL_skTthSrsRyP5-t0RfcDWnrgLVX/view?usp=sharing"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-bold text-white text-xl transition-all duration-300 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+          className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white text-2xl transition-all duration-300 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
         >
           View My Resume
         </a>

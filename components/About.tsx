@@ -10,7 +10,7 @@ export default function About() {
       {/* first section */}
       <LampDemo />
       {/* second section */}
-      <HeroHighlight className="space-y-10">
+      <HeroHighlight className="space-y-10 z-0">
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: [20, -5, 0] }}

@@ -1,14 +1,15 @@
 import About from '@/components/About';
+import Skills from '@/components/Skills';
 
 export default function ContentLayoutPage() {
 
   return (
-    <main>
+    <main className='bg-slate-950'>
       <section id="aboutMe">
         <About />
       </section>
       <section id="skills">
-        <h2>Skills</h2>
+        <Skills/>
       </section>
       <section id="projects">
         <h2>Projects</h2>

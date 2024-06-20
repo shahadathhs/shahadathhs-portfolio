@@ -63,7 +63,7 @@ export default function ContentLayout({ children }: ContentLayoutProps) {
       </div> 
       <div className="drawer-side">
         <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label> 
-        <ul className="menu p-4 w-60 h-screen flex items-center justify-center bg-slate-950 text-white text-2xl">
+        <ul className="menu p-4 w-60 h-screen flex items-center justify-center bg-slate-950 text-white text-2xl z-50">
           {/* Sidebar content here */}
           {/* <ThemeToggle /> */}
           {links}
