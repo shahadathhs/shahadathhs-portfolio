@@ -51,7 +51,7 @@ export const HoverEffect = ({
             )}
           </AnimatePresence>
           <Card>
-            <CardTitle>{item.title}</CardTitle>
+            <CardTitle className="text-xl font-bold text-white">{item.title}</CardTitle>
             <CardDescription className="grid grid-cols-1 gap-3">
               {item.description.map((skill, idx) => (
                 <motion.span 
@@ -61,8 +61,8 @@ export const HoverEffect = ({
                   transition={{ type: 'spring', stiffness: 300 }}
                   className='border-2 p-3 rounded-md shadow-sm text-center flex flex-col items-center'
                 >
-                  <span>{skill.name}</span>
-                  <span className="text-sm text-white">({skill.level})</span>
+                  <span className="text-lg font-semibold text-white">{skill.name}</span>
+                  <span className="text-md text-white">({skill.level})</span>
                 </motion.span>
               ))}
             </CardDescription>

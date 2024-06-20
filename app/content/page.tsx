@@ -1,4 +1,5 @@
 import About from '@/components/About';
+import { Projects } from '@/components/Projects';
 import Skills from '@/components/Skills';
 
 export default function ContentLayoutPage() {
@@ -12,7 +13,7 @@ export default function ContentLayoutPage() {
         <Skills/>
       </section>
       <section id="projects">
-        <h2>Projects</h2>
+        <Projects />
       </section>
       <section id="education">
         <h2>Education</h2>
