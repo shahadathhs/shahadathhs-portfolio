@@ -44,7 +44,7 @@ export function Projects() {
   ]
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-2 gap-10'>
+    <div className='grid grid-cols-1 md:grid-cols-2 gap-10 overflow-x-hidden'>
       {
         projects.map((project, index) =>
           <CardContainer key={index} className="inter-var">
