@@ -10,21 +10,31 @@ interface ThemeContextType {
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-// Theme provider component
 interface ThemeProviderProps {
   children: ReactNode;
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState<string>(() => localStorage.getItem('theme') || 'light');
+  const [theme, setTheme] = useState<string>('synthwave');
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    if (typeof window !== 'undefined') {
+      const storedTheme = localStorage.getItem('theme');
+      setTheme(storedTheme || 'synthwave');
+      setMounted(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    }
+  }, [theme, mounted]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dracula' : 'light'));
+    setTheme((prevTheme) => (prevTheme === 'synthwave' ? 'dracula' : 'synthwave'));
   };
 
   const themeInfo: ThemeContextType = { theme, toggleTheme };

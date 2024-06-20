@@ -18,7 +18,7 @@ const ThemeToggle: React.FC = () => {
       <label className="swap swap-rotate">
         <input onClick={toggleTheme} type="checkbox" className="theme-controller" />
         {
-          theme === 'light' 
+          theme === 'synthwave' 
           ? <GoSun className="text-3xl m-2" />
           : <GiMoon className="text-3xl m-2" />
         }

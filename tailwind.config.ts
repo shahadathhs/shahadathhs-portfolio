@@ -21,17 +21,17 @@ const config: Config = {
   daisyui: {
     themes: [
       // white
-      "light",
-      "cupcake",
-      "corporate",
+      // "light",
+      // "cupcake",
+      // "corporate",
       // black
-      "dark",
-      "synthwave",
+      // "dark",
+      // "synthwave",
       "black",
-      "luxury",
-      "dracula",
-      "night",
-      "dim",
+      // "luxury",
+      // "dracula",
+      // "night",
+      // "dim",
     ],
   },
 };

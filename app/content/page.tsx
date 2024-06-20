@@ -1,14 +1,11 @@
-"use client"
-
-import { motion } from 'framer-motion';
-import Image from 'next/image';
+import About from '@/components/About';
 
 export default function ContentLayoutPage() {
 
   return (
     <main>
       <section id="aboutMe">
-        <h2>About Me</h2>
+        <About />
       </section>
       <section id="skills">
         <h2>Skills</h2>
