@@ -3,12 +3,13 @@ import React from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { Typewriter } from "react-simple-typewriter";
+import ButtonWrapper from "../sub/SpotlightButton";
 
 export function LampDemo() {
   return (
     <LampContainer>
       <motion.h1
-        initial={{ opacity: 0.5, y: 100 }}
+        initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
           delay: 0.3,
@@ -18,15 +19,15 @@ export function LampDemo() {
         className="mt-4 bg-gradient-to-br from-slate-300 to-slate-500 
         py-4 bg-clip-text text-center text-3xl font-medium tracking-tight text-white md:text-5xl"
       >
-        Hi, I am
+        Hi, This is
       </motion.h1>
       
       <motion.h1
-        initial={{ opacity: 0.5, y: 100 }}
+        initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
-          delay: 0.5,
-          duration: 2,
+          delay: 1,
+          duration: 2.5,
           ease: "easeInOut",
         }}
         className="mt-2 bg-gradient-to-br from-slate-300 to-slate-500 
@@ -36,11 +37,11 @@ export function LampDemo() {
       </motion.h1>
 
       <motion.div
-        initial={{ opacity: 0.5, y: 100 }}
+        initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
-          delay: 0.7,
-          duration: 2.5,
+          delay: 2,
+          duration: 3.5,
           ease: "easeInOut",
         }}
         className="mt-2 py-4 text-center text-3xl font-medium tracking-tight text-white md:text-5xl"
@@ -53,6 +54,26 @@ export function LampDemo() {
           deleteSpeed={50}
           delaySpeed={1000}
         />
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 3,
+          duration: 4.5,
+          ease: "easeInOut",
+        }}
+        className="mt-6 flex justify-center"
+      >
+        <a
+          href="https://drive.google.com/file/d/1W-zqL_skTthSrsRyP5-t0RfcDWnrgLVX/view?usp=sharing"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-bold text-white text-xl transition-all duration-300 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+        >
+          View My Resume
+        </a>
       </motion.div>
     </LampContainer>
   );
@@ -72,7 +93,7 @@ export const LampContainer = ({
         className
       )}
     >
-      <div className="relative flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0 ">
+      <div className="relative mt-52 flex w-full flex-1 scale-y-125 items-center justify-center isolate z-0">
         <motion.div
           initial={{ opacity: 0.5, width: "15rem" }}
           whileInView={{ opacity: 1, width: "30rem" }}
@@ -132,7 +153,7 @@ export const LampContainer = ({
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950 "></div>
       </div>
  
-      <div className="relative z-50 flex -translate-y-80 flex-col items-center px-5">
+      <div className="relative z-50 flex -translate-y-40 flex-col items-center px-5">
         {children}
       </div>
     </div>
