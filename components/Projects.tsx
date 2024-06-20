@@ -3,10 +3,10 @@
 import Image from "next/image";
 import React from "react";
 import { CardBody, CardContainer, CardItem } from "./ui/3d-card";
-import donateLifePic from "../public/donateLife-banner.png";
-import roomReadyPic from "../public/roomready-banner.png";
-import craftPic from "../public/craft-banner.png";
-import industryPic from "../public/industry.png";
+import donateLifePic from "@/public/donatelife-banner.png";
+import roomReadyPic from "@/public/roomready-banner.png";
+import craftPic from "@/public/craft-banner.png";
+import industryPic from "@/public/industry.png";
 
 export function Projects() {
   const projects = [
@@ -49,7 +49,7 @@ export function Projects() {
         projects.map((project, index) =>
           <CardContainer key={index} className="inter-var">
             <CardBody className="relative group/card  hover:shadow-2xl hover:shadow-emerald-500/[0.1] 
-            bg-gradient-to-r from-slate-900 to-slate-850 border-white/[0.2]  w-auto sm:w-[30rem] h-auto rounded-xl p-6 border  ">
+            bg-gradient-to-r from-slate-900 to-slate-850 border-white/[0.2]  w-4/5 sm:w-[30rem] h-auto rounded-xl p-6 border  ">
               {/* project name */}
               <CardItem
                 translateZ="50"
@@ -94,7 +94,7 @@ export function Projects() {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Live Site →
+                    Live Site
                   </a>
                 </CardItem>
                 {/* github */}

@@ -6,7 +6,3 @@ html {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
 }
-
-section {
-  min-height: 600px;
-}
