@@ -12,7 +12,7 @@ export function LampDemo() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
           delay: 0.3,
-          duration: 1.5,
+          duration: 1.3,
           ease: "easeInOut",
         }}
         className="mt-4 bg-gradient-to-br from-slate-300 to-slate-500 
@@ -20,13 +20,13 @@ export function LampDemo() {
       >
         Hi, This is
       </motion.h1>
-      
+
       <motion.h1
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
           delay: 1,
-          duration: 2.5,
+          duration: 2.2,
           ease: "easeInOut",
         }}
         className="mt-2 bg-gradient-to-br from-slate-300 to-slate-500 
@@ -39,14 +39,14 @@ export function LampDemo() {
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
-          delay: 2,
-          duration: 3.5,
+          delay: 1.7,
+          duration: 3.1,
           ease: "easeInOut",
         }}
         className="mt-2 py-4 text-center text-3xl font-medium tracking-tight text-white md:text-5xl"
       >
         <Typewriter
-          words={['A MERN Stack Developer', 'A Front-End Developer']}
+          words={['A Front-End Developer', 'MERN Stack Enthusiast']}
           loop={Infinity}
           cursor
           typeSpeed={100}
@@ -59,21 +59,23 @@ export function LampDemo() {
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{
-          delay: 3,
-          duration: 4.5,
+          delay: 2.4,
+          duration: 4,
           ease: "easeInOut",
         }}
         className="mt-6 flex justify-center"
       >
         <a
-          href="https://drive.google.com/file/d/1W-zqL_skTthSrsRyP5-t0RfcDWnrgLVX/view?usp=sharing"
-          target="_blank"
+          href="https://drive.google.com/uc?export=download&id=1btsi4NyrA4ziPfLaQrvtB_EDKyFoKz9w"
           rel="noopener noreferrer"
-          className="inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white text-2xl transition-all duration-300 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+          className="inline-block rounded-lg bg-gradient-to-r from-indigo-400 to-purple-400
+          px-6 py-3 font-semibold text-white text-2xl transition-all duration-300 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
         >
-          View My Resume
+          Download My Resume
         </a>
       </motion.div>
+
+
     </LampContainer>
   );
 }
@@ -148,10 +150,10 @@ export const LampContainer = ({
           }}
           className="absolute inset-auto z-50 h-0.5 w-[30rem] -translate-y-[7rem] bg-cyan-400 "
         ></motion.div>
- 
+
         <div className="absolute inset-auto z-40 h-44 w-full -translate-y-[12.5rem] bg-slate-950 "></div>
       </div>
- 
+
       <div className="relative z-50 flex -translate-y-40 flex-col items-center px-5">
         {children}
       </div>

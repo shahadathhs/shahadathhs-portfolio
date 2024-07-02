@@ -22,7 +22,7 @@ export const HoverEffect = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10",
+        "grid grid-cols-1 md:grid-cols-2",
         className
       )}
     >
@@ -62,7 +62,7 @@ export const HoverEffect = ({
                   className='border-2 p-3 rounded-md shadow-sm text-center flex flex-col items-center'
                 >
                   <span className="text-lg font-semibold text-white">{skill.name}</span>
-                  <span className="text-md text-white">({skill.level})</span>
+                  {/* <span className="text-md text-white">{skill.icon}</span> */}
                 </motion.span>
               ))}
             </CardDescription>

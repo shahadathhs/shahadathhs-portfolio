@@ -14,6 +14,10 @@ export default function ContentLayout({ children }: ContentLayoutProps) {
   const links = <>
     <motion.li 
     whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 300 }}
+    ><a href="#home">Home</a></motion.li>
+
+    <motion.li 
+    whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} transition={{ type: 'spring', stiffness: 300 }}
     ><a href="#aboutMe">About Me</a></motion.li>
 
     <motion.li 
