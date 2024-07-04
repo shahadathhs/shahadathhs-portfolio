@@ -13,6 +13,7 @@ export const HoverEffect = ({
     description: {
       name: string;
       level: string;
+      icon: JSX.Element;
     }[];
   }[];
   className?: string;
@@ -59,10 +60,10 @@ export const HoverEffect = ({
                   whileHover={{ scale: 1.1 }} 
                   whileTap={{ scale: 0.9 }} 
                   transition={{ type: 'spring', stiffness: 300 }}
-                  className='border-2 p-3 rounded-md shadow-sm text-center flex flex-col items-center'
+                  className='border-2 p-3 rounded-md shadow-sm text-center flex items-center justify-center'
                 >
+                  <span className="text-2xl mr-2 text-white">{skill.icon}</span>
                   <span className="text-lg font-semibold text-white">{skill.name}</span>
-                  {/* <span className="text-md text-white">{skill.icon}</span> */}
                 </motion.span>
               ))}
             </CardDescription>
