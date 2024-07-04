@@ -3,12 +3,14 @@ import { Contact } from '@/components/Contact';
 import { Education } from '@/components/Education';
 import Intro from '@/components/Intro';
 import { Projects } from '@/components/Projects';
+import { SendMail } from '@/components/SendMail';
 import Skills from '@/components/Skills';
+import { Footer } from '@/components/Footer';
 
 export default function ContentLayoutPage() {
 
   return (
-    <main className='bg-slate-950'>
+    <main className='bg-slate-950 overflow-x-hidden'>
       <section id="home">
         <Intro />
       </section>
@@ -26,6 +28,10 @@ export default function ContentLayoutPage() {
       </section>
       <section id="contact">
         <Contact />
+        <SendMail />
+      </section>
+      <section>
+        <Footer />
       </section>
     </main>
   );
