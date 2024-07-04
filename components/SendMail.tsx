@@ -3,17 +3,24 @@ import React from "react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/utils/cn";
+import emailjs from '@emailjs/browser';
 
 export function SendMail() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
-    const toEmail = 'shahadathhossensajib732@gmail.com';
-    const sendEmail = form.email.value;
+    const toEmail = 'shahadathhossensajib732@gmail.com'; // Replace with your email
+    const toName = 'Shahadath Hossen Sajib'; // Replace with your name
+    const fromEmail = form.email.value;
+    const fromName = form.name.value;
     const emailSubject = form.subject.value;
     const emailBody = form.message.value;
-    const email = { toEmail, sendEmail, emailSubject, emailBody };
-    console.table(email);
+    const email = { toEmail, toName, fromEmail, fromName, emailSubject, emailBody };
+
+    // implementing sending email using EmailJS or any other service
+    emailjs.send('service_00pytkd', 'template_zjypgnp', email, '6tts-NUhjD3cxO454')
+      .then((response) => console.log('Email sent:', response))
+      .catch((error) => console.error('Email error:', error));
   };
 
   return (
@@ -27,6 +34,10 @@ export function SendMail() {
 
       <div className="max-w-md w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-gray-800">
         <form className="my-8" onSubmit={handleSubmit}>
+          <LabelInputContainer className="mb-4">
+            <Label htmlFor="name">Your Name</Label>
+            <Input id="name" name="name" placeholder="Enter Your Name" type="text" className="bg-zinc-800 text-white placeholder-text-neutral-600 focus-visible:ring-neutral-600" />
+          </LabelInputContainer>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Email Address</Label>
             <Input id="email" name="email" placeholder="projectmayhem@fc.com" type="email" className="bg-zinc-800 text-white placeholder-text-neutral-600 focus-visible:ring-neutral-600" />
@@ -80,3 +91,5 @@ const LabelInputContainer = ({
     </div>
   );
 };
+
+export default SendMail;
