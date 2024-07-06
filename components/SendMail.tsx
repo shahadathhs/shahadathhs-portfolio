@@ -60,17 +60,17 @@ export function SendMail() {
           </LabelInputContainer> */}
           <LabelInputContainer className="mb-4">
             <Label htmlFor="email">Email Address</Label>
-            <Input id="email" name="email" placeholder="projectmayhem@fc.com" type="email" className="bg-zinc-800 text-white placeholder-text-neutral-600 focus-visible:ring-neutral-600" />
+            <Input id="email" name="email" placeholder="projectmayhem@fc.com" type="email" className="bg-zinc-800 text-white placeholder-text-neutral-600 focus-visible:ring-neutral-600" required />
           </LabelInputContainer>
           <LabelInputContainer className="mb-4">
             <Label htmlFor="subject">Subject</Label>
-            <Input id="subject" name="subject" placeholder="Enter Email Subject" type="text" className="bg-zinc-800 text-white placeholder-text-neutral-600 focus-visible:ring-neutral-600" />
+            <Input id="subject" name="subject" placeholder="Enter Email Subject" type="text" className="bg-zinc-800 text-white placeholder-text-neutral-600 focus-visible:ring-neutral-600" required />
           </LabelInputContainer>
           <LabelInputContainer className="mb-8">
             <Label htmlFor="message">Message</Label>
             <textarea
               id="message"
-              name="message"
+              name="message" required
               placeholder="Enter your message..."
               className="flex h-32 w-full border-none bg-zinc-800 text-white shadow-input rounded-md px-3 py-2 text-sm placeholder-text-neutral-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-600 disabled:cursor-not-allowed disabled:opacity-50 shadow-0px-0px-1px-1px-var(--neutral-700) group-hover-input-shadow-none transition duration-400"
             />

@@ -68,7 +68,7 @@ export function Projects() {
   ]
 
   return (
-    <div>
+    <div className="pt-16">
       <div className="text-center mb-12">
         <h1 className="text-3xl font-bold text-white mb-4">My Projects</h1>
         <p className="text-lg text-gray-400 max-w-lg mx-auto">
