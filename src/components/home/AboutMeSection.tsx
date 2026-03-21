@@ -24,9 +24,16 @@ export default function AboutMeSection() {
             <h2 className="text-4xl mb-4 font-bold dark:text-white text-black">
               About Me
             </h2>
-            <p className="mt-2 text-neutral-700 dark:text-neutral-300 text-justify text-base">
-              {aboutMeBio}
-            </p>
+            <div className="space-y-4">
+              {aboutMeBio.map((paragraph, idx) => (
+                <p
+                  key={idx}
+                  className="mt-2 text-neutral-700 dark:text-neutral-300 text-justify text-base leading-relaxed"
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
           </div>
 
           {/* Text & Features */}

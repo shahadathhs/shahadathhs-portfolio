@@ -1,37 +1,12 @@
 'use client';
 
 import { cn } from '@/lib/utils';
-import {
-  IconDatabase,
-  IconLanguage,
-  IconPackage,
-  IconServer,
-  IconStackFront,
-  IconTerminal2,
-  IconTestPipe,
-  IconTools,
-} from '@tabler/icons-react';
 import { BorderBeam } from '../magicui/border-beam';
 import { Badge } from '../ui/badge';
 
 import { skills } from '@/constant/skillsData';
 
 export default function SkillsSection() {
-  const iconMap: Record<string, React.ReactNode> = {
-    Languages: <IconLanguage className="h-8 w-8" />,
-    'Backend Frameworks': <IconServer className="h-8 w-8" />,
-    Databases: <IconDatabase className="h-8 w-8" />,
-    'ORMs & ODMs': <IconStackFront className="h-8 w-8" />,
-    'Real-time & Queues': <IconTerminal2 className="h-8 w-8" />,
-    'API Architecture': <IconServer className="h-8 w-8" />,
-    Testing: <IconTestPipe className="h-8 w-8" />,
-    'DevOps & Cloud': <IconTerminal2 className="h-8 w-8" />,
-    'VCS & CI/CD': <IconPackage className="h-8 w-8" />,
-    'Web Servers': <IconServer className="h-8 w-8" />,
-    'Package Managers': <IconPackage className="h-8 w-8" />,
-    'Development Tools': <IconTools className="h-8 w-8" />,
-  };
-
   return (
     <div
       id="skills"
@@ -50,12 +25,12 @@ export default function SkillsSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 py-12 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10">
             {skills.map((skill, idx) => (
               <Skill
                 key={skill.title}
                 title={skill.title}
-                icon={iconMap[skill.title]}
+                icon={skill.icon}
                 description={skill.description}
                 index={idx}
               />
@@ -71,17 +46,18 @@ export default function SkillsSection() {
 type SkillProps = {
   title: string;
   description: string[];
-  icon: React.ReactNode;
+  icon: React.ComponentType<{ className?: string }>;
   index: number;
 };
 
-const Skill = ({ title, description, icon, index }: SkillProps) => (
+const Skill = ({ title, description, icon: Icon, index }: SkillProps) => (
   <div
     className={cn(
       'flex flex-col lg:border-r py-10 relative group/feature dark:border-neutral-800',
-      (index === 0 || index === 4 || index === 8) && 'lg:border-l',
+      (index === 0 || index === 4) && 'lg:border-l',
       index < 4 && 'lg:border-b lg:border-t',
-      index > 7 && 'lg:border-b lg:border-t',
+      index >= 4 && 'lg:border-b',
+      index === 4 && 'lg:border-t-0', // Avoid double border if it wraps weirdly, but grid-cols-4 handles it
     )}
   >
     {/* hover overlay */}
@@ -96,7 +72,7 @@ const Skill = ({ title, description, icon, index }: SkillProps) => (
 
     {/* icon */}
     <div className="mb-4 px-10 text-neutral-600 dark:text-neutral-400 relative z-10">
-      {icon}
+      <Icon className="h-8 w-8" />
     </div>
 
     {/* title */}

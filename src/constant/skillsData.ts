@@ -1,35 +1,53 @@
+import {
+  Code2,
+  Cpu,
+  Database,
+  Globe,
+  Layers,
+  Network,
+  Rocket,
+  Zap,
+} from 'lucide-react';
+
 export const skills = [
-  { title: 'Languages', description: ['JavaScript', 'TypeScript', 'Python'] },
   {
-    title: 'Backend Frameworks',
-    description: ['Node.js', 'NestJS', 'FastAPI'],
+    title: 'Languages',
+    description: ['JavaScript', 'TypeScript', 'Python'],
+    icon: Code2,
   },
-  { title: 'Databases', description: ['PostgreSQL', 'MongoDB', 'Redis'] },
+  {
+    title: 'Frameworks',
+    description: ['Node.js', 'NestJS', 'FastAPI', 'Express'],
+    icon: Rocket,
+  },
+  {
+    title: 'Databases',
+    description: ['PostgreSQL', 'MongoDB', 'Redis'],
+    icon: Database,
+  },
   {
     title: 'ORMs & ODMs',
     description: ['Prisma', 'Drizzle', 'Mongoose'],
-  },
-  { title: 'Real-time & Queues', description: ['Socket.IO', 'BullMQ'] },
-  {
-    title: 'API Architecture',
-    description: ['REST', 'Microservices', 'Webhooks'],
-  },
-  { title: 'Testing', description: ['Jest', 'Supertest', 'Vitest'] },
-  {
-    title: 'DevOps & Cloud',
-    description: ['Docker', 'AWS (EC2, S3)', 'DigitalOcean'],
+    icon: Layers,
   },
   {
-    title: 'VCS & CI/CD',
-    description: ['Git', 'GitHub', 'GitHub Actions'],
-  },
-  { title: 'Web Servers', description: ['Nginx', 'Caddy'] },
-  {
-    title: 'Package Managers',
-    description: ['npm', 'pnpm', 'pip'],
+    title: 'Realtime',
+    description: ['Socket.IO', 'WebRTC', 'BullMQ'],
+    icon: Zap,
   },
   {
-    title: 'Development Tools',
-    description: ['VS Code', 'Postman', 'Swagger', 'Warp'],
+    title: 'Architecture',
+    description: ['Event-Driven', 'Microservices'],
+    icon: Network,
+  },
+  {
+    title: 'DevOps',
+    description: ['Docker', 'AWS (EC2, S3)', 'GitHub Actions', 'Linux'],
+    icon: Cpu,
+  },
+  {
+    title: 'Servers',
+    description: ['Nginx', 'Caddy', 'Reverse Proxy'],
+    icon: Globe,
   },
 ];
