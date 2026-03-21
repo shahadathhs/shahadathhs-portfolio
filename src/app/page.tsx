@@ -1,5 +1,4 @@
 import AboutMeSection from '@/components/home/AboutMeSection';
-import CertificateTimeline from '@/components/home/CertificateTimeline';
 import ContactSection from '@/components/home/ContactSection';
 import ExperienceSection from '@/components/home/ExperienceSection';
 import HeroSection from '@/components/home/HeroSection';
@@ -16,7 +15,6 @@ export default function Home() {
       <SkillsSection />
       <ProjectSection />
       <MediumBlogSection />
-      <CertificateTimeline />
       <ContactSection />
     </main>
   );

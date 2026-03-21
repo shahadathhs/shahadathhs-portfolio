@@ -17,8 +17,17 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Sajib | Portfolio',
-  description: 'Welcome to my portfolio website',
+  title: 'Shahadath H. Sajib | Backend Engineer',
+  description:
+    'Backend Engineer specializing in scalable microservices, AI-powered automation, and robust system architecture.',
+  keywords: [
+    'Backend Engineer',
+    'Node.js',
+    'PostgreSQL',
+    'Microservices',
+    'AI Automation',
+    'Shahadath H. Sajib',
+  ],
 };
 
 export default function RootLayout({

@@ -164,7 +164,7 @@ export default function HeroSection() {
           }}
           className="flex items-center justify-center"
         >
-          <SocialLinks />
+          <SocialLinks className="mt-8" />
         </motion.div>
       </div>
     </div>
