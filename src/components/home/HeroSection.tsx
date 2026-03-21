@@ -9,163 +9,174 @@ import { Button } from '../ui/button';
 import { heroData } from '@/constant/heroData';
 
 export default function HeroSection() {
-  const firstLine = heroData.firstLine.split(' ');
-  const secondLine = heroData.secondLine.split(' ');
-  const stagger = 0.2; // seconds between each word
-  const duration = 0.6; // each word’s animation duration
-  const firstTotal = firstLine.length * stagger + duration;
-
   return (
     <div
       id="hero"
-      className="relative mx-auto my-10 flex flex-col items-center justify-center"
+      className="relative w-full my-10 min-h-[70vh] flex items-center"
     >
-      {/* top */}
+      {/* Special Borders (Kept as requested) */}
       <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
         <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-stone-500 to-transparent" />
         <div className="absolute right-0 mx-auto h-px w-40 bg-gradient-to-r from-transparent via-stone-500 to-transparent" />
       </div>
-
-      {/* left */}
       <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
         <div className="absolute top-0 h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
       </div>
-
-      {/* bottom */}
       <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
         <div className="absolute mx-auto h-px w-full bg-gradient-to-r from-transparent via-stone-500 to-transparent" />
       </div>
-
-      {/* right */}
       <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
         <div className="absolute h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
       </div>
 
-      {/* content */}
-      <div className="px-4 py-10 md:py-20">
-        <h1 className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-6xl dark:text-slate-300">
-          {firstLine.map((word, i) => (
-            <motion.span
-              key={`f-${i}`}
-              initial={{ opacity: 0, filter: 'blur(4px)', y: 10 }}
-              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-              transition={{
-                duration,
-                delay: i * stagger,
-                ease: 'easeInOut',
-              }}
-              className="mr-2 inline-block"
-            >
-              {word}
-            </motion.span>
-          ))}
-          <br />
-          {secondLine.map((word, i) => (
-            <motion.span
-              key={`s-${i}`}
-              initial={{ opacity: 0, filter: 'blur(4px)', y: 10 }}
-              animate={{ opacity: 1, filter: 'blur(0px)', y: 0 }}
-              transition={{
-                duration,
-                delay: firstTotal + i * stagger,
-                ease: 'easeInOut',
-              }}
-              className="mr-2 inline-block"
-            >
-              {word}
-            </motion.span>
-          ))}
-        </h1>
-        <motion.p
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            duration: 0.3,
-            delay: 0.8,
-          }}
-          className="relative z-10 mx-auto max-w-xl py-4 text-center text-xl md:text-3xl font-normal text-slate-700 dark:text-slate-300"
-        >
-          <Typewriter
-            words={heroData.typewriterWords}
-            loop={Infinity}
-            cursor
-            typeSpeed={100}
-            deleteSpeed={50}
-            delaySpeed={1000}
-          />
-        </motion.p>
-
-        {/* cta buttons */}
-        <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            duration: 0.3,
-            delay: 1,
-          }}
-          className="relative z-10 mt-4 flex flex-wrap items-center justify-center gap-4"
-        >
-          <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium dark:text-white text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black  dark:hover:bg-gray-900">
-            <Link href="#projects">See My Work</Link>
-          </button>
-          <button className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium dark:text-white text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black  dark:hover:bg-gray-900">
-            <Link href="#contact">Contact Me</Link>
-          </button>
-        </motion.div>
-
-        {/* Resume */}
-        <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            duration: 0.3,
-            delay: 1,
-          }}
-          className="relative z-10 mt-4 flex flex-wrap items-center justify-center gap-4"
-        >
-          <Button
-            asChild
-            variant="secondary"
-            size="lg"
-            className="hover:scale-120 transition-transform duration-500"
+      {/* Main Content Area */}
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-20 relative z-10 flex flex-col md:flex-row items-center gap-12">
+        {/* Left Side: Text Content */}
+        <div className="w-full md:w-3/5 flex flex-col items-start gap-6 text-left">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <Link
-              target="_blank"
-              href={heroData.resumeLink}
-              rel="noopener noreferrer"
-            >
-              View My Resume
-            </Link>
-          </Button>
-        </motion.div>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wider uppercase mb-2">
+              {heroData.firstLine}
+            </span>
+          </motion.div>
 
-        <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-          }}
-          transition={{
-            duration: 0.3,
-            delay: 1.5,
-          }}
-          className="flex items-center justify-center"
-        >
-          <SocialLinks className="mt-8" />
-        </motion.div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 leading-tight">
+            {heroData.secondLine.split(' ').map((word, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
+                className="inline-block mr-3"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
+
+          <div className="h-10 md:h-12 flex items-center">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="text-xl md:text-2xl font-medium text-neutral-600 dark:text-neutral-400"
+            >
+              <Typewriter
+                words={heroData.typewriterWords}
+                loop={Infinity}
+                cursor
+                cursorStyle="_"
+                typeSpeed={80}
+                deleteSpeed={50}
+                delaySpeed={1500}
+              />
+            </motion.p>
+          </div>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
+            className="text-lg text-neutral-500 dark:text-neutral-400 max-w-lg leading-relaxed"
+          >
+            {heroData.footerDescription}
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1 }}
+            className="flex flex-wrap items-center gap-4 mt-4"
+          >
+            <Button
+              asChild
+              size="lg"
+              className="rounded-xl h-12 px-8 font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300"
+            >
+              <Link href="#projects">Explore Projects</Link>
+            </Button>
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="rounded-xl h-12 px-8 font-bold border-2 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-all duration-300"
+            >
+              <Link
+                href={heroData.resumeLink}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Resume
+              </Link>
+            </Button>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            className="mt-8"
+          >
+            <SocialLinks className="justify-start scale-110 origin-left" />
+          </motion.div>
+        </div>
+
+        {/* Right Side: Visual Element */}
+        <div className="hidden md:flex w-full md:w-2/5 justify-center items-center relative">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 1,
+              delay: 0.5,
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
+            className="absolute h-80 w-80 bg-primary/20 rounded-full blur-[100px] -z-10"
+          />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="p-8 rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50 backdrop-blur-sm shadow-2xl overflow-hidden relative group"
+          >
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+            <div className="space-y-4 font-mono text-sm">
+              <div className="flex gap-2">
+                <div className="h-3 w-3 rounded-full bg-red-500" />
+                <div className="h-3 w-3 rounded-full bg-yellow-500" />
+                <div className="h-3 w-3 rounded-full bg-green-500" />
+              </div>
+              <div className="space-y-2">
+                <p className="text-primary">class BackendDeveloper {'{'}</p>
+                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
+                  name ={' '}
+                  <span className="text-yellow-500">&apos;Shahadath&apos;</span>
+                  ;
+                </p>
+                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
+                  focus ={' '}
+                  <span className="text-yellow-500">
+                    &apos;Scalability&apos;
+                  </span>
+                  ;
+                </p>
+                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
+                  stack = [
+                  <span className="text-yellow-500">
+                    &apos;Node.js&apos;, &apos;Python&apos;
+                  </span>
+                  ];
+                </p>
+                <p className="text-primary">{'}'}</p>
+              </div>
+            </div>
+            <div className="absolute -bottom-10 -right-10 h-40 w-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-500" />
+          </motion.div>
+        </div>
       </div>
     </div>
   );
