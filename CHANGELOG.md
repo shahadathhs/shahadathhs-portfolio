@@ -1,3 +1,9 @@
+# [1.6.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.5.0...v1.6.0) (2026-03-21)
+
+### Features
+
+- redesign SkillsSection with bento grid layout and animations ([8ebfaf7](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/8ebfaf7b58e518d88f65e1b61cdef2669a79466e))
+
 # [1.5.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.4.0...v1.5.0) (2026-03-21)
 
 ### Features
