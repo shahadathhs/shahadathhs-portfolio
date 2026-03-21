@@ -3,7 +3,6 @@
 import { aboutMeBio, features } from '@/constant/aboutMe';
 import { motion } from 'motion/react';
 import { BorderBeam } from '../magicui/border-beam';
-import { WarpBackground } from '../magicui/warp-background';
 import {
   Card,
   CardContent,
@@ -18,8 +17,8 @@ export default function AboutMeSection() {
       id="about"
       className="relative w-full mt-10 border rounded overflow-clip scroll-mt-24"
     >
-      <WarpBackground>
-        <section className="w-full max-w-7xl mx-auto my-10 md:my-0">
+      <section className="w-full bg-white dark:bg-neutral-950 py-16 px-4 md:px-8 lg:px-16">
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* Header Block */}
           <div className="mb-10 flex flex-col">
             <h2 className="text-4xl mb-4 font-bold dark:text-white text-black">
@@ -55,7 +54,7 @@ export default function AboutMeSection() {
                       },
                     }}
                   >
-                    <Card className="hover:shadow-xl transform hover:-translate-y-1 transition bg-white dark:bg-neutral-900 border-neutral-100 dark:border-neutral-800">
+                    <Card className="hover:shadow-xl transform hover:-translate-y-1 transition bg-transparent border-neutral-100 dark:border-neutral-800 rounded-xl">
                       <CardHeader className="flex flex-row items-center gap-4">
                         <feature.icon className="w-6 h-6 text-blue-500" />
                         <CardTitle className="text-lg font-semibold">
@@ -71,8 +70,8 @@ export default function AboutMeSection() {
               </motion.div>
             </div>
           </div>
-        </section>
-      </WarpBackground>
+        </div>
+      </section>
       <BorderBeam duration={200} size={250} />
     </div>
   );

@@ -39,10 +39,10 @@ export default function CertificateTimeline() {
                   <div className="h-4 w-4 rounded-full bg-background"></div>
                 </div>
 
-                <div className="flex-1 space-y-2 bg-card rounded-lg border p-4 shadow-sm hover:shadow-md transition-shadow duration-200 border-l-4 border-l-primary/40">
+                <div className="flex-1 space-y-2 bg-transparent rounded-xl border p-4 shadow-sm hover:shadow-md transition-shadow duration-200 border-l-4 border-l-primary/40">
                   <div className="flex justify-between items-start">
                     <div className="flex gap-3">
-                      <div className="h-12 w-12 rounded bg-muted flex items-center justify-center overflow-hidden">
+                      <div className="h-12 w-12 rounded-lg bg-muted flex items-center justify-center overflow-hidden">
                         <Image
                           src={certificate.logo || '/placeholder.svg'}
                           alt={certificate.organization}

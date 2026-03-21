@@ -1,15 +1,17 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { IconBrandMedium } from '@tabler/icons-react';
-import { CheckCircle, Copy, Github, Linkedin, Mail } from 'lucide-react';
+import { socialLinks } from '@/constant/socialLinks';
+import { contactEmail } from '@/constant/contactInfo';
+import { heroData } from '@/constant/heroData';
+import { CheckCircle, Copy, FileText, Mail, ArrowUpRight } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { TypingAnimation } from '../magicui/typing-animation';
-
 import { BorderBeam } from '../magicui/border-beam';
-
-import { contactEmail } from '@/constant/contactInfo';
+import { motion } from 'motion/react';
+import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -21,108 +23,161 @@ export default function ContactSection() {
     toast.success('Email copied to clipboard', {
       icon: '📋',
       duration: 2000,
-      description: 'You can now paste it anywhere you need.',
     });
-
-    setTimeout(() => {
-      setCopied(false);
-    }, 2000);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
     <div
       id="contact"
-      className="relative w-full mt-10 border rounded overflow-clip scroll-mt-24"
+      className="relative w-full mt-10 border rounded overflow-clip scroll-mt-24 mb-10"
     >
       <section className="w-full bg-white dark:bg-neutral-950 py-16 px-4 md:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* Header Block */}
-          <div className="flex flex-col items-start text-left max-w-2xl mb-10">
-            <h2 className="text-3xl font-semibold dark:text-white text-black  mb-4">
-              <TypingAnimation>Get in touch</TypingAnimation>
+          <div className="flex flex-col mb-10">
+            <h2 className="text-4xl mb-4 font-bold dark:text-white text-black">
+              <TypingAnimation
+                startOnView
+                duration={50}
+                className="text-4xl leading-tight text-left"
+              >
+                Get in touch
+              </TypingAnimation>
             </h2>
-            <p className="text-neutral-700 dark:text-neutral-300  text-base max-w-4xl">
-              {/* I&apos;m always open to new opportunities, collaborations, or just
-              a friendly chat about backend architecture and API design. */}
-              I&apos;m a backend developer passionate about building clean,
-              scalable systems. Here&apos;s a bit about my journey and what I
-              bring to the table.
+            <p className="mt-2 text-neutral-700 dark:text-neutral-300 text-base max-w-2xl">
+              Whether you have a question about backend architecture, want to
+              discuss a new project, or just want to say hi, I&apos;m always
+              open to connecting.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 w-full max-w-6xl pt-8 mx-auto">
-            {/* github */}
-            <a
-              href="https://github.com/shahadathhs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center p-6 bg-primary/5 rounded-2xl hover:bg-primary/10 transition-colors border border-primary/10 group"
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Contact Card - Email */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="lg:col-span-2 group relative p-8 rounded-xl bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm"
             >
-              <div className="bg-primary/10 p-4 rounded-full mb-4 group-hover:scale-110 transition-transform">
-                <Github className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-1">GitHub</h3>
-              <span className="text-primary text-sm font-medium">
-                @shahadathhs
-              </span>
-            </a>
+              <div className="flex flex-col h-full justify-between">
+                <div>
+                  <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-6">
+                    <Mail className="h-6 w-6" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-2 text-black dark:text-white">
+                    Drop me an email
+                  </h3>
+                  <p className="text-neutral-500 dark:text-neutral-400 mb-8 max-w-md">
+                    Send me a message for collaborations, inquiries, or just a
+                    friendly chat.
+                  </p>
+                </div>
 
-            {/* linkedin */}
-            <a
-              href="https://www.linkedin.com/in/shahadathhs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center p-6 bg-primary/5 rounded-2xl hover:bg-primary/10 transition-colors border border-primary/10 group"
+                <div className="flex flex-col sm:flex-row items-center gap-4 mt-auto">
+                  <div className="w-full sm:w-auto flex items-center justify-between gap-4 p-4 rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 flex-1">
+                    <span className="font-mono text-sm md:text-base text-black dark:text-white truncate">
+                      {email}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={copyToClipboard}
+                      className="shrink-0 hover:bg-neutral-100 dark:hover:bg-neutral-900"
+                    >
+                      {copied ? (
+                        <CheckCircle className="h-4 w-4 text-green-500" />
+                      ) : (
+                        <Copy className="h-4 w-4" />
+                      )}
+                    </Button>
+                  </div>
+                  <Button
+                    asChild
+                    size="lg"
+                    className="w-full sm:w-auto rounded-xl font-bold px-8"
+                  >
+                    <a href={`mailto:${email}`}>
+                      Send Email
+                      <ArrowUpRight className="ml-2 h-4 w-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Resume Card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="group relative p-8 rounded-xl bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm"
             >
-              <div className="bg-primary/10 p-4 rounded-full mb-4 group-hover:scale-110 transition-transform">
-                <Linkedin className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-1">LinkedIn</h3>
-              <span className="text-primary text-sm font-medium">
-                in/shahadathhs
-              </span>
-            </a>
-
-            {/* email */}
-            <div className="flex flex-col items-center p-6 bg-primary/5 rounded-2xl hover:bg-primary/10 transition-colors border border-primary/10 group relative">
-              <div className="bg-primary/10 p-4 rounded-full mb-4 group-hover:scale-110 transition-transform">
-                <Mail className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-1">Email</h3>
-              <div className="flex items-center gap-2">
-                <span className="text-primary text-sm font-medium truncate max-w-[150px]">
-                  {email}
-                </span>
+              <div className="flex flex-col h-full items-center text-center">
+                <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-6">
+                  <FileText className="h-6 w-6" />
+                </div>
+                <h3 className="text-2xl font-bold mb-2 text-black dark:text-white">
+                  Resume
+                </h3>
+                <p className="text-neutral-500 dark:text-neutral-400 mb-8">
+                  Check out my professional journey and technical stack in
+                  detail.
+                </p>
                 <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={copyToClipboard}
-                  className="h-8 w-8 p-0"
+                  asChild
+                  variant="outline"
+                  size="lg"
+                  className="mt-auto w-full rounded-xl font-bold border-2"
                 >
-                  {copied ? (
-                    <CheckCircle className="h-4 w-4 text-green-500" />
-                  ) : (
-                    <Copy className="h-4 w-4" />
-                  )}
+                  <Link
+                    href={heroData.resumeLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    View Resume
+                    <ArrowUpRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </Button>
               </div>
-            </div>
+            </motion.div>
+          </div>
 
-            {/* medium */}
-            <a
-              href="https://medium.com/@shahadathhs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center p-6 bg-primary/5 rounded-2xl hover:bg-primary/10 transition-colors border border-primary/10 group"
-            >
-              <div className="bg-primary/10 p-4 rounded-full mb-4 group-hover:scale-110 transition-transform">
-                <IconBrandMedium className="h-8 w-8 text-primary" />
-              </div>
-              <h3 className="font-bold text-lg mb-1">Medium</h3>
-              <span className="text-primary text-sm font-medium">
-                @shahadathhs
-              </span>
-            </a>
+          {/* Social Grid */}
+          <div className="mt-12">
+            <p className="text-center text-sm font-medium text-neutral-400 dark:text-neutral-600 uppercase tracking-widest mb-8">
+              Connect with me on Socials
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+              {socialLinks.map((link, idx) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.3, delay: idx * 0.05 }}
+                  viewport={{ once: true }}
+                  className="flex flex-col items-center gap-3 p-6 rounded-xl bg-transparent border border-neutral-100 dark:border-neutral-800 hover:bg-white dark:hover:bg-neutral-800/80 transition-all duration-300"
+                >
+                  <div
+                    className={cn(
+                      'p-2 rounded-xl bg-white dark:bg-neutral-800 shadow-sm transition-transform',
+                      link.color,
+                    )}
+                  >
+                    <link.icon className="h-6 w-6" />
+                  </div>
+                  <span className="text-sm font-semibold text-neutral-700 dark:text-neutral-300">
+                    {link.name}
+                  </span>
+                </motion.a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
