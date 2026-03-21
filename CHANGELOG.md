@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.4.0...v1.5.0) (2026-03-21)
+
+### Features
+
+- complete unified design across remaining sections ([0337143](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/0337143e4238a6a1c3f37f9f126a137b137ae737))
+- unify section designs with Hero style and improve typography ([39f05e1](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/39f05e19b66094dc42fd600bb46f12c71ac1e565))
+
 # [1.4.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.3.0...v1.4.0) (2026-03-21)
 
 ### Features
