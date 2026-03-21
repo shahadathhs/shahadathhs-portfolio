@@ -22,7 +22,7 @@ export const skills = [
   },
   {
     title: 'Databases',
-    description: ['PostgreSQL', 'MongoDB', 'Redis'],
+    description: ['PostgreSQL', 'MongoDB', 'Redis', 'Qdrant'],
     icon: Database,
   },
   {
@@ -36,8 +36,8 @@ export const skills = [
     icon: Zap,
   },
   {
-    title: 'Architecture',
-    description: ['Event-Driven', 'Microservices'],
+    title: 'API Architecture',
+    description: ['Event-Driven', 'Microservices', 'RESTful API'],
     icon: Network,
   },
   {
@@ -46,7 +46,7 @@ export const skills = [
     icon: Cpu,
   },
   {
-    title: 'Servers',
+    title: 'Web Servers',
     description: ['Nginx', 'Caddy', 'Reverse Proxy'],
     icon: Globe,
   },

@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { Badge } from '../ui/badge';
 
 import { skills } from '@/constant/skillsData';
+import { motion } from 'motion/react';
 
 export default function SkillsSection() {
   return (
@@ -40,9 +41,9 @@ export default function SkillsSection() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 relative z-10">
             {skills.map((skill, idx) => (
-              <Skill
+              <SkillCard
                 key={skill.title}
                 title={skill.title}
                 icon={skill.icon}
@@ -57,53 +58,107 @@ export default function SkillsSection() {
   );
 }
 
-type SkillProps = {
+const SkillCard = ({
+  title,
+  description,
+  icon: Icon,
+  index,
+}: {
   title: string;
   description: string[];
   icon: React.ComponentType<{ className?: string }>;
   index: number;
-};
+}) => {
+  // Bento col/row spans logic for a repeating staggered look (handles all 8 skills)
+  const pattern = [
+    'md:col-span-7',
+    'md:col-span-5',
+    'md:col-span-5',
+    'md:col-span-7',
+  ];
+  const span = pattern[index % 4];
 
-const Skill = ({ title, description, icon: Icon, index }: SkillProps) => (
-  <div
-    className={cn(
-      'flex flex-col lg:border-r py-10 relative group/feature dark:border-neutral-800',
-      (index === 0 || index === 4) && 'lg:border-l',
-      index < 4 && 'lg:border-b lg:border-t',
-      index >= 4 && 'lg:border-b',
-      index === 4 && 'lg:border-t-0', // Avoid double border if it wraps weirdly, but grid-cols-4 handles it
-    )}
-  >
-    {/* hover overlay */}
-    <div
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: (index % 4) * 0.1 }}
+      viewport={{ once: true }}
       className={cn(
-        'absolute inset-0 h-full w-full transition duration-200 pointer-events-none',
-        index < 4
-          ? 'bg-gradient-to-t from-neutral-100 dark:from-neutral-800 to-transparent opacity-0 group-hover/feature:opacity-100'
-          : 'bg-gradient-to-b from-neutral-100 dark:from-neutral-800 to-transparent opacity-0 group-hover/feature:opacity-100',
+        'group relative rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm overflow-hidden flex flex-col p-8 min-h-[200px]',
+        span,
       )}
-    />
+    >
+      {/* Subtle Gradient Accent */}
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:via-primary/50 transition-all z-20" />
 
-    {/* icon */}
-    <div className="mb-4 px-10 text-neutral-600 dark:text-neutral-400 relative z-10">
-      <Icon className="h-8 w-8" />
-    </div>
+      {/* Animated SVG Pattern Background (Hidden on Mobile) */}
+      <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 hidden md:block">
+        <svg
+          className="h-full w-full"
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+        >
+          <defs>
+            <pattern
+              id={`pattern-${index}`}
+              x="0"
+              y="0"
+              width="40"
+              height="40"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 40 0 L 0 0 0 40"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="0.5"
+                className="text-primary"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill={`url(#pattern-${index})`} />
+        </svg>
+      </div>
 
-    {/* title */}
-    <div className="relative z-10 mb-2 px-10 text-lg font-bold">
-      <div className="absolute left-0 inset-y-0 h-6 w-1 rounded-tr-full rounded-br-full bg-neutral-300 dark:bg-neutral-700 transition-all duration-200 origin-center group-hover/feature:h-8 group-hover/feature:bg-blue-500" />
-      <span className="inline-block transition-transform duration-200 group-hover/feature:translate-x-2 text-neutral-800 dark:text-neutral-100">
-        {title}
-      </span>
-    </div>
+      <div className="relative z-10 flex flex-col h-full">
+        {/* icon and title header */}
+        <div className="flex items-center gap-4 mb-6">
+          <div className="inline-flex p-3 rounded-md bg-primary/5 text-primary group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
+            <Icon className="h-6 w-6" />
+          </div>
+          <h3 className="text-sm font-black uppercase tracking-[0.2em] text-neutral-900 dark:text-neutral-50 group-hover:text-primary transition-colors">
+            {title}
+          </h3>
+        </div>
 
-    {/* render each description item as a badge */}
-    <div className="flex flex-wrap gap-2 px-10 relative z-10">
-      {description.map((tech) => (
-        <Badge key={tech} variant={'outline'} className="rounded-md">
-          {tech}
-        </Badge>
-      ))}
-    </div>
-  </div>
-);
+        {/* tech badges with drifting animation */}
+        <div className="flex flex-wrap gap-2 md:gap-3 mt-auto">
+          {description.map((tech) => (
+            <motion.div
+              key={tech}
+              whileHover={{ y: -5, scale: 1.1 }}
+              transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+            >
+              <Badge
+                variant="outline"
+                className="rounded-md px-3 py-1 text-[11px] font-black uppercase tracking-widest bg-black/5 dark:bg-white/5 border-neutral-200/50 dark:border-neutral-800/50 group-hover:border-primary/20 group-hover:text-primary transition-all duration-300 whitespace-nowrap"
+              >
+                {tech}
+              </Badge>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Decorative Corner Accent */}
+      <div className="absolute top-4 right-4 text-[10px] font-mono font-black text-neutral-200 dark:text-neutral-800 select-none opacity-50 group-hover:opacity-100 transition-opacity">
+        0{index + 1}
+      </div>
+
+      {/* Background Glow */}
+      <div className="absolute -bottom-10 -right-10 h-40 w-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700 pointer-events-none" />
+    </motion.div>
+  );
+};
