@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.3.0...v1.4.0) (2026-03-21)
+
+### Features
+
+- enhance contact section with portfolio versions and improve content ([7b94e3c](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/7b94e3cb25c061166f4858b7ed77475124e6db5f))
+- redesign HeroSection with modern two-column layout ([76dda86](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/76dda86ed1e6090c085f401b34e06770468e6d5a))
+
 # [1.3.0](https://github.com/shahadathhs/shahadathhs-portfolio/compare/v1.2.0...v1.3.0) (2026-03-08)
 
 ### Bug Fixes
