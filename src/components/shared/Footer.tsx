@@ -38,7 +38,7 @@ export default function Footer() {
       <div className="container mx-auto pt-16 pb-8 relative z-10">
         <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 lg:gap-24">
           {/* info */}
-          <div className="space-y-6 max-w-md">
+          <div className="space-y-4 max-w-md">
             {/* Logo and Description */}
             <div className="space-y-4">
               <Link
@@ -52,33 +52,31 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* email - Glassmorphic Style (Above Socials) */}
-            <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-md bg-black/5 dark:bg-white/5 border border-neutral-200 dark:border-neutral-800 backdrop-blur-sm w-fit max-w-[200px] md:max-w-xs group hover:border-primary/30 transition-all">
-              <p className="text-[10px] md:text-xs text-neutral-500 dark:text-neutral-400 truncate font-mono font-bold tracking-tight">
+            {/* email - Minimal Style (Above Socials) */}
+            <div className="flex items-center gap-3 max-w-sm w-full group transition-all">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400 font-mono font-bold tracking-tight">
                 {email}
               </p>
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={handleCopyEmail}
-                className="h-7 w-7 shrink-0 hover:bg-primary/10 hover:text-primary transition-colors"
+                className="h-8 w-8 shrink-0 hover:bg-primary/10 hover:text-primary transition-colors"
               >
                 {copied ? (
-                  <Check className="h-3.5 w-3.5 text-green-500" />
+                  <Check className="h-4 w-4 text-green-500" />
                 ) : (
-                  <Copy className="h-3.5 w-3.5" />
+                  <Copy className="h-4 w-4" />
                 )}
                 <span className="sr-only">Copy email</span>
               </Button>
             </div>
 
             {/* Social Links */}
-            <div className="pt-2">
-              <SocialLinks />
-            </div>
+            <SocialLinks />
           </div>
 
-          <div className="flex flex-row justify-between gap-12 lg:gap-24">
+          <div className="flex flex-row gap-12 lg:gap-24">
             {/* Quick Links */}
             <div className="space-y-4">
               <h3 className="text-xs font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-600">
@@ -89,10 +87,12 @@ export default function Footer() {
                   <li key={link.title}>
                     <Link
                       href={link.link}
-                      className="text-neutral-500 dark:text-neutral-400 text-sm hover:text-primary transition-colors group flex items-center gap-2"
+                      className="text-neutral-500 relative dark:text-neutral-400 text-sm hover:text-primary transition-colors group flex items-center gap-2"
                     >
-                      <span className="h-px w-0 bg-primary group-hover:w-3 transition-all duration-300" />
-                      {link.title}
+                      <span className="h-px absolute top-[50%] left-0 w-0 bg-primary dark:bg-neutral-400 group-hover:w-3 transition-all duration-300" />
+                      <span className="group-hover:translate-x-3 text-neutral-500 dark:text-neutral-400 text-sm hover:text-primary transition-colors group flex items-center gap-2">
+                        {link.title}
+                      </span>
                     </Link>
                   </li>
                 ))}
