@@ -33,7 +33,7 @@ export default function SkillsSection() {
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
               Technical Skills
             </h2>
-            <div className="h-1.5 w-20 bg-primary mb-6 rounded-full" />
+            <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
               I always look forward to continuous learning and improving myself.
               Here&apos;s a snapshot of the tools and technologies I work with.
@@ -100,7 +100,7 @@ const Skill = ({ title, description, icon: Icon, index }: SkillProps) => (
     {/* render each description item as a badge */}
     <div className="flex flex-wrap gap-2 px-10 relative z-10">
       {description.map((tech) => (
-        <Badge key={tech} variant={'outline'}>
+        <Badge key={tech} variant={'outline'} className="rounded-md">
           {tech}
         </Badge>
       ))}

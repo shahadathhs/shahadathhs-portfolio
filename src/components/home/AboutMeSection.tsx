@@ -45,7 +45,7 @@ export default function AboutMeSection() {
                 <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50">
                   About Me
                 </h2>
-                <div className="h-1.5 w-20 bg-primary mt-4 rounded-full" />
+                <div className="h-1.5 w-20 bg-primary mt-4 rounded-md" />
               </motion.div>
 
               <div className="space-y-6">
@@ -88,10 +88,10 @@ export default function AboutMeSection() {
                       },
                     }}
                   >
-                    <Card className="h-full hover:shadow-lg hover:border-primary/50 transition-all duration-300 bg-transparent border-neutral-200 dark:border-neutral-800 rounded-2xl group overflow-hidden relative">
+                    <Card className="h-full hover:shadow-lg hover:border-primary/50 transition-all duration-300 bg-transparent border-neutral-200 dark:border-neutral-800 rounded-md group overflow-hidden relative">
                       <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                       <CardHeader className="pb-2">
-                        <div className="p-2.5 rounded-xl bg-primary/10 text-primary w-fit mb-2 group-hover:scale-110 transition-transform">
+                        <div className="p-2.5 rounded-md bg-primary/10 text-primary w-fit mb-2 group-hover:scale-110 transition-transform">
                           <feature.icon className="w-5 h-5" />
                         </div>
                         <CardTitle className="text-base font-bold text-neutral-800 dark:text-neutral-100">

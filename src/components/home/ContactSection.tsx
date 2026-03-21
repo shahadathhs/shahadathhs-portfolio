@@ -53,7 +53,7 @@ export default function ContactSection() {
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
               Get in touch
             </h2>
-            <div className="h-1.5 w-20 bg-primary mb-6 rounded-full" />
+            <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
               Whether you have a question about backend architecture, want to
               discuss a new project, or just want to say hi, I&apos;m always
@@ -62,38 +62,40 @@ export default function ContactSection() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Contact Card - Email */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
-              className="lg:col-span-2 group relative p-8 rounded-xl bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm"
+              className="lg:col-span-2 group relative p-8 rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm overflow-hidden"
             >
-              <div className="flex flex-col h-full justify-between">
+              {/* Subtle Gradient Accent */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:via-primary/50 transition-all" />
+
+              <div className="flex flex-col h-full justify-between relative z-10">
                 <div>
-                  <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-6">
+                  <div className="inline-flex p-3 rounded-md bg-primary/10 text-primary mb-6 group-hover:scale-110 transition-transform">
                     <Mail className="h-6 w-6" />
                   </div>
-                  <h3 className="text-2xl font-bold mb-2 text-black dark:text-white">
+                  <h3 className="text-2xl font-black mb-2 text-black dark:text-white">
                     Drop me an email
                   </h3>
-                  <p className="text-neutral-500 dark:text-neutral-400 mb-8 max-w-md">
+                  <p className="text-neutral-500 dark:text-neutral-400 mb-8 max-w-md italic text-sm">
                     Send me a message for collaborations, inquiries, or just a
-                    friendly chat.
+                    friendly chat. I typically respond within 24 hours.
                   </p>
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-stretch gap-4 mt-auto">
-                  <div className="w-full sm:w-auto h-12 flex items-center justify-between gap-4 px-4 rounded-xl bg-white dark:bg-black border border-neutral-200 dark:border-neutral-800 flex-1">
-                    <span className="font-mono text-sm md:text-base text-black dark:text-white truncate">
+                  <div className="w-full sm:w-auto h-12 flex items-center justify-between gap-4 px-4 rounded-md bg-black/5 dark:bg-white/5 border border-neutral-200 dark:border-neutral-800 flex-1 backdrop-blur-sm group-hover:border-primary/20 transition-colors">
+                    <span className="font-mono text-sm md:text-base text-neutral-800 dark:text-neutral-200 truncate font-bold">
                       {email}
                     </span>
                     <Button
                       variant="ghost"
                       size="sm"
                       onClick={copyToClipboard}
-                      className="shrink-0 h-8 w-8 p-0 hover:bg-neutral-100 dark:hover:bg-neutral-900"
+                      className="shrink-0 h-8 w-8 p-0 hover:bg-primary/10 hover:text-primary transition-colors"
                     >
                       {copied ? (
                         <CheckCircle className="h-4 w-4 text-green-500" />
@@ -104,7 +106,7 @@ export default function ContactSection() {
                   </div>
                   <Button
                     asChild
-                    className="w-full sm:w-auto h-12 rounded-xl font-bold px-8 shadow-sm"
+                    className="w-full sm:w-auto h-12 rounded-md font-black px-8 shadow-sm tracking-widest uppercase text-xs"
                   >
                     <a href={`mailto:${email}`}>
                       Send Email
@@ -113,31 +115,36 @@ export default function ContactSection() {
                   </Button>
                 </div>
               </div>
+
+              {/* Background Glow */}
+              <div className="absolute -bottom-10 -right-10 h-32 w-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-500" />
             </motion.div>
 
-            {/* Resume Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
               viewport={{ once: true }}
-              className="group relative p-8 rounded-xl bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm"
+              className="group relative p-8 rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm overflow-hidden"
             >
-              <div className="flex flex-col h-full items-center text-center">
-                <div className="inline-flex p-3 rounded-xl bg-primary/10 text-primary mb-6">
+              {/* Subtle Gradient Accent */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:via-primary/50 transition-all" />
+
+              <div className="flex flex-col h-full items-center text-center relative z-10">
+                <div className="inline-flex p-3 rounded-md bg-primary/10 text-primary mb-6 group-hover:scale-110 transition-transform">
                   <FileText className="h-6 w-6" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2 text-black dark:text-white">
+                <h3 className="text-2xl font-black mb-2 text-black dark:text-white">
                   Resume
                 </h3>
-                <p className="text-neutral-500 dark:text-neutral-400 mb-8 text-sm">
+                <p className="text-neutral-500 dark:text-neutral-400 mb-8 text-sm italic">
                   Check out my professional journey and technical stack in
                   detail.
                 </p>
                 <Button
                   asChild
                   variant="outline"
-                  className="mt-auto w-full h-12 rounded-xl font-bold border-2 hover:bg-primary/5 transition-colors"
+                  className="mt-auto w-full h-12 rounded-md font-black border-2 border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-all duration-300 tracking-widest uppercase text-xs"
                 >
                   <Link
                     href={heroData.resumeLink}
@@ -149,6 +156,9 @@ export default function ContactSection() {
                   </Link>
                 </Button>
               </div>
+
+              {/* Background Glow */}
+              <div className="absolute -bottom-10 -right-10 h-24 w-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors duration-500" />
             </motion.div>
           </div>
 
@@ -170,22 +180,25 @@ export default function ContactSection() {
                   transition={{ duration: 0.3, delay: idx * 0.05 }}
                   viewport={{ once: true }}
                   className={cn(
-                    'flex flex-row items-center gap-3 p-3 rounded-xl bg-transparent border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-all duration-300 shadow-sm',
+                    'group/social flex flex-row items-center gap-3 p-3 rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 hover:bg-neutral-50/50 dark:hover:bg-neutral-900/50 transition-all duration-300 shadow-sm relative overflow-hidden',
                     idx === 4 &&
                       'max-md:col-span-2 max-md:mx-auto max-md:w-[calc(50%-8px)] md:w-full',
                   )}
                 >
                   <div
                     className={cn(
-                      'p-2 rounded-lg bg-white dark:bg-neutral-900 shadow-sm transition-transform shrink-0',
+                      'p-2 rounded-md bg-white dark:bg-neutral-900 shadow-sm transition-transform shrink-0 group-hover/social:scale-110 group-hover/social:bg-primary/5 group-hover/social:text-primary',
                       link.color,
                     )}
                   >
                     <link.icon className="h-4 w-4" />
                   </div>
-                  <span className="text-xs font-bold text-neutral-700 dark:text-neutral-300 truncate">
+                  <span className="text-xs font-black text-neutral-800 dark:text-neutral-200 truncate uppercase tracking-widest transition-colors group-hover/social:text-primary">
                     {link.name}
                   </span>
+
+                  {/* Tiny background glow on hover */}
+                  <div className="absolute -bottom-4 -right-4 h-8 w-8 bg-primary/5 rounded-full blur-xl group-hover/social:bg-primary/10 transition-colors" />
                 </motion.a>
               ))}
             </div>
@@ -209,17 +222,19 @@ export default function ContactSection() {
                   transition={{ duration: 0.3, delay: idx * 0.05 }}
                   viewport={{ once: true }}
                   className={cn(
-                    'flex flex-row items-center gap-3 p-3 rounded-xl bg-transparent border border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-all duration-300 shadow-sm',
+                    'group/version flex flex-row items-center gap-3 p-3 rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 hover:bg-neutral-50/50 dark:hover:bg-neutral-900/50 transition-all duration-300 shadow-sm relative overflow-hidden',
                     idx === 4 &&
                       'max-md:col-span-2 max-md:mx-auto max-md:w-[calc(50%-8px)] md:w-full',
                   )}
                 >
-                  <div className="p-2 rounded-lg bg-white dark:bg-neutral-900 shadow-sm text-neutral-500 group-hover:text-primary transition-colors shrink-0">
+                  <div className="p-2 rounded-md bg-white dark:bg-neutral-900 shadow-sm text-neutral-500 group-hover/version:text-primary transition-colors shrink-0 group-hover/version:scale-110 group-hover/version:bg-primary/5">
                     <version.icon className="h-4 w-4" />
                   </div>
-                  <span className="text-xs font-bold text-neutral-700 dark:text-neutral-300 truncate">
+                  <span className="text-xs font-black text-neutral-800 dark:text-neutral-200 truncate uppercase tracking-widest group-hover/version:text-primary transition-colors">
                     {version.name}
                   </span>
+                  {/* Tiny background glow on hover */}
+                  <div className="absolute -bottom-4 -right-4 h-8 w-8 bg-primary/5 rounded-full blur-xl group-hover/version:bg-primary/10 transition-colors" />
                 </motion.a>
               ))}
             </div>

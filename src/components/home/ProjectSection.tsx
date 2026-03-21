@@ -96,7 +96,7 @@ export default function ProjectSection() {
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
               Open Source Projects
             </h2>
-            <div className="h-1.5 w-20 bg-primary mb-6 rounded-full" />
+            <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
               A collection of my recent backend tools, infrastructure templates,
               and full-stack experiments.
@@ -104,8 +104,8 @@ export default function ProjectSection() {
           </div>
 
           {isRateLimited && (
-            <div className="mb-10 p-6 rounded-xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 flex items-start gap-4">
-              <div className="p-2 rounded-full bg-amber-100 dark:bg-amber-900/50">
+            <div className="mb-10 p-6 rounded-md bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 flex items-start gap-4">
+              <div className="p-2 rounded-md bg-amber-100 dark:bg-amber-900/50">
                 <AlertCircle className="w-6 h-6 text-amber-600 dark:text-amber-400" />
               </div>
               <div className="flex-1">
@@ -122,7 +122,7 @@ export default function ProjectSection() {
             </div>
           )}
 
-          <div className="flex flex-col max-w-7xl mx-auto border-t border-border/50">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
             {loading
               ? Array.from({ length: 4 }).map((_, i) => (
                   <ProjectSkeleton key={i} />
@@ -134,6 +134,7 @@ export default function ProjectSection() {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: idx * 0.1 }}
                     viewport={{ once: true }}
+                    className="h-full"
                   >
                     <ProjectCard
                       name={repo.name}
@@ -148,7 +149,11 @@ export default function ProjectSection() {
           </div>
 
           <div className="flex justify-center mt-16">
-            <Button asChild variant="outline" className="font-bold">
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-md h-12 px-8 font-bold border-2 border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-all duration-300"
+            >
               <Link
                 href="https://github.com/shahadathhs?tab=repositories"
                 target="_blank"

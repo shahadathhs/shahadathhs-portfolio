@@ -38,7 +38,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-bold tracking-wider uppercase mb-2">
+            <span className="inline-block px-4 py-1.5 rounded-md bg-primary/10 text-primary text-sm font-bold tracking-wider uppercase mb-2">
               {heroData.firstLine}
             </span>
           </motion.div>
@@ -94,7 +94,7 @@ export default function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="rounded-xl h-12 px-8 font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300"
+              className="rounded-md h-12 px-8 font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300"
             >
               <Link href="#projects">Explore Projects</Link>
             </Button>
@@ -102,7 +102,7 @@ export default function HeroSection() {
               asChild
               variant="outline"
               size="lg"
-              className="rounded-xl h-12 px-8 font-bold border-2 hover:bg-neutral-50 dark:hover:bg-neutral-900 transition-all duration-300"
+              className="rounded-md h-12 px-8 font-bold border-2 border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-all duration-300"
             >
               <Link
                 href={heroData.resumeLink}
@@ -141,7 +141,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="p-8 rounded-3xl border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50 backdrop-blur-sm shadow-2xl overflow-hidden relative group"
+            className="p-8 rounded-md border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50 backdrop-blur-sm shadow-2xl overflow-hidden relative group"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
             <div className="space-y-4 font-mono text-sm">

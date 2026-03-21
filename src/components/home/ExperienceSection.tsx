@@ -32,7 +32,7 @@ export default function ExperienceSection() {
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
               Tech Journey
             </h2>
-            <div className="h-1.5 w-20 bg-primary mb-6 rounded-full" />
+            <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
               My professional progression through backend engineering, system
               architecture, and technical leadership.
