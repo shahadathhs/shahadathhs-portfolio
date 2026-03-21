@@ -42,7 +42,7 @@ export const skills = [
   },
   {
     title: 'DevOps',
-    description: ['Docker', 'AWS (EC2, S3)', 'GitHub Actions', 'Linux'],
+    description: ['Docker', 'Linux', 'CI/CD', 'AWS (EC2, S3)'],
     icon: Cpu,
   },
   {

@@ -6,8 +6,6 @@ import { Button } from '../ui/button';
 import { Calendar, ExternalLink } from 'lucide-react';
 import { motion } from 'motion/react';
 
-import { BorderBeam } from '../magicui/border-beam';
-
 import BlogSkeleton from '../skeleton/BlogSkeleton';
 
 export default function MediumBlogSection() {
@@ -30,16 +28,32 @@ export default function MediumBlogSection() {
   return (
     <div
       id="blogs"
-      className="relative w-full mt-10 border rounded overflow-clip scroll-mt-24"
+      className="relative w-full mt-10 min-h-[50vh] flex items-center overflow-hidden scroll-mt-24"
     >
-      <section className="w-full bg-white dark:bg-neutral-950 py-16 px-4 md:px-8 lg:px-16">
-        <div className="max-w-7xl mx-auto">
+      {/* Special Borders (Matching Hero) */}
+      <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-stone-500 to-transparent" />
+        <div className="absolute right-0 mx-auto h-px w-40 bg-gradient-to-r from-transparent via-stone-500 to-transparent" />
+      </div>
+      <div className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute top-0 h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
+      </div>
+      <div className="absolute inset-x-0 bottom-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute mx-auto h-px w-full bg-gradient-to-r from-transparent via-stone-500 to-transparent" />
+      </div>
+      <div className="absolute inset-y-0 right-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
+        <div className="absolute h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
+      </div>
+
+      <section className="w-full bg-white dark:bg-neutral-950 py-20 px-6 md:px-12 lg:px-20">
+        <div className="max-w-7xl mx-auto relative z-10">
           {/* Header Block */}
-          <div className="flex flex-col max-w-4xl mb-10">
-            <h2 className="text-4xl font-bold mb-4 dark:text-white text-black">
+          <div className="flex flex-col mb-12 text-left items-start">
+            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
               Latest Blogs
             </h2>
-            <p className="text-neutral-700 dark:text-neutral-300  text-base max-w-2xl">
+            <div className="h-1.5 w-20 bg-primary mb-6 rounded-full" />
+            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
               Insights on backend architecture, API design, and modern web
               development.
             </p>
@@ -131,7 +145,6 @@ export default function MediumBlogSection() {
           )}
         </div>
       </section>
-      <BorderBeam duration={200} size={250} />
     </div>
   );
 }
