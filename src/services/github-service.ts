@@ -18,6 +18,14 @@ export interface GithubResponse {
 
 const CACHE_DURATION = 3600 * 1000; // 1 hour
 
+/**
+ * Per-repo flow: read localStorage first (`github_repo_{owner}_{repo}`).
+ * Cache hit → return immediately (no network call, no rate-limit flag).
+ * Cache miss → GET repo; on 403 → `{ data: null, isRateLimited: true }` (nothing cached).
+ * `fetchMultipleRepos` sets `isRateLimited` if any individual fetch hit 403, even when
+ * other repos succeeded from cache or a fresh 200.
+ */
+
 const getCache = <T>(key: string): T | null => {
   if (typeof window === 'undefined') return null;
   try {

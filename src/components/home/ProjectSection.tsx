@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,24 +14,27 @@ import { AlertCircle } from 'lucide-react';
 
 import ProjectSkeleton from '../skeleton/ProjectSkeleton';
 
-import { PINNED_REPOS } from '@/constant/projectConfig';
+import { PINNED_REPOS, repoCategories } from '@/constant/projectConfig';
 
 export default function ProjectSection() {
   const [repos, setRepos] = useState<GithubRepo[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  /** True if at least one GitHub request returned 403 (may still have data from cache). */
   const [isRateLimited, setIsRateLimited] = useState(false);
+  /** True only when every pinned repo failed and we show placeholder cards (no API metadata). */
+  const [usedSyntheticFallback, setUsedSyntheticFallback] = useState(false);
 
   useEffect(() => {
     const loadRepos = async () => {
       const response = await fetchMultipleRepos('shahadathhs', PINNED_REPOS);
 
-      if (response.isRateLimited) {
-        setIsRateLimited(true);
-      }
+      setIsRateLimited(!!response.isRateLimited);
+      setUsedSyntheticFallback(false);
 
-      // If no data returned and rate limited, use PINNED_REPOS as fallback
+      // No successful repo payloads and GitHub said 403: no cache to use → link-only placeholders
       if (response.data.length === 0 && response.isRateLimited) {
+        setUsedSyntheticFallback(true);
         const fallbackRepos: GithubRepo[] = PINNED_REPOS.map((name, index) => ({
           id: index,
           name,
@@ -69,6 +72,13 @@ export default function ProjectSection() {
     console.error(error, 'error in project section');
   }
 
+  const repoByName = useMemo(
+    () => new Map(repos.map((r) => [r.name, r])),
+    [repos],
+  );
+
+  const categoryEntries = Object.entries(repoCategories);
+
   return (
     <div
       id="projects"
@@ -103,49 +113,93 @@ export default function ProjectSection() {
             </p>
           </div>
 
-          {isRateLimited && (
+          {usedSyntheticFallback && (
             <div className="mb-10 p-6 rounded-md bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 flex items-start gap-4">
               <div className="p-2 rounded-md bg-amber-100 dark:bg-amber-900/50">
                 <AlertCircle className="w-6 h-6 text-amber-600 dark:text-amber-400" />
               </div>
               <div className="flex-1">
                 <h3 className="text-lg font-bold text-amber-900 dark:text-amber-100">
-                  GitHub API Rate Limit Reached
+                  GitHub API rate limit
                 </h3>
                 <p className="mt-1 text-amber-800 dark:text-amber-200 text-sm">
-                  The projects below are currently being served from cache. New
-                  updates will be visible once the rate limit resets (usually in
-                  less than an hour). This happens because unauthenticated
-                  requests are limited by GitHub.
+                  Live metadata could not be loaded (nothing in local cache
+                  yet). The cards below are placeholders with working links to
+                  each repo. Try again after the limit resets, or open a repo on
+                  GitHub for full details.
                 </p>
               </div>
             </div>
           )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-7xl mx-auto">
-            {loading
-              ? Array.from({ length: 4 }).map((_, i) => (
-                  <ProjectSkeleton key={i} />
-                ))
-              : repos.map((repo, idx) => (
-                  <motion.div
-                    key={repo.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: idx * 0.1 }}
-                    viewport={{ once: true }}
-                    className="h-full"
-                  >
-                    <ProjectCard
-                      name={repo.name}
-                      description={repo.description}
-                      url={repo.html_url}
-                      stars={repo.stargazers_count}
-                      forks={repo.forks_count}
-                      language={repo.language}
-                    />
-                  </motion.div>
-                ))}
+          {!usedSyntheticFallback && isRateLimited && (
+            <div className="mb-10 p-4 rounded-md bg-amber-50/80 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/40 flex items-start gap-3">
+              <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+              <div className="flex-1">
+                <p className="text-sm text-amber-900 dark:text-amber-100 font-medium">
+                  Some requests hit the GitHub rate limit
+                </p>
+                <p className="mt-1 text-amber-800/95 dark:text-amber-200/90 text-sm leading-relaxed">
+                  Repos you see with real descriptions and stats were served
+                  from cache or a successful response. Any missing project in a
+                  category failed to refresh and should appear again after the
+                  limit resets (often within an hour for unauthenticated API
+                  use).
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="flex flex-col gap-16 md:gap-20 max-w-7xl mx-auto">
+            {categoryEntries.map(([category, names], categoryIdx) => {
+              const resolved = names
+                .map((name) => repoByName.get(name))
+                .filter((r): r is GithubRepo => r != null);
+
+              if (!loading && resolved.length === 0) {
+                return null;
+              }
+
+              return (
+                <div key={category}>
+                  <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-2">
+                    {category}
+                  </h3>
+                  <div className="h-1 w-14 bg-primary/80 rounded-md mb-6" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {loading
+                      ? names.map((_, i) => (
+                          <ProjectSkeleton key={`${category}-${i}`} />
+                        ))
+                      : resolved.map((repo, idx) => {
+                          const stagger = (categoryIdx * 6 + idx) * 0.05;
+                          return (
+                            <motion.div
+                              key={repo.id}
+                              initial={{ opacity: 0, y: 10 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{
+                                duration: 0.4,
+                                delay: stagger,
+                              }}
+                              viewport={{ once: true }}
+                              className="h-full"
+                            >
+                              <ProjectCard
+                                name={repo.name}
+                                description={repo.description}
+                                url={repo.html_url}
+                                stars={repo.stargazers_count}
+                                forks={repo.forks_count}
+                                language={repo.language}
+                              />
+                            </motion.div>
+                          );
+                        })}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           <div className="flex justify-center mt-16">
