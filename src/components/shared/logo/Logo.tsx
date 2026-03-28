@@ -2,9 +2,15 @@ import { Terminal } from 'lucide-react';
 import Link from 'next/link';
 
 export default function Logo() {
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <Link
       href="/"
+      onClick={handleClick}
       className="group relative flex items-center gap-2.5 font-bold text-lg tracking-tight transition-all duration-300 hover:opacity-90 active:scale-95"
     >
       <div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-nav-accent/20 to-nav-accent/5 ring-1 ring-nav-accent/20 transition-all duration-500 group-hover:from-nav-accent/30 group-hover:to-nav-accent/10 group-hover:ring-nav-accent/40 shadow-sm">

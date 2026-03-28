@@ -34,8 +34,17 @@ export function ActiveLink({
   ) : null;
 
   if (href.startsWith('#')) {
+    const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+      e.preventDefault();
+      const targetId = href.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+
     return (
-      <a href={href} className={className}>
+      <a href={href} onClick={handleClick} className={className}>
         {children}
         {indicator}
       </a>
