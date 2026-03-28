@@ -1,3 +1,13 @@
+# [1.9.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.8.0...v1.9.0) (2026-03-28)
+
+### Bug Fixes
+
+- improve scroll alignment and active section detection ([f327fda](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/f327fda3780f3cd676ed16e7058783c4c2d16699))
+
+### Features
+
+- add smooth scroll-to-top for logo and prevent URL hash updates ([cae969e](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/cae969ec999e29d637be1ad92a36f6e575536ec5)), closes [#section](https://github.com/shahadathhs/shahadathhs.vercel.app/issues/section)
+
 # [1.8.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.7.0...v1.8.0) (2026-03-28)
 
 ### Features
