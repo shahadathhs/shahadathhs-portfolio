@@ -1,6 +1,6 @@
 <div align="center">
 
-![Shahadath Banner](https://github.com/shahadathhs/shahadathhs.vercel.app/blob/main/public/banner.png)
+![Shahadath Banner](https://github.com/shahadathhs/shahadathhs.vercel.app/blob/main/public/github-banner.png)
 
 # Shahadath Hossen Sajib
 
