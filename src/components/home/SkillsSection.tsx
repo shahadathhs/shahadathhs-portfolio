@@ -36,8 +36,9 @@ export default function SkillsSection() {
             </h2>
             <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
-              I always look forward to continuous learning and improving myself.
-              Here&apos;s a snapshot of the tools and technologies I work with.
+              I focus on backend systems and getting them to production
+              reliably. Here&apos;s a snapshot of the stack I use
+              most—especially APIs, data, and delivery.
             </p>
           </div>
 

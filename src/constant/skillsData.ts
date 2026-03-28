@@ -16,6 +16,11 @@ export const skills = [
     icon: Code2,
   },
   {
+    title: 'DevOps & delivery',
+    description: ['Docker', 'CI/CD', 'PM2', 'Linux', 'AWS (EC2, S3)'],
+    icon: Cpu,
+  },
+  {
     title: 'Frameworks',
     description: ['Node.js', 'NestJS', 'FastAPI', 'Express'],
     icon: Rocket,
@@ -39,11 +44,6 @@ export const skills = [
     title: 'API Architecture',
     description: ['Event-Driven', 'Microservices', 'RESTful API'],
     icon: Network,
-  },
-  {
-    title: 'DevOps',
-    description: ['Docker', 'Linux', 'CI/CD', 'AWS (EC2, S3)'],
-    icon: Cpu,
   },
   {
     title: 'Web Servers',
