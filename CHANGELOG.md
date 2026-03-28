@@ -1,3 +1,10 @@
+# [1.7.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.6.0...v1.7.0) (2026-03-28)
+
+### Features
+
+- add categorized project sections and improve rate limit handling ([9b2f055](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/9b2f0559cb406807cfb05982b5f3b16411f76751))
+- redesign About section with band layout and update hero/skills content ([499b5bd](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/499b5bde83a817d4f0b66a5edf0f551a21b4f880))
+
 # [1.6.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.5.0...v1.6.0) (2026-03-21)
 
 ### Features
