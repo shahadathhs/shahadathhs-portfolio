@@ -1,3 +1,9 @@
+# [1.8.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.7.0...v1.8.0) (2026-03-28)
+
+### Features
+
+- add Fiverr freelance services and update site positioning ([427992b](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/427992b408710c7377c07274201ee8d38f879b52))
+
 # [1.7.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.6.0...v1.7.0) (2026-03-28)
 
 ### Features
