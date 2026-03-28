@@ -1,6 +1,6 @@
 <div align="center">
 
-![Shahadath Banner](https://github.com/shahadathhs/shahadathhs.vercel.app/blob/main/public/github-banner.png)
+![Shahadath Banner](https://github.com/shahadathhs/shahadathhs.vercel.app/blob/main/public/banner.png)
 
 # Shahadath Hossen Sajib
 
@@ -83,7 +83,7 @@ I'm a **Backend Developer** who architects scalable, production-ready systems us
 
 ## 💼 Professional Journey
 
-### **Backend Developer** @ [Digital Pylon](https://digitalpylot.com)
+### **Backend Developer** @ [Digital Pylot]
 
 _Feb 2026 - Present | Dhaka, Bangladesh_
 
@@ -95,7 +95,7 @@ Building a **large-scale, configurable microservices platform** with:
 
 ---
 
-### **Backend Developer** @ [Softvence Agency](https://softvence.com)
+### **Backend Developer** @ [Softvence Agency]
 
 _Jul 2025 - Feb 2026 | Dhaka, Bangladesh_
 
@@ -127,7 +127,7 @@ Delivered **mission-critical systems** including:
 
 ---
 
-### **Web Developer** @ [Monster Studio](https://monsterstudio.com)
+### **Web Developer** @ [Monster Studio]
 
 _Aug 2024 - Apr 2025 | Chattogram, Bangladesh_
 
@@ -184,9 +184,11 @@ Built with modern tech and optimized for performance:
 
 ## 📊 GitHub Stats
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=shahadathhs&show_icons=true&theme=radical&hide_border=true&include_all_commits=true&count_private=true)
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=shahadathhs&layout=compact&theme=radical&hide_border=true)
-![Streak](https://github-readme-streak-stats.herokuapp.com/?user=shahadathhs&theme=radical&hide_border=true)
+
+![GitHub Overview](https://github.com/shahadathhs/github-stats/blob/main/generated/overview.svg#gh-dark-mode-only)
+![Languages Used](https://github.com/shahadathhs/github-stats/blob/main/generated/languages.svg#gh-dark-mode-only)
+
+![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=shahadathhs&theme=nightowl)
 
 ---
 
@@ -220,15 +222,5 @@ Need help with **backend APIs, DevOps, or deployment**? I offer professional fre
 **[Visit My Portfolio](https://shahadathhs.vercel.app)** · **[Download Resume](https://drive.google.com/file/d/1dtZCEgZyof-qrUreeVpXDlOovosegpuf/view)**
 
 Made with ❤️ and ⚡ by Shahadath Hossen Sajib
-
-</div>
-
----
-
-<div align="center">
-
-![Visitor Count](https://profile-counter.glitch.me/shahadathhs/count.svg)
-
-_Star this repo if you found it helpful! ⭐_
 
 </div>
