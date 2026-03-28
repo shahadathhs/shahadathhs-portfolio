@@ -1,3 +1,9 @@
+## [1.9.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.9.0...v1.9.1) (2026-03-28)
+
+### Bug Fixes
+
+- update Fiverr profile link to correct username ([1aa3d9e](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/1aa3d9ee5673c85509ce15292f0998226583e14b))
+
 # [1.9.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.8.0...v1.9.0) (2026-03-28)
 
 ### Bug Fixes
