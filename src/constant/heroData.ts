@@ -5,6 +5,7 @@ export const heroData = {
     'Backend Developer (Node.js & NestJS)',
     'Python & FastAPI Developer',
     'DevOps & CI/CD (Docker, PM2)',
+    'Fiverr Freelancer (DevOps & Backend APIs)',
     'Microservices Architect',
     'Scalable Systems Builder',
     'AI & Automation Enthusiast',
@@ -12,5 +13,5 @@ export const heroData = {
   resumeLink:
     'https://drive.google.com/file/d/1dtZCEgZyof-qrUreeVpXDlOovosegpuf/view',
   footerDescription:
-    'Backend and DevOps-focused engineer: shipping Node and Python services with Docker, CI/CD, and solid operations. Past frontend experience helps me collaborate across the stack; my day-to-day work is APIs, infrastructure, and releases.',
+    'Backend and DevOps: Node and Python services, Docker, CI/CD, and production ops. Scoped freelance on Fiverr for servers, deploys, and APIs.',
 };

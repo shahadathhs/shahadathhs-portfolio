@@ -14,8 +14,8 @@ export default function Home() {
       <ExperienceSection />
       <SkillsSection />
       <ProjectSection />
-      <MediumBlogSection />
       <ContactSection />
+      <MediumBlogSection />
     </main>
   );
 }

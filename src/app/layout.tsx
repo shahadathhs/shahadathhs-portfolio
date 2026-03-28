@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: 'Shahadath H. Sajib | Backend Engineer',
   description:
-    'Backend Engineer specializing in scalable microservices, AI-powered automation, and robust system architecture.',
+    'Backend and DevOps engineer: Node.js, Python, Docker, CI/CD. Freelance on Fiverr for Linux servers, deploys, and scalable APIs. Microservices and AI-powered automation.',
   keywords: [
     'Backend Engineer',
     'Node.js',
@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     'Microservices',
     'AI Automation',
     'Shahadath H. Sajib',
+    'Fiverr',
+    'Freelance DevOps',
+    'Backend API',
   ],
 };
 

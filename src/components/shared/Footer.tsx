@@ -1,13 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { quickLinks } from '@/constant/navigationLinks';
-import { ArrowUp, Check, Copy, FileText } from 'lucide-react';
+import { Check, Copy, FileText, Briefcase } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
 import SocialLinks from './SocialLinks';
 
 import { contactEmail } from '@/constant/contactInfo';
+import { fiverrProfileUrl } from '@/constant/fiverr';
 import { heroData } from '@/constant/heroData';
 
 export default function Footer() {
@@ -20,13 +20,6 @@ export default function Footer() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
-  };
-
   return (
     <footer className="relative overflow-hidden">
       {/* Special Borders (Matching Hero/Contact) */}
@@ -35,115 +28,99 @@ export default function Footer() {
         <div className="absolute right-0 mx-auto h-px w-40 bg-gradient-to-r from-transparent via-stone-500 to-transparent" />
       </div>
 
-      <div className="container mx-auto pt-16 pb-8 relative z-10">
-        <div className="flex flex-col md:flex-row md:items-start justify-between gap-12 lg:gap-24">
-          {/* info */}
-          <div className="space-y-4 max-w-md">
-            {/* Logo and Description */}
-            <div className="space-y-4">
-              <Link
-                href="/"
-                className="font-black italic text-2xl tracking-tighter text-primary"
-              >
-                {heroData.secondLine}
-              </Link>
-              <p className="text-sm pt-2 text-neutral-600 dark:text-neutral-400 leading-relaxed italic">
-                {heroData.footerDescription}
-              </p>
-            </div>
-
-            {/* email - Minimal Style (Above Socials) */}
-            <div className="flex items-center gap-3 max-w-sm w-full group transition-all">
-              <p className="text-sm text-neutral-500 dark:text-neutral-400 font-mono font-bold tracking-tight">
-                {email}
-              </p>
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={handleCopyEmail}
-                className="h-8 w-8 shrink-0 hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                {copied ? (
-                  <Check className="h-4 w-4 text-green-500" />
-                ) : (
-                  <Copy className="h-4 w-4" />
-                )}
-                <span className="sr-only">Copy email</span>
-              </Button>
-            </div>
-
-            {/* Social Links */}
-            <SocialLinks />
-          </div>
-
-          <div className="flex flex-row gap-12 lg:gap-24">
-            {/* Quick Links */}
-            <div className="space-y-4">
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-600">
-                Quick Links
-              </h3>
-              <ul className="space-y-2">
-                {quickLinks.map((link) => (
-                  <li key={link.title}>
-                    <Link
-                      href={link.link}
-                      className="text-neutral-500 relative dark:text-neutral-400 text-sm hover:text-primary transition-colors group flex items-center gap-2"
-                    >
-                      <span className="h-px absolute top-[50%] left-0 w-0 bg-primary dark:bg-neutral-400 group-hover:w-3 transition-all duration-300" />
-                      <span className="group-hover:translate-x-3 text-neutral-500 dark:text-neutral-400 text-sm hover:text-primary transition-colors group flex items-center gap-2">
-                        {link.title}
-                      </span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Actions */}
-            <div className="space-y-4">
-              <h3 className="text-xs font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-600">
-                Actions
-              </h3>
-              <div className="flex flex-col gap-3">
-                <Button
-                  asChild
-                  variant="outline"
-                  className="h-10 rounded-md border-2 border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-all duration-300 font-black tracking-widest uppercase text-[10px]"
+      <div className="w-full pt-16 pb-8">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-12 lg:gap-16 xl:gap-24">
+            {/* Brand + bio + contact */}
+            <div className="space-y-6 max-w-2xl w-full">
+              <div className="space-y-4">
+                <Link
+                  href="/"
+                  className="font-black italic text-2xl tracking-tighter text-primary inline-block"
                 >
-                  <Link
-                    target="_blank"
-                    href={heroData.resumeLink}
-                    rel="noopener noreferrer"
-                  >
-                    <FileText className="mr-2 h-3.5 w-3.5" />
-                    View Resume
-                  </Link>
-                </Button>
+                  {heroData.secondLine}
+                </Link>
+                <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                  {heroData.footerDescription}
+                </p>
+              </div>
 
+              <div className="flex flex-wrap items-center gap-3">
+                <p className="text-sm text-neutral-500 dark:text-neutral-400 font-mono font-bold tracking-tight break-all">
+                  {email}
+                </p>
                 <Button
-                  className="hover:cursor-pointer h-10 rounded-md font-black tracking-widest uppercase text-[10px] shadow-sm"
-                  onClick={scrollToTop}
+                  variant="ghost"
+                  size="icon"
+                  onClick={handleCopyEmail}
+                  className="h-8 w-8 shrink-0 hover:bg-primary/10 hover:text-primary transition-colors"
                 >
-                  <ArrowUp className="mr-2 h-3.5 w-3.5" />
-                  Back to Top
+                  {copied ? (
+                    <Check className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
+                  <span className="sr-only">Copy email</span>
                 </Button>
               </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Copyright */}
-        <div className="relative mt-20 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
-            <div className="absolute mx-auto h-px w-full bg-gradient-to-r from-transparent via-stone-500/50 to-transparent" />
+              <SocialLinks />
+            </div>
+
+            {/* Actions: self-contained panel */}
+            <aside className="w-full lg:w-[min(100%,280px)] shrink-0">
+              <div className="rounded-md border border-neutral-200 dark:border-neutral-800 bg-neutral-50/80 dark:bg-neutral-900/40 p-6 space-y-4">
+                <p className="text-[10px] font-black uppercase tracking-[0.25em] text-neutral-400 dark:text-neutral-500">
+                  Elsewhere
+                </p>
+                <div className="flex flex-col gap-3">
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-10 w-full justify-center rounded-md border-2 border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-all duration-300 font-black tracking-widest uppercase text-[10px]"
+                  >
+                    <Link
+                      target="_blank"
+                      href={heroData.resumeLink}
+                      rel="noopener noreferrer"
+                    >
+                      <FileText className="mr-2 h-3.5 w-3.5 shrink-0" />
+                      View Resume
+                    </Link>
+                  </Button>
+
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-10 w-full justify-center rounded-md border-2 border-[#1DBF73]/30 bg-[#1DBF73]/5 text-[#1a9e5f] dark:text-[#1DBF73] hover:bg-[#1DBF73]/10 hover:border-[#1DBF73]/50 transition-all duration-300 font-black tracking-widest uppercase text-[10px]"
+                  >
+                    <Link
+                      href={fiverrProfileUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Briefcase className="mr-2 h-3.5 w-3.5 shrink-0" />
+                      Fiverr profile
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </aside>
           </div>
-          <p className="text-xs font-bold text-neutral-500 dark:text-neutral-500 uppercase tracking-widest">
-            &copy; {new Date().getFullYear()} {heroData.secondLine}. All rights
-            reserved.
-          </p>
-          <p className="text-[10px] font-medium text-neutral-400 dark:text-neutral-600 italic">
-            Built with Next.js, React & Heart
-          </p>
+
+          {/* Copyright */}
+          <div className="relative mt-16 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
+              <div className="absolute mx-auto h-px w-full bg-gradient-to-r from-transparent via-stone-500/50 to-transparent" />
+            </div>
+            <p className="text-xs font-bold text-neutral-500 dark:text-neutral-500 uppercase tracking-widest">
+              &copy; {new Date().getFullYear()} {heroData.secondLine}. All
+              rights reserved.
+            </p>
+            <p className="text-[10px] font-medium text-neutral-400 dark:text-neutral-600 italic">
+              Built with Next.js, React & Heart
+            </p>
+          </div>
         </div>
       </div>
 

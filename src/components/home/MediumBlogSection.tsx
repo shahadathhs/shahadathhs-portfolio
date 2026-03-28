@@ -28,7 +28,7 @@ export default function MediumBlogSection() {
   return (
     <div
       id="blogs"
-      className="relative w-full mt-10 min-h-[50vh] flex items-center overflow-hidden scroll-mt-24"
+      className="relative w-full mt-10 mb-10 min-h-[50vh] flex items-center overflow-hidden scroll-mt-24"
     >
       {/* Special Borders (Matching Hero) */}
       <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">

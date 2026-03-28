@@ -6,7 +6,9 @@ import { Typewriter } from 'react-simple-typewriter';
 import SocialLinks from '../shared/SocialLinks';
 import { Button } from '../ui/button';
 
+import { fiverrProfileUrl } from '@/constant/fiverr';
 import { heroData } from '@/constant/heroData';
+import { ArrowUpRight, Briefcase, FileText } from 'lucide-react';
 
 export default function HeroSection() {
   return (
@@ -94,9 +96,17 @@ export default function HeroSection() {
             <Button
               asChild
               size="lg"
-              className="rounded-md h-12 px-8 font-bold shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300"
+              className="rounded-md h-12 px-8 font-bold bg-[#1DBF73] text-white hover:bg-[#19a866] shadow-lg shadow-[#1DBF73]/25 hover:shadow-[#1DBF73]/40 transition-all duration-300"
             >
-              <Link href="#projects">Explore Projects</Link>
+              <Link
+                href={fiverrProfileUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Briefcase className="mr-2 h-4 w-4" />
+                Fiverr profile
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </Link>
             </Button>
             <Button
               asChild
@@ -109,7 +119,9 @@ export default function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <FileText className="mr-2 h-4 w-4" />
                 View Resume
+                <ArrowUpRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </motion.div>
@@ -154,8 +166,7 @@ export default function HeroSection() {
                 <p className="text-primary">class BackendDeveloper {'{'}</p>
                 <p className="pl-4 text-neutral-600 dark:text-neutral-400">
                   name ={' '}
-                  <span className="text-yellow-500">&apos;Shahadath&apos;</span>
-                  ;
+                  <span className="text-yellow-500">&apos;SAJIB&apos;</span>;
                 </p>
                 <p className="pl-4 text-neutral-600 dark:text-neutral-400">
                   focus ={' '}
@@ -168,6 +179,24 @@ export default function HeroSection() {
                   stack = [
                   <span className="text-yellow-500">
                     &apos;Node.js&apos;, &apos;Python&apos;
+                  </span>
+                  ];
+                </p>
+                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
+                  freelance ={' '}
+                  <span className="text-yellow-500">&apos;Fiverr&apos;</span>;
+                </p>
+                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
+                  apis = [
+                  <span className="text-yellow-500">
+                    &apos;FastAPI&apos;, &apos;NestJS&apos;
+                  </span>
+                  ];
+                </p>
+                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
+                  devops = [
+                  <span className="text-yellow-500">
+                    &apos;Docker&apos;, &apos;CI/CD&apos;
                   </span>
                   ];
                 </p>

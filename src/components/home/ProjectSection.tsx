@@ -109,7 +109,8 @@ export default function ProjectSection() {
             <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
               A collection of my recent backend tools, infrastructure templates,
-              and full-stack experiments.
+              and full-stack experiments. Need something built or deployed? I
+              also take scoped work on Fiverr. See Contact.
             </p>
           </div>
 

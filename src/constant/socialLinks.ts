@@ -1,7 +1,15 @@
-import { Github, Linkedin, Globe } from 'lucide-react';
+import { Briefcase, Github, Linkedin, Globe } from 'lucide-react';
 import { IconBrandMedium, IconBrandX } from '@tabler/icons-react';
 
+import { fiverrProfileUrl } from '@/constant/fiverr';
+
 export const socialLinks = [
+  {
+    name: 'Fiverr',
+    href: fiverrProfileUrl,
+    icon: Briefcase,
+    color: 'text-[#1DBF73]',
+  },
   {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/shahadathhs/',
