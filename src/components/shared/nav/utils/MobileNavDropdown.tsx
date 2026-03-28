@@ -1,4 +1,3 @@
-import { nanoid } from 'nanoid';
 import { ActiveLink } from './ActiveLink';
 import { navLinks } from '@/constant/navigationLinks';
 import {
@@ -39,7 +38,7 @@ export const MobileNavDropdown = () => {
         </SheetHeader>
         <nav className="flex flex-col space-y-1">
           {navLinks.map((link) => (
-            <div key={nanoid()} onClick={handleItemClick}>
+            <div key={link.link} onClick={handleItemClick}>
               <ActiveLink
                 href={link.link}
                 extraClasses="text-base block px-3 py-3 rounded-md hover:bg-nav-accent/5 w-full"

@@ -2,37 +2,51 @@
 
 import { useEffect, useState } from 'react';
 
-export function useActiveSection(sectionIds: string[]) {
-  const [activeSection, setActiveSection] = useState<string>('');
+/**
+ * Highlights the nav item for the section that has reached the scroll top
+ * (just below the sticky nav). Uses simple getBoundingClientRect logic
+ * to determine which section is currently in view.
+ */
+export function useActiveSection(orderedSectionIds: readonly string[]) {
+  const [activeHash, setActiveHash] = useState<string>('');
 
   useEffect(() => {
-    // const observers: IntersectionObserver[] = [];
+    const compute = () => {
+      // Trigger when section top is at or slightly above viewport center
+      // This ensures the section that's most visible gets highlighted
+      const threshold = window.innerHeight * 0.3;
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -70% 0px', // Adjust to trigger when section is in view
-      threshold: 0,
+      // Find the last section whose top is above the threshold
+      let current = '';
+      for (const raw of orderedSectionIds) {
+        const id = raw.replace(/^#/, '');
+        const section = document.getElementById(id);
+        if (!section) continue;
+        if (section.getBoundingClientRect().top <= threshold) {
+          current = `#${id}`;
+        }
+      }
+      setActiveHash(current);
     };
 
-    const handleIntersect = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(`#${entry.target.id}`);
-        }
+    let raf = 0;
+    const schedule = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        compute();
       });
     };
 
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
+    schedule();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+    };
+  }, [orderedSectionIds]);
 
-    sectionIds.forEach((id) => {
-      const element = document.getElementById(id.replace('#', ''));
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => observer.disconnect();
-  }, [sectionIds]);
-
-  return activeSection;
+  return activeHash;
 }
