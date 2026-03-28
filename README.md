@@ -11,7 +11,7 @@
 [![Portfolio](https://img.shields.io/badge/Portfolio-Visit-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://shahadathhs.vercel.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/shahadathhs)
 [![Twitter](https://img.shields.io/badge/Twitter-Follow-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/shahadathhs)
-[![Fiverr](https://img.shields.io/badge/Fiverr-Hire_Me-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/sajib_devops)
+[![Fiverr](https://img.shields.io/badge/Fiverr-Hire_Me-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/shahadath_sajib)
 
 </div>
 
@@ -184,7 +184,6 @@ Built with modern tech and optimized for performance:
 
 ## 📊 GitHub Stats
 
-
 ![GitHub Overview](https://github.com/shahadathhs/github-stats/blob/main/generated/overview.svg#gh-dark-mode-only)
 ![Languages Used](https://github.com/shahadathhs/github-stats/blob/main/generated/languages.svg#gh-dark-mode-only)
 
@@ -203,7 +202,7 @@ Need help with **backend APIs, DevOps, or deployment**? I offer professional fre
 - 🔌 **RESTful API Development**
 - 🔄 **CI/CD Pipeline Setup**
 
-[![Fiverr Gigs](https://img.shields.io/badge/Fiverr-View_Gigs-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/sajib_devops)
+[![Fiverr Gigs](https://img.shields.io/badge/Fiverr-View_Gigs-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/shahadath_sajib)
 
 ---
 
