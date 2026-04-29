@@ -1,19 +1,16 @@
 export const heroData = {
-  firstLine: "Hey there, I'm",
+  firstLine: "Hey, I'm",
   secondLine: 'Shahadath Hossen Sajib',
   typewriterWords: [
-    'Backend Developer (Node.js & NestJS)',
+    'Backend Engineer',
+    'Node.js & NestJS Specialist',
     'Python & FastAPI Developer',
-    'DevOps & CI/CD (Docker, PM2)',
-    // 'Fiverr Freelancer (DevOps & Backend APIs)', // Commented out
+    'AI-Integrated Systems Builder',
     'Microservices Architect',
-    'Scalable Systems Builder',
-    'AI & Automation Enthusiast',
-    'Open Source Contributor', // Added as alternative
+    'DevOps Enthusiast',
   ],
   resumeLink:
     'https://drive.google.com/file/d/1dtZCEgZyof-qrUreeVpXDlOovosegpuf/view',
   footerDescription:
-    // 'Backend and DevOps: Node and Python services, Docker, CI/CD, and production ops. Scoped freelance on Fiverr for servers, deploys, and APIs.', // Original with Fiverr
-    'Backend and DevOps: Node and Python services, Docker, CI/CD, and production ops. Building scalable systems and open source solutions.',
+    'Backend engineer building scalable systems with Node.js and Python, integrating AI into real-world applications. Experienced with Docker, CI/CD, and production-ready architectures.',
 };

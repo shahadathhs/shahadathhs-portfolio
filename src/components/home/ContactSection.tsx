@@ -19,7 +19,7 @@ import { toast } from 'sonner';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-import { otherVersions } from '@/constant/otherVersions';
+// import { otherVersions } from '@/constant/otherVersions'; // Commented out
 // import { fiverrGigs, fiverrProfileUrl } from '@/constant/fiverr'; // Commented out
 
 // const fiverrGigIcons: LucideIcon[] = [Server, Terminal]; // Commented out
@@ -250,7 +250,7 @@ export default function ContactSection() {
             <p className="text-center text-xs font-bold text-neutral-400 dark:text-neutral-600 uppercase tracking-[0.2em] mb-10">
               Connect with me on Socials
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {socialLinks.map((link, idx) => (
                 <motion.a
                   key={link.name}
@@ -285,8 +285,8 @@ export default function ContactSection() {
             </div>
           </div>
 
-          {/* Other Portfolio Versions Grid - Aligned with Social Grid */}
-          <div className="mt-16 pt-16 border-t border-neutral-200 dark:border-neutral-800">
+          {/* Other Portfolio Versions Grid - Aligned with Social Grid - Commented out */}
+          {/* <div className="mt-16 pt-16 border-t border-neutral-200 dark:border-neutral-800">
             <p className="text-center text-xs font-bold text-neutral-400 dark:text-neutral-600 uppercase tracking-[0.2em] mb-10">
               Visit All Versions of My Portfolio
             </p>
@@ -314,12 +314,11 @@ export default function ContactSection() {
                   <span className="text-xs font-black text-neutral-800 dark:text-neutral-200 truncate uppercase tracking-widest group-hover/version:text-primary transition-colors">
                     {version.name}
                   </span>
-                  {/* Tiny background glow on hover */}
                   <div className="absolute -bottom-4 -right-4 h-8 w-8 bg-primary/5 rounded-full blur-xl group-hover/version:bg-primary/10 transition-colors" />
                 </motion.a>
               ))}
             </div>
-          </div>
+          </div> */}
         </div>
       </section>
     </div>

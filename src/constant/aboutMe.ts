@@ -22,106 +22,97 @@ export type AboutBand = {
   cards: AboutHighlightCard[];
 };
 
-/** Each paragraph is paired only with cards that reflect that beat; no orphan paragraphs. */
 export const aboutBands: AboutBand[] = [
   {
     paragraph:
-      'I build scalable, production-minded backends with Node.js and NestJS, plus Python and FastAPI when the problem fits. TypeScript ties it together: clear contracts, safer refactors, and services that stay maintainable as they grow.',
+      'I build scalable, production-ready backends using Node.js and NestJS, along with Python and FastAPI when it fits the problem. TypeScript keeps everything predictable, maintainable, and safe as systems grow.',
     cards: [
       {
         title: 'Node.js & NestJS',
         description:
-          'Services, modules, and APIs on Node, structured with NestJS where the domain calls for it.',
+          'Structured backend systems with modular architecture and clean service boundaries.',
         icon: Rocket,
       },
       {
         title: 'Python & FastAPI',
         description:
-          'Fast APIs, tooling, and automation in Python when speed of iteration or ecosystem wins.',
+          'High-speed APIs, tooling, and automation using Python’s ecosystem.',
         icon: Code2,
       },
     ],
   },
   {
     paragraph:
-      'I design and live with the data layer (PostgreSQL, MongoDB, Redis) and ship REST APIs that stay predictable under load. Real-time channels, background queues, and AI-assisted workflows sit on that foundation when the product needs them.',
+      'I design data layers with PostgreSQL, MongoDB, and Redis, and build APIs that stay reliable under real-world load. I also integrate real-time systems, background jobs, and AI-powered features when they add real product value.',
     cards: [
       {
         title: 'Databases',
         description:
-          'PostgreSQL, MongoDB, Redis: schemas, migrations, and access patterns that match the workload.',
+          'PostgreSQL, MongoDB, Redis — optimized schemas and efficient access patterns.',
         icon: Database,
       },
       {
-        title: 'Real-time, jobs & AI',
+        title: 'Realtime, jobs & AI',
         description:
-          'Socket.IO-style realtime, BullMQ-style processing, and pragmatic AI hooks where they earn their keep.',
+          'WebSockets, queues, and AI integrations built for actual use cases, not hype.',
         icon: Zap,
       },
     ],
   },
   {
     paragraph:
-      'Large systems often mean microservices: bounded contexts, clear service boundaries, and integrations that do not turn into spaghetti. I am used to multi-repo or modular monolith setups and shipping features without losing operational clarity.',
+      'For larger systems, I design microservices with clear boundaries and maintainable communication patterns. Whether it’s modular monoliths or distributed systems, I focus on keeping complexity under control.',
     cards: [
       {
         title: 'Microservices',
         description:
-          'Splitting and evolving services so teams can move without breaking the whole platform.',
+          'Service boundaries that scale without turning into chaos.',
         icon: Layers,
       },
       {
         title: 'APIs & integrations',
         description:
-          'REST, events, and third-party integrations with contracts that stay honest in production.',
+          'Reliable REST APIs and third-party integrations with strong contracts.',
         icon: Network,
       },
     ],
   },
   {
     paragraph:
-      // 'I have shipped frontend work in the past and still read UI code comfortably, useful for API shape, pagination, and edge cases. My focus now is backend and operations; I stay aligned with product and design without owning the UI layer. I am on Fiverr as well: packaged gigs for Linux servers, deploys, and backend APIs when a clear scope and handoff matter.', // Original with Fiverr
-      'I have shipped frontend work in the past and still read UI code comfortably, useful for API shape, pagination, and edge cases. My focus now is backend and operations; I stay aligned with product and design without owning the UI layer. Open source contributions and collaborative development are my preferred ways to share expertise.',
+      'I understand frontend concerns from past experience, which helps me design better APIs around real UI needs like pagination, loading states, and error handling. My focus is backend, but I build with the full product in mind.',
     cards: [
       {
         title: 'Product alignment',
         description:
-          'APIs and contracts that match how interfaces actually load data, fail, and recover.',
+          'Backend systems designed around real user-facing behavior.',
         icon: PanelsTopLeft,
       },
-      // {
-      //   title: 'Fiverr & freelance',
-      //   description:
-      //     'Public gigs for DevOps and backend APIs with defined deliverables. Profile and gig links live in Contact.',
-      //   icon: Briefcase,
-      // }, // Commented out Fiverr card
       {
         title: 'Collaboration',
         description:
-          'Active contributor to collaborative development communities and team projects.',
-        icon: Network, // Using Network icon instead
+          'Clear communication, clean code, and systems that teams can work on confidently.',
+        icon: Network,
       },
     ],
   },
   {
     paragraph:
-      'I take features to production: Docker images, CI/CD (including GitHub Actions), and AWS where it belongs. On the host (PM2 for Node, Nginx or Caddy in front, Linux as the default), I care that deploys are repeatable and easy to reason about when something breaks.',
+      'I ship systems to production using Docker, CI/CD pipelines, and cloud infrastructure. From deployment to runtime, I focus on stability, observability, and systems that are easy to debug when things go wrong.',
     cards: [
       {
         title: 'CI/CD & cloud',
         description:
-          'Pipelines, containers, and AWS (EC2, S3) so releases are boring in the best way.',
+          'Automated pipelines and cloud deployments that keep releases smooth.',
         icon: Cpu,
       },
       {
         title: 'Runtime & edge',
         description:
-          'PM2, Nginx, Caddy, and Linux: processes, TLS, and reverse proxy behavior you can debug.',
+          'Linux, reverse proxies, and process managers configured for reliability.',
         icon: Server,
       },
     ],
   },
 ];
 
-/** Flat list of paragraphs (e.g. meta, tests). Order matches `aboutBands`. */
 export const aboutMeBio = aboutBands.map((b) => b.paragraph);
