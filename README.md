@@ -6,12 +6,14 @@
 
 ### Backend Developer · Microservices Architect · DevOps Engineer
 
-![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=4000&pause=1000&color=000000&center=true&vCenter=true&width=600&lines=Node.js+%26+NestJS+Specialist;Python+%26+FastAPI+Developer;Microservices+Architecture;Scalable+Systems+Builder;DevOps+%26+CI%2FCD+Engineer;Fiverr+Freelancer)
+![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=4000&pause=1000&color=000000&center=true&vCenter=true&width=600&lines=Node.js+%26+NestJS+Specialist;Python+%26+FastAPI+Developer;Microservices+Architecture;Scalable+Systems+Builder;DevOps+%26+CI%2FCD+Engineer;Open+Source+Contributor)
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Visit-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://shahadathhs.vercel.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/shahadathhs)
 [![Twitter](https://img.shields.io/badge/Twitter-Follow-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/shahadathhs)
-[![Fiverr](https://img.shields.io/badge/Fiverr-Hire_Me-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/shahadath_sajib)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shahadathhs)
+
+<!-- [![Fiverr](https://img.shields.io/badge/Fiverr-Hire_Me-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/shahadath_sajib) -->
 
 </div>
 
@@ -191,6 +193,7 @@ Built with modern tech and optimized for performance:
 
 ---
 
+<!--
 ## 💼 Hire Me on Fiverr
 
 Need help with **backend APIs, DevOps, or deployment**? I offer professional freelance services:
@@ -203,6 +206,7 @@ Need help with **backend APIs, DevOps, or deployment**? I offer professional fre
 - 🔄 **CI/CD Pipeline Setup**
 
 [![Fiverr Gigs](https://img.shields.io/badge/Fiverr-View_Gigs-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/shahadath_sajib)
+-->
 
 ---
 

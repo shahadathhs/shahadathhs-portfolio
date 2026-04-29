@@ -44,7 +44,7 @@ export default function ScrollToTop() {
             size="icon"
             className={cn(
               'rounded-full h-12 w-12 shadow-lg border-2 border-primary/20',
-              'bg-white dark:bg-neutral-900 text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-300',
+              'bg-white dark:bg-neutral-900 text-primary hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-all duration-300 cursor-pointer',
             )}
             aria-label="Scroll to top"
           >

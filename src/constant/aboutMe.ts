@@ -1,6 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
 import {
-  Briefcase,
   Code2,
   Cpu,
   Database,
@@ -81,7 +80,8 @@ export const aboutBands: AboutBand[] = [
   },
   {
     paragraph:
-      'I have shipped frontend work in the past and still read UI code comfortably, useful for API shape, pagination, and edge cases. My focus now is backend and operations; I stay aligned with product and design without owning the UI layer. I am on Fiverr as well: packaged gigs for Linux servers, deploys, and backend APIs when a clear scope and handoff matter.',
+      // 'I have shipped frontend work in the past and still read UI code comfortably, useful for API shape, pagination, and edge cases. My focus now is backend and operations; I stay aligned with product and design without owning the UI layer. I am on Fiverr as well: packaged gigs for Linux servers, deploys, and backend APIs when a clear scope and handoff matter.', // Original with Fiverr
+      'I have shipped frontend work in the past and still read UI code comfortably, useful for API shape, pagination, and edge cases. My focus now is backend and operations; I stay aligned with product and design without owning the UI layer. Open source contributions and collaborative development are my preferred ways to share expertise.',
     cards: [
       {
         title: 'Product alignment',
@@ -89,11 +89,17 @@ export const aboutBands: AboutBand[] = [
           'APIs and contracts that match how interfaces actually load data, fail, and recover.',
         icon: PanelsTopLeft,
       },
+      // {
+      //   title: 'Fiverr & freelance',
+      //   description:
+      //     'Public gigs for DevOps and backend APIs with defined deliverables. Profile and gig links live in Contact.',
+      //   icon: Briefcase,
+      // }, // Commented out Fiverr card
       {
-        title: 'Fiverr & freelance',
+        title: 'Collaboration',
         description:
-          'Public gigs for DevOps and backend APIs with defined deliverables. Profile and gig links live in Contact.',
-        icon: Briefcase,
+          'Active contributor to collaborative development communities and team projects.',
+        icon: Network, // Using Network icon instead
       },
     ],
   },

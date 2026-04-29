@@ -9,10 +9,10 @@ import {
   CheckCircle,
   Copy,
   FileText,
-  LucideIcon,
+  // LucideIcon, // Commented out as it's only used for Fiverr
+  // Server,
+  // Terminal,
   Mail,
-  Server,
-  Terminal,
 } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
@@ -20,9 +20,9 @@ import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { otherVersions } from '@/constant/otherVersions';
-import { fiverrGigs, fiverrProfileUrl } from '@/constant/fiverr';
+// import { fiverrGigs, fiverrProfileUrl } from '@/constant/fiverr'; // Commented out
 
-const fiverrGigIcons: LucideIcon[] = [Server, Terminal];
+// const fiverrGigIcons: LucideIcon[] = [Server, Terminal]; // Commented out
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -67,9 +67,10 @@ export default function ContactSection() {
             </h2>
             <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
             <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
-              Email works great for a direct line. Prefer a scoped gig? I&apos;m
-              on Fiverr for DevOps and backend API work. Profile and gigs are
-              below. I&apos;m always open to a thoughtful message either way.
+              Email works great for a direct line. Prefer a structured
+              collaboration? I&apos;m active on open source communities and
+              platforms like GitHub. I&apos;m always open to a thoughtful
+              message either way.
             </p>
           </div>
 
@@ -174,8 +175,8 @@ export default function ContactSection() {
             </motion.div>
           </div>
 
-          {/* Fiverr */}
-          <motion.div
+          {/* Fiverr section commented out */}
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -242,7 +243,7 @@ export default function ContactSection() {
               </div>
             </div>
             <div className="absolute -bottom-10 -right-10 h-32 w-32 bg-[#1DBF73]/5 rounded-full blur-3xl pointer-events-none" />
-          </motion.div>
+          </motion.div> */}
 
           {/* Social Grid */}
           <div className="mt-16">

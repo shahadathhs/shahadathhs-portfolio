@@ -1,13 +1,13 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { Check, Copy, FileText, Briefcase } from 'lucide-react';
+import { Check, Copy, FileText, Github } from 'lucide-react'; // Changed Briefcase to Github
 import Link from 'next/link';
 import { useState } from 'react';
 import SocialLinks from './SocialLinks';
 
 import { contactEmail } from '@/constant/contactInfo';
-import { fiverrProfileUrl } from '@/constant/fiverr';
+// import { fiverrProfileUrl } from '@/constant/fiverr'; // Commented out
 import { heroData } from '@/constant/heroData';
 
 export default function Footer() {
@@ -89,7 +89,8 @@ export default function Footer() {
                     </Link>
                   </Button>
 
-                  <Button
+                  {/* Fiverr button commented out */}
+                  {/* <Button
                     asChild
                     variant="outline"
                     className="h-10 w-full justify-center rounded-md border-2 border-[#1DBF73]/30 bg-[#1DBF73]/5 text-[#1a9e5f] dark:text-[#1DBF73] hover:bg-[#1DBF73]/10 hover:border-[#1DBF73]/50 transition-all duration-300 font-black tracking-widest uppercase text-[10px]"
@@ -101,6 +102,20 @@ export default function Footer() {
                     >
                       <Briefcase className="mr-2 h-3.5 w-3.5 shrink-0" />
                       Fiverr profile
+                    </Link>
+                  </Button> */}
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="h-10 w-full justify-center rounded-md border-2 border-neutral-900/20 dark:border-white/20 bg-neutral-900/5 dark:bg-white/5 text-neutral-900 dark:text-white hover:bg-neutral-900/10 dark:hover:bg-white/10 hover:border-neutral-900/30 dark:hover:border-white/30 transition-all duration-300 font-black tracking-widest uppercase text-[10px]"
+                  >
+                    <Link
+                      href="https://github.com/shahadathhs"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Github className="mr-2 h-3.5 w-3.5 shrink-0" />
+                      GitHub
                     </Link>
                   </Button>
                 </div>

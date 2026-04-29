@@ -6,9 +6,9 @@ import { Typewriter } from 'react-simple-typewriter';
 import SocialLinks from '../shared/SocialLinks';
 import { Button } from '../ui/button';
 
-import { fiverrProfileUrl } from '@/constant/fiverr';
+// import { fiverrProfileUrl } from '@/constant/fiverr'; // Commented out
 import { heroData } from '@/constant/heroData';
-import { ArrowUpRight, Briefcase, FileText } from 'lucide-react';
+import { ArrowUpRight, Github, FileText } from 'lucide-react'; // Changed Briefcase to Github
 
 export default function HeroSection() {
   return (
@@ -93,7 +93,8 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 1 }}
             className="flex flex-wrap items-center gap-4 mt-4"
           >
-            <Button
+            {/* Fiverr button commented out */}
+            {/* <Button
               asChild
               size="lg"
               className="rounded-md h-12 px-8 font-bold bg-[#1DBF73] text-white hover:bg-[#19a866] shadow-lg shadow-[#1DBF73]/25 hover:shadow-[#1DBF73]/40 transition-all duration-300"
@@ -105,6 +106,21 @@ export default function HeroSection() {
               >
                 <Briefcase className="mr-2 h-4 w-4" />
                 Fiverr profile
+                <ArrowUpRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button> */}
+            <Button
+              asChild
+              size="lg"
+              className="rounded-md h-12 px-8 font-bold bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200 shadow-lg shadow-neutral-900/20 dark:shadow-white/20 hover:shadow-neutral-900/30 dark:hover:shadow-white/30 transition-all duration-300"
+            >
+              <Link
+                href="https://github.com/shahadathhs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Github className="mr-2 h-4 w-4" />
+                GitHub Profile
                 <ArrowUpRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -184,7 +200,10 @@ export default function HeroSection() {
                 </p>
                 <p className="pl-4 text-neutral-600 dark:text-neutral-400">
                   freelance ={' '}
-                  <span className="text-yellow-500">&apos;Fiverr&apos;</span>;
+                  <span className="text-yellow-500">
+                    &apos;Open Source&apos;
+                  </span>
+                  ;
                 </p>
                 <p className="pl-4 text-neutral-600 dark:text-neutral-400">
                   apis = [
