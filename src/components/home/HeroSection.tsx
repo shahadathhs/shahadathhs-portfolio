@@ -179,7 +179,7 @@ export default function HeroSection() {
                 <div className="h-3 w-3 rounded-full bg-green-500" />
               </div>
               <div className="space-y-2">
-                <p className="text-primary">class BackendDeveloper {'{'}</p>
+                <p className="text-primary">class BackendEngineer {'{'}</p>
                 <p className="pl-4 text-neutral-600 dark:text-neutral-400">
                   name ={' '}
                   <span className="text-yellow-500">&apos;SAJIB&apos;</span>;

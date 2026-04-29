@@ -4,9 +4,9 @@
 
 # Shahadath Hossen Sajib
 
-### Backend Developer · Microservices Architect · DevOps Engineer
+### Backend Engineer · Microservices Architect · DevOps Enthusiast
 
-![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=4000&pause=1000&color=000000&center=true&vCenter=true&width=600&lines=Node.js+%26+NestJS+Specialist;Python+%26+FastAPI+Developer;Microservices+Architecture;Scalable+Systems+Builder;DevOps+%26+CI%2FCD+Engineer;Open+Source+Contributor)
+![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=4000&pause=1000&color=000000&center=true&vCenter=true&width=600&lines=Backend+Engineer;Node.js+%26+NestJS+Specialist;Python+%26+FastAPI+Developer;Microservices+Architect;DevOps+Enthusiast)
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-Visit-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://shahadathhs.vercel.app)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/shahadathhs)
@@ -21,7 +21,7 @@
 
 ## 🧠 About Me
 
-I'm a **Backend Developer** who architects scalable, production-ready systems using **Node.js, NestJS, Python, and FastAPI**. My expertise lies in building **microservices** that handle complex workflows, **real-time features**, and **AI-powered automation**.
+I'm a **Backend Engineer** who architects scalable, production-ready systems using **Node.js, NestJS, Python, and FastAPI**. My expertise lies in building **microservices** that handle complex workflows, **real-time features**, and **AI-powered automation**.
 
 ### What I Do Best
 
