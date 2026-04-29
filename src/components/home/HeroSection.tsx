@@ -199,13 +199,6 @@ export default function HeroSection() {
                   ];
                 </p>
                 <p className="pl-4 text-neutral-600 dark:text-neutral-400">
-                  freelance ={' '}
-                  <span className="text-yellow-500">
-                    &apos;Open Source&apos;
-                  </span>
-                  ;
-                </p>
-                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
                   apis = [
                   <span className="text-yellow-500">
                     &apos;FastAPI&apos;, &apos;NestJS&apos;
