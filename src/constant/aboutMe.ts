@@ -54,7 +54,7 @@ export const aboutBands: AboutBand[] = [
       {
         title: 'Realtime, jobs & AI',
         description:
-          'WebSockets, queues, and AI integrations built for actual use cases, not hype.',
+          'WebSockets, queues, and AI integrations — RAG pipelines, tool calling, and vector search — built for actual use cases, not hype.',
         icon: Zap,
       },
     ],

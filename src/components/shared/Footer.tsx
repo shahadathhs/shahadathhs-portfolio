@@ -38,10 +38,10 @@ export default function Footer() {
                   href="/"
                   className="font-black italic text-2xl tracking-tighter text-primary inline-block"
                 >
-                  {heroData.secondLine}
+                  {heroData.name}
                 </Link>
                 <p className="text-sm text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  {heroData.footerDescription}
+                  {heroData.tagline}
                 </p>
               </div>
 
@@ -129,8 +129,8 @@ export default function Footer() {
               <div className="absolute mx-auto h-px w-full bg-gradient-to-r from-transparent via-stone-500/50 to-transparent" />
             </div>
             <p className="text-xs font-bold text-neutral-500 dark:text-neutral-500 uppercase tracking-widest">
-              &copy; {new Date().getFullYear()} {heroData.secondLine}. All
-              rights reserved.
+              &copy; {new Date().getFullYear()} {heroData.name}. All rights
+              reserved.
             </p>
             <p className="text-[10px] font-medium text-neutral-400 dark:text-neutral-600 italic">
               Built with Next.js, React & Heart

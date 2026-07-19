@@ -1,5 +1,6 @@
-import { Github, Linkedin, Globe } from 'lucide-react';
+import { Github, Linkedin } from 'lucide-react';
 import { IconBrandMedium, IconBrandX } from '@tabler/icons-react';
+import { LeetCodeIcon } from '@/components/shared/icons/LeetCodeIcon';
 
 // Fiverr import commented out
 // import { fiverrProfileUrl } from '@/constant/fiverr';
@@ -37,9 +38,9 @@ export const socialLinks = [
     color: 'text-black dark:text-white',
   },
   {
-    name: 'Substack',
-    href: 'https://shahadathhs.substack.com',
-    icon: Globe,
+    name: 'LeetCode',
+    href: 'https://leetcode.com/u/shahadathhs/',
+    icon: LeetCodeIcon,
     color: 'text-orange-500',
   },
 ];

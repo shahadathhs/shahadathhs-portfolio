@@ -1,53 +1,53 @@
 import {
   Code2,
-  Cpu,
+  Server,
   Database,
-  Globe,
   Layers,
-  Network,
-  Rocket,
+  Cloud,
   Zap,
+  BrainCircuit,
 } from 'lucide-react';
 
 export const skills = [
   {
     title: 'Languages',
-    description: ['JavaScript', 'TypeScript', 'Python'],
+    description: ['TypeScript', 'JavaScript (ES6+)', 'Python'],
     icon: Code2,
   },
   {
-    title: 'DevOps & delivery',
-    description: ['Docker', 'CI/CD', 'PM2', 'Linux', 'AWS (EC2, S3)'],
-    icon: Cpu,
-  },
-  {
-    title: 'Frameworks',
-    description: ['Node.js', 'NestJS', 'FastAPI', 'Express'],
-    icon: Rocket,
+    title: 'Backend',
+    description: ['Node.js', 'NestJS', 'FastAPI', 'Express.js'],
+    icon: Server,
   },
   {
     title: 'Databases',
-    description: ['PostgreSQL', 'MongoDB', 'Redis', 'Qdrant'],
+    description: ['PostgreSQL', 'MongoDB', 'Redis'],
     icon: Database,
   },
   {
-    title: 'ORMs & ODMs',
-    description: ['Prisma', 'Drizzle', 'Mongoose'],
+    title: 'ORM / ODM',
+    description: ['Prisma', 'Mongoose', 'Drizzle'],
     icon: Layers,
   },
   {
-    title: 'Realtime',
+    title: 'Cloud & DevOps',
+    description: [
+      'Docker',
+      'AWS (EC2, S3)',
+      'Nginx',
+      'Caddy',
+      'GitHub Actions',
+    ],
+    icon: Cloud,
+  },
+  {
+    title: 'Messaging & Real-time',
     description: ['Socket.IO', 'WebRTC', 'BullMQ'],
     icon: Zap,
   },
   {
-    title: 'API Architecture',
-    description: ['Event-Driven', 'Microservices', 'RESTful API'],
-    icon: Network,
-  },
-  {
-    title: 'Web Servers',
-    description: ['Nginx', 'Caddy', 'Reverse Proxy'],
-    icon: Globe,
+    title: 'AI & LLM',
+    description: ['OpenAI API', 'Ollama', 'RAG', 'Vector Search'],
+    icon: BrainCircuit,
   },
 ];

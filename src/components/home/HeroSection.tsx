@@ -6,9 +6,15 @@ import { Typewriter } from 'react-simple-typewriter';
 import SocialLinks from '../shared/SocialLinks';
 import { Button } from '../ui/button';
 
-// import { fiverrProfileUrl } from '@/constant/fiverr'; // Commented out
 import { heroData } from '@/constant/heroData';
-import { ArrowUpRight, Github, FileText } from 'lucide-react'; // Changed Briefcase to Github
+import { ArrowUpRight, Github, FileText } from 'lucide-react';
+
+const segmentColor: Record<string, string> = {
+  default: 'text-neutral-600 dark:text-neutral-400',
+  key: 'text-sky-500',
+  string: 'text-yellow-500',
+  punct: 'text-neutral-500',
+};
 
 export default function HeroSection() {
   return (
@@ -39,14 +45,22 @@ export default function HeroSection() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
+            className="flex items-center gap-3"
           >
-            <span className="inline-block px-4 py-1.5 rounded-md bg-primary/10 text-primary text-sm font-bold tracking-wider uppercase mb-2">
-              {heroData.firstLine}
+            <span className="inline-block px-4 py-1.5 rounded-md bg-primary/10 text-primary text-sm font-bold tracking-wider uppercase">
+              {heroData.greeting}
+            </span>
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              Available for work
             </span>
           </motion.div>
 
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 leading-tight">
-            {heroData.secondLine.split(' ').map((word, i) => (
+            {heroData.name.split(' ').map((word, i) => (
               <motion.span
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
@@ -84,8 +98,27 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 0.8 }}
             className="text-lg text-neutral-500 dark:text-neutral-400 max-w-lg leading-relaxed"
           >
-            {heroData.footerDescription}
+            {heroData.tagline}
           </motion.p>
+
+          {/* Quick Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
+            className="flex flex-wrap gap-6 md:gap-10"
+          >
+            {heroData.quickStats.map((stat) => (
+              <div key={stat.label} className="flex flex-col">
+                <span className="text-2xl font-extrabold text-primary">
+                  {stat.value}
+                </span>
+                <span className="text-xs font-medium uppercase tracking-wider text-neutral-500 dark:text-neutral-400">
+                  {stat.label}
+                </span>
+              </div>
+            ))}
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -93,29 +126,13 @@ export default function HeroSection() {
             transition={{ duration: 0.5, delay: 1 }}
             className="flex flex-wrap items-center gap-4 mt-4"
           >
-            {/* Fiverr button commented out */}
-            {/* <Button
-              asChild
-              size="lg"
-              className="rounded-md h-12 px-8 font-bold bg-[#1DBF73] text-white hover:bg-[#19a866] shadow-lg shadow-[#1DBF73]/25 hover:shadow-[#1DBF73]/40 transition-all duration-300"
-            >
-              <Link
-                href={fiverrProfileUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Briefcase className="mr-2 h-4 w-4" />
-                Fiverr profile
-                <ArrowUpRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button> */}
             <Button
               asChild
               size="lg"
               className="rounded-md h-12 px-8 font-bold bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 hover:bg-neutral-800 dark:hover:bg-neutral-200 shadow-lg shadow-neutral-900/20 dark:shadow-white/20 hover:shadow-neutral-900/30 dark:hover:shadow-white/30 transition-all duration-300"
             >
               <Link
-                href="https://github.com/shahadathhs"
+                href={heroData.githubLink}
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -152,7 +169,7 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Right Side: Visual Element */}
+        {/* Right Side: Visual Element (data-driven code window) */}
         <div className="hidden md:flex w-full md:w-2/5 justify-center items-center relative">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -178,40 +195,26 @@ export default function HeroSection() {
                 <div className="h-3 w-3 rounded-full bg-yellow-500" />
                 <div className="h-3 w-3 rounded-full bg-green-500" />
               </div>
-              <div className="space-y-2">
-                <p className="text-primary">class BackendEngineer {'{'}</p>
-                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
-                  name ={' '}
-                  <span className="text-yellow-500">&apos;SAJIB&apos;</span>;
+              <div className="space-y-1.5">
+                <p className="text-primary">
+                  class {heroData.codeSnippet.className} {'{'}
                 </p>
-                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
-                  focus ={' '}
-                  <span className="text-yellow-500">
-                    &apos;Scalability&apos;
-                  </span>
-                  ;
-                </p>
-                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
-                  stack = [
-                  <span className="text-yellow-500">
-                    &apos;Node.js&apos;, &apos;Python&apos;
-                  </span>
-                  ];
-                </p>
-                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
-                  apis = [
-                  <span className="text-yellow-500">
-                    &apos;FastAPI&apos;, &apos;NestJS&apos;
-                  </span>
-                  ];
-                </p>
-                <p className="pl-4 text-neutral-600 dark:text-neutral-400">
-                  devops = [
-                  <span className="text-yellow-500">
-                    &apos;Docker&apos;, &apos;CI/CD&apos;
-                  </span>
-                  ];
-                </p>
+                {heroData.codeSnippet.lines.map((line, idx) => (
+                  <p
+                    key={idx}
+                    className="text-neutral-600 dark:text-neutral-400"
+                    style={{ paddingLeft: `${(line.indent ?? 0) * 16}px` }}
+                  >
+                    {line.segments.map((seg, i) => (
+                      <span
+                        key={i}
+                        className={segmentColor[seg.variant ?? 'default']}
+                      >
+                        {seg.text}
+                      </span>
+                    ))}
+                  </p>
+                ))}
                 <p className="text-primary">{'}'}</p>
               </div>
             </div>
