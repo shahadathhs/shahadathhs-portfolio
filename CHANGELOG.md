@@ -1,3 +1,9 @@
+# [1.11.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.10.0...v1.11.0) (2026-07-19)
+
+### Features
+
+- switch typography to IBM Plex Mono and sync SkillsCard spacing ([2ae60b1](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/2ae60b1ed92aba522004d2119bfe19292d08b1f8))
+
 # [1.10.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.9.1...v1.10.0) (2026-07-19)
 
 ### Features
