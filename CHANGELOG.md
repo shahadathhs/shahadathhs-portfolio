@@ -1,3 +1,9 @@
+# [1.10.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.9.1...v1.10.0) (2026-07-19)
+
+### Features
+
+- add manifest, robots, sitemap, and opengraph image for SEO and PWA support ([8099be6](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/8099be6de5d72943fb426262c0cdb2bb33a73877))
+
 ## [1.9.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.9.0...v1.9.1) (2026-03-28)
 
 ### Bug Fixes
