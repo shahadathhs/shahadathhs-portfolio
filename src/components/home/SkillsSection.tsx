@@ -43,7 +43,7 @@ export default function SkillsSection() {
           </div>
 
           {/* Compact 2-column bento grid (7 cards: 3 rows of 2 + 1 featured full-width) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
             {skills.map((skill, idx) => (
               <SkillCard
                 key={skill.title}
@@ -84,12 +84,12 @@ const SkillCard = ({
       transition={{ duration: 0.4, delay: (index % 4) * 0.08 }}
       viewport={{ once: true }}
       className={cn(
-        'group relative rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm overflow-hidden flex flex-col p-6',
+        'group relative rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm overflow-hidden flex flex-col p-8 min-h-[200px]',
         isFeatured && 'md:col-span-2',
       )}
     >
       {/* Subtle Gradient Accent */}
-      <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:via-primary/50 transition-all z-20" />
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:via-primary/50 transition-all z-20" />
 
       {/* Animated SVG Pattern Background (Hidden on Mobile) */}
       <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 hidden md:block">
@@ -123,22 +123,22 @@ const SkillCard = ({
 
       <div className="relative z-10 flex flex-col h-full">
         {/* Icon + Title Header */}
-        <div className="flex items-center gap-3 mb-3">
-          <div className="inline-flex p-2.5 rounded-md bg-primary/5 text-primary group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
-            <Icon className="h-5 w-5" />
+        <div className="flex items-center gap-4 mb-6">
+          <div className="inline-flex p-3 rounded-md bg-primary/5 text-primary group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
+            <Icon className="h-6 w-6" />
           </div>
-          <h3 className="text-xs font-black uppercase tracking-[0.2em] text-neutral-900 dark:text-neutral-50 group-hover:text-primary transition-colors">
+          <h3 className="text-sm font-black uppercase tracking-[0.2em] text-neutral-900 dark:text-neutral-50 group-hover:text-primary transition-colors">
             {title}
           </h3>
         </div>
 
         {/* One-line context summary */}
-        <p className="text-[12.5px] leading-relaxed text-neutral-500 dark:text-neutral-400 mb-4">
+        <p className="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400 mb-6">
           {summary}
         </p>
 
         {/* Tech Badges */}
-        <div className="flex flex-wrap gap-1.5 md:gap-2 mt-auto">
+        <div className="flex flex-wrap gap-2 md:gap-2.5 mt-auto">
           {description.map((tech) => (
             <motion.div
               key={tech}
@@ -147,7 +147,7 @@ const SkillCard = ({
             >
               <Badge
                 variant="outline"
-                className="rounded-md px-2.5 py-0.5 text-[10px] font-black uppercase tracking-widest bg-black/5 dark:bg-white/5 border-neutral-200/50 dark:border-neutral-800/50 group-hover:border-primary/20 group-hover:text-primary transition-all duration-300 whitespace-nowrap"
+                className="rounded-md px-3 py-1 text-xs font-black uppercase tracking-widest bg-black/5 dark:bg-white/5 border-neutral-200/50 dark:border-neutral-800/50 group-hover:border-primary/20 group-hover:text-primary transition-all duration-300 whitespace-nowrap"
               >
                 {tech}
               </Badge>
@@ -157,12 +157,12 @@ const SkillCard = ({
       </div>
 
       {/* Decorative Corner Accent */}
-      <div className="absolute top-3 right-3 text-[9px] font-mono font-black text-neutral-200 dark:text-neutral-800 select-none opacity-50 group-hover:opacity-100 transition-opacity">
+      <div className="absolute top-4 right-4 text-[10px] font-mono font-black text-neutral-200 dark:text-neutral-800 select-none opacity-50 group-hover:opacity-100 transition-opacity">
         0{index + 1}
       </div>
 
       {/* Background Glow */}
-      <div className="absolute -bottom-8 -right-8 h-32 w-32 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700 pointer-events-none" />
+      <div className="absolute -bottom-10 -right-10 h-40 w-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700 pointer-events-none" />
     </motion.div>
   );
 };

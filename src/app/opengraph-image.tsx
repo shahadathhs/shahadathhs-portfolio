@@ -18,7 +18,7 @@ export default function OpengraphImage() {
           'radial-gradient(circle at 20% 0%, rgba(16, 185, 129, 0.18) 0%, transparent 50%), radial-gradient(circle at 80% 100%, rgba(99, 102, 241, 0.15) 0%, transparent 50%), #0a0a0a',
         padding: 80,
         color: '#fafafa',
-        fontFamily: 'system-ui, -apple-system, Segoe UI, Roboto, sans-serif',
+        fontFamily: 'IBM Plex Mono, ui-monospace, monospace',
         position: 'relative',
       }}
     >
