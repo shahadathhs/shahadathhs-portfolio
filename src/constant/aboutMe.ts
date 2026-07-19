@@ -1,14 +1,13 @@
 import type { LucideIcon } from 'lucide-react';
 import {
+  Activity,
+  Boxes,
+  BrainCircuit,
+  Cloud,
   Code2,
-  Cpu,
-  Database,
-  Layers,
   Network,
-  PanelsTopLeft,
-  Rocket,
-  Server,
-  Zap,
+  Radio,
+  Workflow,
 } from 'lucide-react';
 
 export type AboutHighlightCard = {
@@ -25,91 +24,73 @@ export type AboutBand = {
 export const aboutBands: AboutBand[] = [
   {
     paragraph:
-      'I build scalable, production-ready backends using Node.js and NestJS, along with Python and FastAPI when it fits the problem. TypeScript keeps everything predictable, maintainable, and safe as systems grow.',
+      'I’m a backend engineer who builds scalable, distributed systems and AI-powered services. My work spans the full lifecycle — data modeling, API contracts, business logic, deployment, and runtime — not just one layer of the stack. Coming from full-stack work, I design APIs around real UI needs: pagination, loading states, and error handling that the frontend can actually build on.',
     cards: [
       {
-        title: 'Node.js & NestJS',
+        title: 'End-to-end ownership',
         description:
-          'Structured backend systems with modular architecture and clean service boundaries.',
-        icon: Rocket,
+          'I design, build, and ship backend systems from schema to production — including the deployment and runtime around them.',
+        icon: Workflow,
       },
       {
-        title: 'Python & FastAPI',
+        title: 'Backend-first',
         description:
-          'High-speed APIs, tooling, and automation using Python’s ecosystem.',
+          'Node.js/NestJS for real-time and modular services, Python/FastAPI for AI and async workloads — chosen per problem.',
         icon: Code2,
       },
     ],
   },
   {
     paragraph:
-      'I design data layers with PostgreSQL, MongoDB, and Redis, and build APIs that stay reliable under real-world load. I also integrate real-time systems, background jobs, and AI-powered features when they add real product value.',
+      'For systems that need to grow, I design microservices with clear boundaries and APIs with strong contracts. Whether it’s a modular monolith or a distributed system, my focus is keeping complexity under control as products and teams scale — not adding services for the sake of it.',
     cards: [
       {
-        title: 'Databases',
+        title: 'Microservices architecture',
         description:
-          'PostgreSQL, MongoDB, Redis — optimized schemas and efficient access patterns.',
-        icon: Database,
-      },
-      {
-        title: 'Realtime, jobs & AI',
-        description:
-          'WebSockets, queues, and AI integrations — RAG pipelines, tool calling, and vector search — built for actual use cases, not hype.',
-        icon: Zap,
-      },
-    ],
-  },
-  {
-    paragraph:
-      'For larger systems, I design microservices with clear boundaries and maintainable communication patterns. Whether it’s modular monoliths or distributed systems, I focus on keeping complexity under control.',
-    cards: [
-      {
-        title: 'Microservices',
-        description:
-          'Service boundaries that scale without turning into chaos.',
-        icon: Layers,
-      },
-      {
-        title: 'APIs & integrations',
-        description:
-          'Reliable REST APIs and third-party integrations with strong contracts.',
+          'Service boundaries that scale without turning into chaos — clear modules, contracts, and ownership.',
         icon: Network,
       },
+      {
+        title: 'Event-driven design',
+        description:
+          'Async workflows, queues, and pub/sub patterns that decouple services and absorb load gracefully.',
+        icon: Boxes,
+      },
     ],
   },
   {
     paragraph:
-      'I understand frontend concerns from past experience, which helps me design better APIs around real UI needs like pagination, loading states, and error handling. My focus is backend, but I build with the full product in mind.',
+      'I build features that need live behavior or intelligence — real-time logistics, RAG chatbots, tool calling, document retrieval. The goal is AI and real-time that solve real product problems, not bolted-on hype. I’ve shipped Uber-style tracking, payment engines, and AI automation that real users depend on.',
     cards: [
       {
-        title: 'Product alignment',
+        title: 'AI in production',
         description:
-          'Backend systems designed around real user-facing behavior.',
-        icon: PanelsTopLeft,
+          'RAG pipelines, tool calling, and vector search shipped to real users — not demos. Backed by document retrieval and workflow automation.',
+        icon: BrainCircuit,
       },
       {
-        title: 'Collaboration',
+        title: 'Real-time systems',
         description:
-          'Clear communication, clean code, and systems that teams can work on confidently.',
-        icon: Network,
+          'Live tracking, signaling, and background jobs at product scale — multi-party coordination and dynamic routing included.',
+        icon: Radio,
       },
     ],
   },
   {
     paragraph:
-      'I ship systems to production using Docker, CI/CD pipelines, and cloud infrastructure. From deployment to runtime, I focus on stability, observability, and systems that are easy to debug when things go wrong.',
+      'I deploy what I build — Docker on AWS, CI/CD pipelines, Linux VPS behind Nginx or Caddy. I optimize for stability, observability, and systems that are easy to debug at 2am, not just impressive in a demo. Production is the deliverable.',
     cards: [
       {
         title: 'CI/CD & cloud',
         description:
-          'Automated pipelines and cloud deployments that keep releases smooth.',
-        icon: Cpu,
+          'Automated pipelines and AWS deployments (EC2, S3) that keep releases smooth, reversible, and boring in the best way.',
+        icon: Cloud,
       },
       {
-        title: 'Runtime & edge',
+        title: 'Runtime & observability',
         description:
-          'Linux, reverse proxies, and process managers configured for reliability.',
-        icon: Server,
+          'Linux, reverse proxies, and process managers configured for reliability — with monitoring that catches issues early.',
+        icon: Activity,
       },
     ],
   },

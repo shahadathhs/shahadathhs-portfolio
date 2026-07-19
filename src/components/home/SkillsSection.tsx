@@ -48,6 +48,7 @@ export default function SkillsSection() {
               <SkillCard
                 key={skill.title}
                 title={skill.title}
+                summary={skill.summary}
                 icon={skill.icon}
                 description={skill.description}
                 index={idx}
@@ -63,12 +64,14 @@ export default function SkillsSection() {
 
 const SkillCard = ({
   title,
+  summary,
   description,
   icon: Icon,
   index,
   isFeatured = false,
 }: {
   title: string;
+  summary: string;
   description: string[];
   icon: React.ComponentType<{ className?: string }>;
   index: number;
@@ -120,7 +123,7 @@ const SkillCard = ({
 
       <div className="relative z-10 flex flex-col h-full">
         {/* Icon + Title Header */}
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-3">
           <div className="inline-flex p-2.5 rounded-md bg-primary/5 text-primary group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
             <Icon className="h-5 w-5" />
           </div>
@@ -128,6 +131,11 @@ const SkillCard = ({
             {title}
           </h3>
         </div>
+
+        {/* One-line context summary */}
+        <p className="text-[12.5px] leading-relaxed text-neutral-500 dark:text-neutral-400 mb-4">
+          {summary}
+        </p>
 
         {/* Tech Badges */}
         <div className="flex flex-wrap gap-1.5 md:gap-2 mt-auto">

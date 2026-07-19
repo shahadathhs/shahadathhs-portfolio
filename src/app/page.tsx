@@ -11,8 +11,8 @@ export default function Home() {
     <main>
       <HeroSection />
       <AboutMeSection />
-      <ExperienceSection />
       <SkillsSection />
+      <ExperienceSection />
       <ProjectSection />
       <ContactSection />
       <MediumBlogSection />
