@@ -1,3 +1,13 @@
+# [1.13.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.12.0...v1.13.0) (2026-08-09)
+
+### Bug Fixes
+
+- tighten mobile hero spacing and sync lock-screen text scale ([5e5c2b3](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/5e5c2b3b756579eaa675ee5cabac2af0dab44a8f))
+
+### Features
+
+- add interactive overlay suite and ambient video backgrounds ([b100405](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/b1004050d51ce372dcb4d74485110956bc89824a))
+
 # [1.12.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.11.0...v1.12.0) (2026-08-09)
 
 ### Features
