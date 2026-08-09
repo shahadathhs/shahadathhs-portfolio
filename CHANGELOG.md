@@ -1,3 +1,9 @@
+# [1.15.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.14.0...v1.15.0) (2026-08-09)
+
+### Features
+
+- redesign og card to match portfolio aesthetic ([18c7dec](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/18c7dec287aea8d0e8dbf507f41ea5ec137c34d5))
+
 # [1.14.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.13.1...v1.14.0) (2026-08-09)
 
 ### Features
