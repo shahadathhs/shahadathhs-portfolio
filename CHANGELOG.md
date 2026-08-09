@@ -1,3 +1,9 @@
+## [1.13.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.13.0...v1.13.1) (2026-08-09)
+
+### Bug Fixes
+
+- render og image statically to fix empty-body link previews ([1492e0f](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/1492e0f996948a989f4f3d8c0edaf2b35b5b30e3))
+
 # [1.13.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.12.0...v1.13.0) (2026-08-09)
 
 ### Bug Fixes
