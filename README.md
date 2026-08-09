@@ -154,8 +154,10 @@ Pinned open-source work — [explore all on GitHub](https://github.com/shahadath
 
 ## 📊 GitHub Stats
 
+<div align="center">
+
 ![GitHub Overview](https://github.com/shahadathhs/github-stats/blob/main/generated/overview.svg#gh-dark-mode-only)
 
 ![Languages Used](https://github.com/shahadathhs/github-stats/blob/main/generated/languages.svg#gh-dark-mode-only)
 
-![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=shahadathhs&theme=nightowl)
+</div>

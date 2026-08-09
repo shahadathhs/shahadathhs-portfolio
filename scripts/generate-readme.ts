@@ -145,7 +145,7 @@ push(
 );
 
 /* --------------------------- GitHub stats ------------------------- */
-push('## 📊 GitHub Stats', '');
+push('## 📊 GitHub Stats', '', '<div align="center">', '');
 push(
   `![GitHub Overview](https://github.com/${GH}/github-stats/blob/main/generated/overview.svg#gh-dark-mode-only)`,
   '',
@@ -154,10 +154,7 @@ push(
   `![Languages Used](https://github.com/${GH}/github-stats/blob/main/generated/languages.svg#gh-dark-mode-only)`,
   '',
 );
-push(
-  `![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=${GH}&theme=nightowl)`,
-  '',
-);
+push('</div>', '');
 
 /* --------------------------- Write file --------------------------- */
 const out =
