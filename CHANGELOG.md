@@ -1,3 +1,9 @@
+# [1.14.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.13.1...v1.14.0) (2026-08-09)
+
+### Features
+
+- drive og image from portfolio data so it stays in sync ([827f3f8](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/827f3f86bb3c95dbde0997ec492a5aca621ee561))
+
 ## [1.13.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.13.0...v1.13.1) (2026-08-09)
 
 ### Bug Fixes
