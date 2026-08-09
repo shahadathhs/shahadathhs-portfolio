@@ -4,16 +4,18 @@
 
 # Shahadath Hossen Sajib
 
-### Backend Engineer · Microservices Architect · DevOps Enthusiast
+### Backend Engineer · Dhaka, Bangladesh
 
-![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=14&duration=4000&pause=1000&color=000000&center=true&vCenter=true&width=600&lines=Backend+Engineer;Node.js+%26+NestJS+Specialist;Python+%26+FastAPI+Developer;Microservices+Architect;DevOps+Enthusiast)
+![Typing SVG](https://readme-typing-svg.demolab.com?font=IBM+Plex+Mono&size=14&duration=4000&pause=1000&color=000000&center=true&vCenter=true&width=600&lines=Backend+Engineer;Node.js+%26+NestJS+Specialist;TypeScript+%26+Python+Developer;Microservices+Architect;AI-Integrated+Systems+Builder;Distributed+Systems+Engineer)
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-Visit-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://shahadathhs.vercel.app)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/shahadathhs)
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/shahadathhs)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shahadathhs)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shahadathhs/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shahadathhs)
+[![Twitter (X)](<https://img.shields.io/badge/Twitter%20(X)-000000?style=for-the-badge&logo=x&logoColor=white>)](https://x.com/shahadathhs)
+[![Medium](https://img.shields.io/badge/Medium-000000?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@shahadathhs)
+[![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/u/shahadathhs/)
 
-<!-- [![Fiverr](https://img.shields.io/badge/Fiverr-Hire_Me-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/shahadath_sajib) -->
+[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://shahadathhs.vercel.app)
+[![Resume](https://img.shields.io/badge/Resume-2563EB?style=for-the-badge&logo=googledrive&logoColor=white)](https://drive.google.com/file/d/1dtZCEgZyof-qrUreeVpXDlOovosegpuf/view)
 
 </div>
 
@@ -21,225 +23,141 @@
 
 ## 🧠 About Me
 
-I'm a **Backend Engineer** who architects scalable, production-ready systems using **Node.js, NestJS, Python, and FastAPI**. My expertise lies in building **microservices** that handle complex workflows, **real-time features**, and **AI-powered automation**.
+I’m a backend engineer who builds scalable, distributed systems and AI-powered services. My work spans the full lifecycle — data modeling, API contracts, business logic, deployment, and runtime — not just one layer of the stack. Coming from full-stack work, I design APIs around real UI needs: pagination, loading states, and error handling that the frontend can actually build on.
 
-### What I Do Best
+For systems that need to grow, I design microservices with clear boundaries and APIs with strong contracts. Whether it’s a modular monolith or a distributed system, my focus is keeping complexity under control as products and teams scale — not adding services for the sake of it.
 
-- **🚀 Scalable Backends**: Design services that handle high traffic without breaking a sweat
-- **🏗️ Microservices Architecture**: Split large systems into bounded, maintainable contexts
-- **⚡ Real-time Systems**: Build live features with Socket.IO, WebRTC, and message queues
-- **🤖 AI Integration**: Implement pragmatic AI workflows where they actually add value
-- **🔧 DevOps & CI/CD**: Ship code with Docker, PM2, Nginx/Caddy, and automated pipelines
-- **💾 Data Layer**: Work with PostgreSQL, MongoDB, Redis, and Qdrant like second nature
+I build features that need live behavior or intelligence — real-time logistics, RAG chatbots, tool calling, document retrieval. The goal is AI and real-time that solve real product problems, not bolted-on hype. I’ve shipped Uber-style tracking, payment engines, and AI automation that real users depend on.
 
-### My Philosophy
+I deploy what I build — Docker on AWS, CI/CD pipelines, Linux VPS behind Nginx or Caddy. I optimize for stability, observability, and systems that are easy to debug at 2am, not just impressive in a demo. Production is the deliverable.
 
-> "I don't just write code—I build systems that scale, teams can maintain, and businesses can rely on."
+**2+** · Years Experience • **Microservices** · Focus • **RAG & Agents** · AI/LLM
 
 ---
 
-## 🛠️ Technical Arsenal
+## 🛠️ Skills
 
-### Core Languages
+### Languages
 
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+_TypeScript-first for type-safe backends; Python for AI, automation, and FastAPI services._
 
-### Backend Frameworks
+`TypeScript` `JavaScript (ES6+)` `Python`
 
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=nodedotjs&logoColor=white)
-![NestJS](https://img.shields.io/badge/NestJS-E0234E?style=flat-square&logo=nestjs&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=flat-square&logo=express&logoColor=white)
+### Backend
 
-### Databases & ORMs
+_Node.js/NestJS for real-time and modular services; FastAPI for ML and async workloads._
 
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)
-![Redis](https://img.shields.io/badge/Redis-DC382D?style=flat-square&logo=redis&logoColor=white)
-![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=flat-square&logo=prisma&logoColor=white)
-![Drizzle](https://img.shields.io/badge/Drizzle-F42C00?style=flat-square&logo=fire&logoColor=white)
+`Node.js` `NestJS` `FastAPI` `Express.js`
 
-### Real-time & Queues
+### Databases
 
-![Socket.IO](https://img.shields.io/badge/Socket.IO-010101?style=flat-square&logo=socketdotio&logoColor=white)
-![BullMQ](https://img.shields.io/badge/BullMQ-FF0000?style=flat-square&logo=redis&logoColor=white)
+_Polyglot persistence — relational, document, and in-memory stores chosen per workload._
 
-### DevOps & Infrastructure
+`PostgreSQL` `MongoDB` `Redis`
 
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
-![Nginx](https://img.shields.io/badge/Nginx-009639?style=flat-square&logo=nginx&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat-square&logo=linux&logoColor=black)
-![PM2](https://img.shields.io/badge/PM2-2B037A?style=flat-square&logo=pm2&logoColor=white)
+### ORM / ODM
 
-### Architecture Patterns
+_Typed data layers with Prisma and Drizzle; Mongoose for document models._
 
-![REST API](https://img.shields.io/badge/REST-API-02569B?style=flat-square)
-![Microservices](https://img.shields.io/badge/Microservices-Architecture-FF6600?style=flat-square)
-![Event-Driven](https://img.shields.io/badge/Event--Driven-D8B008?style=flat-square)
-![Webhooks](https://img.shields.io/badge/Webhooks-Integration-6DB33F?style=flat-square)
+`Prisma` `Mongoose` `Drizzle`
 
----
+### Cloud & DevOps
 
-## 💼 Professional Journey
+_Containerized deployments on AWS, automated through CI/CD and reverse-proxied on Linux._
 
-### **Backend Developer** @ [Digital Pylot]
+`Docker` `AWS (EC2, S3)` `Nginx` `Caddy` `GitHub Actions`
 
-_Feb 2026 - Present | Dhaka, Bangladesh_
+### Messaging & Real-time
 
-Building a **large-scale, configurable microservices platform** with:
+_Live updates, signaling, and queue-driven background processing for product-scale features._
 
-- Scalable services handling complex workflows
-- AI-powered features and communication integrations
-- Cross-functional team collaboration on enterprise-grade systems
+`Socket.IO` `WebRTC` `BullMQ`
+
+### AI & LLM
+
+_Production AI features — RAG pipelines, tool calling, and vector search over self-hosted or OpenAI models._
+
+`OpenAI API` `Ollama` `RAG` `Vector Search`
 
 ---
 
-### **Backend Developer** @ [Softvence Agency]
+## 💼 Experience
 
-_Jul 2025 - Feb 2026 | Dhaka, Bangladesh_
+### Back End Developer · Digital Pylot
 
-Delivered **mission-critical systems** including:
+_Feb 2026 - Present · Dhaka, Bangladesh · On-site_
 
-🚖 **Real-time Logistics Platform** (Uber-style tracking)
+- Contributing to a large-scale CRM and dynamic CMS platform on a microservices architecture — working across backend, AI integration, and deployment.
+- Built a fully customizable CMS that lets admins manage themes, layouts, pages, sections, and dynamic content without code changes.
+- Developed REST APIs using PostgreSQL and MongoDB with dynamic configuration and role-based notifications for complex business workflows.
+- Built AI-powered features — a custom RAG chatbot, tool calling, document retrieval, and intelligent workflow automation.
+- Deployed and maintained services on Linux VPS (Nginx, SSL, CI/CD) and contributed to microservices reliability and performance.
 
-- Dynamic route updates with multi-party coordination
-- Weather-aware routing and live location tracking
-- Real-time driver-passenger communication
+### Back End Developer · Softvence Agency
 
-💳 **Payment Infrastructure**
+_Jul 2025 - Feb 2026 · Dhaka, Bangladesh · On-site_
 
-- Subscription management and automated payouts
-- Promo code engine and transaction processing
-- Multi-wallet payment gateway integration
+- Designed and delivered scalable, modular backend systems across multiple web and mobile platforms — real-time features, payment logic, dynamic workflows, and AI automation.
+- Built real-time logistics and trip tracking (Uber-style) with dynamic routing, multi-party coordination, and weather-aware routing.
+- Engineered a platform-level payment engine — subscriptions, promo codes, and rule-based automated payouts.
+- Built dynamic HR/scheduling workflows (payroll automation, timezone-aware ops, activity streams) and location-aware services with map integrations.
+- Implemented AI-powered automation — candidate evaluation, interview generation, analytics, and contextual insights.
+- Owned PostgreSQL schemas (Prisma/Drizzle), Redis caching, and AWS EC2 + S3 infrastructure with monitoring and optimization.
 
-📊 **High-Volume Data Platform**
+### Web Developer · Monster Studio
 
-- Normalized 100K+ external records with user content
-- Advanced search with multi-source data fusion
-- Performance-optimized query patterns
+_Aug 2024 - Apr 2025 · Chattogram, Bangladesh · On-site_
 
-🤖 **AI-Powered HR Platform**
-
-- Candidate evaluation and automated interviews
-- Question generation with analytics dashboard
-- Payroll automation with timezone-aware scheduling
-
----
-
-### **Web Developer** @ [Monster Studio]
-
-_Aug 2024 - Apr 2025 | Chattogram, Bangladesh_
-
-Shipped **20+ production websites** in a large-scale monorepo:
-
-- AI document assistant for context-aware responses
-- Custom CMS with YouTube API integration
-- Performance testing and unit test coverage
-- Frontend team leadership through code reviews
+- Contributed to a large-scale monorepo powering 20+ production websites — responsive, SEO-optimized, and performant.
+- Designed and implemented an AI-powered document assistant with retrieval-based, context-aware responses.
+- Built internal tools — a custom CMS and creator utilities — integrating external APIs like YouTube.
+- Led a frontend team through code reviews, collaboration, and task coordination to improve delivery quality.
+- Strengthened product reliability by contributing unit tests and performance testing initiatives across projects.
 
 ---
 
-## 🎯 Featured Projects
+## 🚀 Projects
 
-### Open Source Contributions
+Pinned open-source work — [explore all on GitHub](https://github.com/shahadathhs?tab=repositories).
 
-| Category            | Repositories                                                                                                                                                                                                                        |
-| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **🚀 Starter Kits** | [nestjs-prisma-aws-starter](https://github.com/shahadathhs/nestjs-prisma-aws-starter) • [nx-remix-starter](https://github.com/shahadathhs/nx-remix-starter) • [turborepo-starter](https://github.com/shahadathhs/turborepo-starter) |
-| **🤖 AI & ML**      | [rag](https://github.com/shahadathhs/rag) • [voice-to-text](https://github.com/shahadathhs/voice-to-text)                                                                                                                           |
-| **🛠️ Tools**        | [systemix](https://github.com/shahadathhs/systemix) • [local-mail-stack](https://github.com/shahadathhs/local-mail-stack)                                                                                                           |
-| **🌐 Full-Stack**   | [vortex](https://github.com/shahadathhs/vortex) • [barisathi](https://github.com/shahadathhs/barisathi)                                                                                                                             |
-| **📚 Learning**     | [data-structures-and-algorithms](https://github.com/shahadathhs/data-structures-and-algorithms-in-javascript) • [sql-guide](https://github.com/shahadathhs/sql-guide)                                                               |
+### AI Applications
 
-[![View All Repos](https://img.shields.io/badge/View_All_Repos-Explore-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shahadathhs?tab=repositories)
+[`rag`](https://github.com/shahadathhs/rag) · [`voice-to-text`](https://github.com/shahadathhs/voice-to-text)
 
----
+### Full-Stack Projects
 
-## 🌐 This Portfolio Site
+[`barisathi`](https://github.com/shahadathhs/barisathi) · [`bike-shop`](https://github.com/shahadathhs/bike-shop) · [`adda`](https://github.com/shahadathhs/adda)
 
-A dark, monochrome site with an ambient nature video background, frosted-glass sections, and a layer of interactive system overlays.
+### Dev Tools & Infrastructure
 
-**Framework & stack**
-
-- [Next.js 16](https://nextjs.org/) · App Router · Turbopack · [React 19](https://react.dev/) Server Components
-- [TypeScript 5](https://www.typescriptlang.org/) end-to-end
-- [Tailwind CSS v4](https://tailwindcss.com/) custom design system · IBM Plex Mono throughout
-
-**UI & animation**
-
-- [Radix UI](https://www.radix-ui.com/) primitives + [shadcn/ui](https://ui.shadcn.com/) components
-- [Motion](https://motion.dev/) for animation · [Lucide](https://lucide.dev/) + [Tabler](https://tabler.io/icons) icons
-
-**Interactive overlays** (`src/components/interactive/`)
-
-- **Assistive button** — draggable, AssistiveTouch-style radial menu
-- **Terminal** — in-page shell (`help`, `skills`, `projects`, `neofetch`, …) with command history
-- **Pet companion** — draggable, reactive sprite with speech bubbles + particles
-- **Lock screen** — slide-to-unlock with a live clock and the latest GitHub commit / Medium post
-- **Spotlight** — cursor-following glow (pointer devices only)
-- **Sound** — synthesized Web Audio UI effects, toggle persisted to `localStorage`
-
-**Backgrounds & media**
-
-- Ambient nature **video background** (dimmed, site-wide) + a video lock screen
-- Frosted-glass sections composited over the video
-- Static, data-driven **Open Graph image** rendered from `heroData`
-
-**Data sources**
-
-- GitHub repos & latest commit via the unauthenticated GitHub API (cached)
-- Medium posts via `rss2json`
-
-**Developer experience**
-
-- ESLint + Prettier · Husky + lint-staged · commitlint
-- Conventional Commits · Semantic Release for automated versioning
+[`systemix`](https://github.com/shahadathhs/systemix) · [`local-mail-stack`](https://github.com/shahadathhs/local-mail-stack)
 
 ---
 
-## 📊 GitHub Stats
-
-![GitHub Overview](https://github.com/shahadathhs/github-stats/blob/main/generated/overview.svg#gh-dark-mode-only)
-![Languages Used](https://github.com/shahadathhs/github-stats/blob/main/generated/languages.svg#gh-dark-mode-only)
-
-![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=shahadathhs&theme=nightowl)
-
----
-
-<!--
-## 💼 Hire Me on Fiverr
-
-Need help with **backend APIs, DevOps, or deployment**? I offer professional freelance services:
-
-- 🐧 **Linux Server Setup & Optimization**
-- 🚀 **PM2 Process Management for Node.js**
-- 🐳 **Docker Containerization Services**
-- ⚙️ **Nginx/Caddy Reverse Proxy Configuration**
-- 🔌 **RESTful API Development**
-- 🔄 **CI/CD Pipeline Setup**
-
-[![Fiverr Gigs](https://img.shields.io/badge/Fiverr-View_Gigs-1DBF73?style=for-the-badge&logo=fiverr&logoColor=white)](https://www.fiverr.com/shahadath_sajib)
--->
-
----
-
-## 📬 Get In Touch
+## 📬 Contact
 
 <div align="center">
 
-**Let's build something scalable together!**
+**Let's build something scalable together.**
 
-[![Email](https://img.shields.io/badge/Email-Contact_Me-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:shahadathhossensajib732@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Let's_Connect-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/shahadathhs)
-[![Twitter](https://img.shields.io/badge/Twitter-DM_Me-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/shahadathhs)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:shahadathhossensajib732@gmail.com)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shahadathhs/)
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shahadathhs)
+[![Twitter (X)](<https://img.shields.io/badge/Twitter%20(X)-000000?style=for-the-badge&logo=x&logoColor=white>)](https://x.com/shahadathhs)
+[![Medium](https://img.shields.io/badge/Medium-000000?style=for-the-badge&logo=medium&logoColor=white)](https://medium.com/@shahadathhs)
+[![LeetCode](https://img.shields.io/badge/LeetCode-FFA116?style=for-the-badge&logo=leetcode&logoColor=white)](https://leetcode.com/u/shahadathhs/)
+[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://shahadathhs.vercel.app)
+
+</div>
 
 ---
 
-**[Visit My Portfolio](https://shahadathhs.vercel.app)** · **[Download Resume](https://drive.google.com/file/d/1dtZCEgZyof-qrUreeVpXDlOovosegpuf/view)**
+## 📊 GitHub
 
-Made with ❤️ and ⚡ by Shahadath Hossen Sajib
+<div align="center">
+
+![Overview](https://github.com/shahadathhs/github-stats/blob/main/generated/overview.svg)
+
+![Languages](https://github.com/shahadathhs/github-stats/blob/main/generated/languages.svg)
 
 </div>

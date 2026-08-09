@@ -19,7 +19,8 @@
     "lint:fix": "eslint . --ext .ts --fix",
     "prepare": "husky",
     "release": "semantic-release",
-    "start": "next start"
+    "start": "next start",
+    "readme": "tsx scripts/generate-readme.ts"
   },
   "config": {
     "commitizen": {
