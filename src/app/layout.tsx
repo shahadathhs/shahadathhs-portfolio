@@ -140,6 +140,9 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/manifest.webmanifest',
+  verification: {
+    google: 'gDV_gmN6sN_n00leYaqzuPnSrB8EL8lgxvHJJUb8GFM',
+  },
   other: {
     // Person schema — primary
     'person-schema': JSON.stringify({
