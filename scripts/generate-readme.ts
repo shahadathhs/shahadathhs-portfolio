@@ -145,16 +145,19 @@ push(
 );
 
 /* --------------------------- GitHub stats ------------------------- */
-push('## 📊 GitHub', '', '<div align="center">', '');
+push('## 📊 GitHub Stats', '');
 push(
-  `![Overview](https://github.com/${GH}/github-stats/blob/main/generated/overview.svg)`,
+  `![GitHub Overview](https://github.com/${GH}/github-stats/blob/main/generated/overview.svg#gh-dark-mode-only)`,
   '',
 );
 push(
-  `![Languages](https://github.com/${GH}/github-stats/blob/main/generated/languages.svg)`,
+  `![Languages Used](https://github.com/${GH}/github-stats/blob/main/generated/languages.svg#gh-dark-mode-only)`,
   '',
 );
-push('</div>', '');
+push(
+  `![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=${GH}&theme=nightowl)`,
+  '',
+);
 
 /* --------------------------- Write file --------------------------- */
 const out =

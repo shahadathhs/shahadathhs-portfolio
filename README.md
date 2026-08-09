@@ -152,12 +152,10 @@ Pinned open-source work — [explore all on GitHub](https://github.com/shahadath
 
 ---
 
-## 📊 GitHub
+## 📊 GitHub Stats
 
-<div align="center">
+![GitHub Overview](https://github.com/shahadathhs/github-stats/blob/main/generated/overview.svg#gh-dark-mode-only)
 
-![Overview](https://github.com/shahadathhs/github-stats/blob/main/generated/overview.svg)
+![Languages Used](https://github.com/shahadathhs/github-stats/blob/main/generated/languages.svg#gh-dark-mode-only)
 
-![Languages](https://github.com/shahadathhs/github-stats/blob/main/generated/languages.svg)
-
-</div>
+![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=shahadathhs&theme=nightowl)
