@@ -54,14 +54,14 @@ function NotificationCard({
       <span className="mt-0.5 text-muted-foreground">{icon}</span>
       <div className="min-w-0 flex-1">
         <div className="flex items-center justify-between gap-2">
-          <span className="text-[10px] font-bold uppercase tracking-widest opacity-50">
+          <span className="text-xs font-bold uppercase tracking-widest opacity-50">
             {app}
           </span>
-          <span className="text-[10px] opacity-40">{time}</span>
+          <span className="text-xs opacity-40">{time}</span>
         </div>
         <p className="mt-0.5 truncate text-sm">{title}</p>
         {sub ? (
-          <p className="truncate text-[11px] text-muted-foreground">{sub}</p>
+          <p className="truncate text-xs text-muted-foreground">{sub}</p>
         ) : null}
       </div>
     </a>
@@ -226,7 +226,7 @@ export default function LockOverlay() {
 
         <div className="flex cursor-pointer flex-col items-center gap-3 text-muted-foreground">
           <ChevronUp className="h-5 w-5 animate-bounce" />
-          <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">
+          <span className="text-xs font-bold uppercase tracking-widest opacity-60">
             Slide up to unlock
           </span>
           <button
@@ -238,7 +238,7 @@ export default function LockOverlay() {
             }}
             aria-label="Open terminal"
             title="Terminal"
-            className="flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-background/50 px-3 py-1.5 text-[10px] font-bold uppercase tracking-widest backdrop-blur-md transition-colors hover:text-foreground"
+            className="flex cursor-pointer items-center gap-1.5 rounded-full border border-border bg-background/50 px-3 py-1.5 text-xs font-bold uppercase tracking-widest backdrop-blur-md transition-colors hover:text-foreground"
           >
             <Terminal className="h-3.5 w-3.5" />
             Terminal

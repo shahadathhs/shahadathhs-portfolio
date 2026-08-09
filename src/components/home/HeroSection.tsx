@@ -20,7 +20,7 @@ export default function HeroSection() {
   return (
     <div
       id="hero"
-      className="relative w-full my-10 min-h-[70vh] flex items-center"
+      className="relative w-full my-4 md:my-10 min-h-[70vh] flex items-center"
     >
       {/* Special Borders (Kept as requested) */}
       <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
@@ -38,7 +38,7 @@ export default function HeroSection() {
       </div>
 
       {/* Main Content Area */}
-      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-20 relative z-10 flex flex-col md:flex-row items-center gap-12">
+      <div className="container mx-auto px-6 md:px-12 lg:px-20 py-10 md:py-20 relative z-10 flex flex-col md:flex-row items-center gap-12">
         {/* Left Side: Text Content */}
         <div className="w-full md:w-3/5 flex flex-col items-start gap-6 text-left">
           <motion.div
