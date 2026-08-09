@@ -34,8 +34,8 @@ export default function Navbar() {
       className={cn(
         'sticky top-0 z-[9999] w-full transition-all duration-500',
         scrolled
-          ? 'py-3 border-b border-nav-border/30 backdrop-blur-xl bg-nav-background/80'
-          : 'py-6 border-b border-nav-border/0 bg-nav-background',
+          ? 'py-3 border-b border-nav-border/30 backdrop-blur-xl bg-nav-background/60'
+          : 'py-6 border-b border-nav-border/0 bg-transparent',
       )}
     >
       <div className="container mx-auto max-w-6xl px-2 lg:px-4">

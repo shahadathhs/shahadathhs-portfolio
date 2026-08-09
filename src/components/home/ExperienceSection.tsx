@@ -25,7 +25,7 @@ export default function ExperienceSection() {
         <div className="absolute h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
       </div>
 
-      <section className="w-full bg-white dark:bg-neutral-950 py-20 px-6 md:px-12 lg:px-20">
+      <section className="w-full py-20 px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Header Block */}
           <div className="flex flex-col mb-20 text-left items-start">

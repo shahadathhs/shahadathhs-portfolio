@@ -17,6 +17,7 @@ export interface GithubResponse {
 }
 
 const CACHE_DURATION = 3600 * 1000; // 1 hour
+const STATS_CACHE_DURATION = 24 * 3600 * 1000; // 1 day
 
 /**
  * Per-repo flow: read localStorage first (`github_repo_{owner}_{repo}`).
@@ -26,13 +27,13 @@ const CACHE_DURATION = 3600 * 1000; // 1 hour
  * other repos succeeded from cache or a fresh 200.
  */
 
-const getCache = <T>(key: string): T | null => {
+const getCache = <T>(key: string, duration = CACHE_DURATION): T | null => {
   if (typeof window === 'undefined') return null;
   try {
     const cached = localStorage.getItem(key);
     if (!cached) return null;
     const { data, timestamp } = JSON.parse(cached);
-    if (Date.now() - timestamp > CACHE_DURATION) {
+    if (Date.now() - timestamp > duration) {
       localStorage.removeItem(key);
       return null;
     }
@@ -139,5 +140,73 @@ export const fetchMultipleRepos = async (
       error.message || error,
     );
     return { data: [], error: error.message };
+  }
+};
+
+export const GITHUB_STATS_USERNAME = 'shahadathhs';
+
+export interface GithubCommit {
+  repo: string;
+  message: string;
+  sha: string;
+  date: string;
+  url: string;
+}
+
+/**
+ * Latest public push (most recent commit) for the lock-screen notification.
+ * Uses the unauthenticated events endpoint, cached for a day.
+ */
+export const fetchGithubLatestCommit = async (
+  username: string,
+): Promise<GithubCommit | null> => {
+  const cacheKey = `github_commit_v2_${username}`;
+  const cached = getCache<GithubCommit>(cacheKey, STATS_CACHE_DURATION);
+  if (cached) return cached;
+
+  try {
+    // The public events feed omits commit messages, but gives us the repo,
+    // the head SHA, and the time of each push.
+    const eventsRes = await fetch(
+      `https://api.github.com/users/${username}/events/public?per_page=30`,
+    );
+    if (!eventsRes.ok) return null; // 403 = rate limited, etc.
+    const events = await eventsRes.json();
+    const pushes = (events as any[]).filter(
+      (event) => event.type === 'PushEvent',
+    );
+
+    // Walk the most recent pushes and return the first commit actually
+    // authored by the user — skips github-actions[bot] and other bots.
+    for (const push of pushes.slice(0, 6)) {
+      const repo: string = push.repo?.name ?? '';
+      const sha: string = push.payload?.head ?? '';
+      if (!repo || !sha) continue;
+      try {
+        const commitRes = await fetch(
+          `https://api.github.com/repos/${repo}/commits/${sha}`,
+        );
+        if (!commitRes.ok) continue;
+        const commit = await commitRes.json();
+        if (commit?.author?.login !== username) continue; // bot / someone else
+
+        const message: string | undefined = commit?.commit?.message;
+        const data: GithubCommit = {
+          repo,
+          message: message ? message.split('\n')[0] : `Pushed to ${repo}`,
+          sha,
+          date: push.created_at,
+          url: `https://github.com/${repo}/commit/${sha}`,
+        };
+        setCache(cacheKey, data);
+        return data;
+      } catch {
+        // try the next push
+      }
+    }
+    return null;
+  } catch (error: any) {
+    console.error('Error fetching latest commit:', error.message || error);
+    return null;
   }
 };

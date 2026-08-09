@@ -196,3 +196,38 @@ div[id]:has(> section) {
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
 }
+
+@keyframes pet-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.pet-bob {
+  animation: pet-bob 3s ease-in-out infinite;
+}
+
+@keyframes pet-particle {
+  0% {
+    transform: translateX(-50%) translateY(0) scale(0.5);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(-50%) translateY(-48px) scale(1.1);
+    opacity: 0;
+  }
+}
+
+.pet-particle {
+  animation: pet-particle 1s ease-out forwards;
+}

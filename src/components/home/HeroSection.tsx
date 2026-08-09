@@ -186,7 +186,7 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="p-8 rounded-md border border-neutral-200 dark:border-neutral-800 bg-white/50 dark:bg-black/50 backdrop-blur-sm shadow-2xl overflow-hidden relative group"
+            className="p-8 rounded-md border border-neutral-200 dark:border-neutral-800 bg-white/10 dark:bg-black/30 backdrop-blur-md shadow-2xl overflow-hidden relative group"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
             <div className="space-y-4 font-mono text-sm">
