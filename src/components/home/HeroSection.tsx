@@ -20,7 +20,7 @@ export default function HeroSection() {
   return (
     <div
       id="hero"
-      className="relative w-full my-4 md:my-10 min-h-[70vh] flex items-center"
+      className="relative w-full my-4 md:my-10 min-h-[60vh] flex items-center"
     >
       {/* Special Borders (Kept as requested) */}
       <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
@@ -96,7 +96,7 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="text-lg text-neutral-500 dark:text-neutral-400 max-w-lg leading-relaxed"
+            className="text-lg text-neutral-500 dark:text-neutral-400 max-w-lg leading-normal"
           >
             {heroData.tagline}
           </motion.p>

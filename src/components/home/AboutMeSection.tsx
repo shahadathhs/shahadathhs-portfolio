@@ -50,7 +50,7 @@ export default function AboutMeSection() {
         <div className="absolute h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
       </div>
 
-      <section className="w-full py-20 px-6 md:px-12 lg:px-20">
+      <section className="w-full py-12 md:py-16 px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
             initial={{ opacity: 0, x: -12 }}
@@ -65,7 +65,7 @@ export default function AboutMeSection() {
             <div className="h-1.5 w-20 bg-primary mt-4 rounded-md" />
           </motion.div>
 
-          <div className="flex flex-col gap-16 md:gap-20 lg:gap-24">
+          <div className="flex flex-col gap-12 md:gap-16 lg:gap-20">
             {aboutBands.map((band, rowIdx) => {
               const flip = rowIdx % 2 === 1;
               return (
@@ -89,7 +89,7 @@ export default function AboutMeSection() {
                       </span>
                       <span className="h-px flex-1 max-w-[120px] bg-gradient-to-r from-primary/40 to-transparent" />
                     </div>
-                    <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-normal">
                       {band.paragraph}
                     </p>
                   </div>

@@ -99,7 +99,7 @@ export default function ProjectSection() {
         <div className="absolute h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
       </div>
 
-      <section className="w-full py-20 px-6 md:px-12 lg:px-20">
+      <section className="w-full py-12 md:py-16 px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Header Block */}
           <div className="flex flex-col mb-12 text-left items-start">
@@ -107,7 +107,7 @@ export default function ProjectSection() {
               Open Source Projects
             </h2>
             <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
-            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
+            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
               A collection of my recent backend tools, infrastructure templates,
               and full-stack experiments. Need something built or deployed?
               I&apos;m active on GitHub and open source communities. See
@@ -152,7 +152,7 @@ export default function ProjectSection() {
             </div>
           )}
 
-          <div className="flex flex-col gap-16 md:gap-20 max-w-7xl mx-auto">
+          <div className="flex flex-col gap-12 md:gap-16 max-w-7xl mx-auto">
             {categoryEntries.map(([category, names], categoryIdx) => {
               const resolved = names
                 .map((name) => repoByName.get(name))

@@ -27,7 +27,7 @@ export default function SkillsSection() {
         <div className="absolute h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
       </div>
 
-      <section className="w-full py-20 px-6 md:px-12 lg:px-20">
+      <section className="w-full py-12 md:py-16 px-6 md:px-12 lg:px-20">
         <div className="max-w-7xl mx-auto">
           {/* Header Block */}
           <div className="mb-10 flex flex-col max-w-4xl text-left">
@@ -35,7 +35,7 @@ export default function SkillsSection() {
               Technical Skills
             </h2>
             <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
-            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-relaxed">
+            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
               I focus on backend systems and getting them to production
               reliably. Here&apos;s a snapshot of the stack I use most —
               languages, frameworks, data layers, AI tooling, and delivery.

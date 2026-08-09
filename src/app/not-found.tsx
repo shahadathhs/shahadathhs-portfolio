@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 py-24 bg-background">
+    <div className="flex flex-col items-center justify-center min-h-screen px-6 py-24">
       <div className="flex flex-col items-center max-w-md text-center">
         <div className="flex items-center justify-center w-20 h-20 rounded-full bg-muted mb-6">
           <FileQuestion className="w-10 h-10 text-muted-foreground" />

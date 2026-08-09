@@ -2,7 +2,7 @@ import { Loader2 } from 'lucide-react';
 
 export default function Loading() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background">
+    <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="flex flex-col items-center gap-6 max-w-md text-center px-4">
         {/* Animated logo/avatar */}
         <div className="relative w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
