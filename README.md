@@ -160,27 +160,43 @@ Shipped **20+ production websites** in a large-scale monorepo:
 
 ## 🌐 This Portfolio Site
 
-Built with modern tech and optimized for performance:
+A dark, monochrome site with an ambient nature video background, frosted-glass sections, and a layer of interactive system overlays.
 
-**Frontend**
+**Framework & stack**
 
-- [Next.js 16](https://nextjs.org/) with App Router & Turbopack
-- [React 19](https://react.dev/) with Server Components
-- [TypeScript 5](https://www.typescriptlang.org/) for type safety
-- [Tailwind CSS v4](https://tailwindcss.com/) with custom design system
+- [Next.js 16](https://nextjs.org/) · App Router · Turbopack · [React 19](https://react.dev/) Server Components
+- [TypeScript 5](https://www.typescriptlang.org/) end-to-end
+- [Tailwind CSS v4](https://tailwindcss.com/) custom design system · IBM Plex Mono throughout
 
-**UI Components**
+**UI & animation**
 
-- [Radix UI](https://www.radix-ui.com/) primitives (Dialog, Dropdown, Toast, etc.)
-- [Framer Motion](https://www.framer.com/motion/) for smooth animations
-- [Lucide Icons](https://lucide.dev/) for consistent iconography
+- [Radix UI](https://www.radix-ui.com/) primitives + [shadcn/ui](https://ui.shadcn.com/) components
+- [Motion](https://motion.dev/) for animation · [Lucide](https://lucide.dev/) + [Tabler](https://tabler.io/icons) icons
 
-**Developer Experience**
+**Interactive overlays** (`src/components/interactive/`)
 
-- ESLint + Prettier for code quality
-- Husky + lint-staged for pre-commit hooks
-- Semantic Release for automated versioning
-- Conventional Commits for commit standards
+- **Assistive button** — draggable, AssistiveTouch-style radial menu
+- **Terminal** — in-page shell (`help`, `skills`, `projects`, `neofetch`, …) with command history
+- **Pet companion** — draggable, reactive sprite with speech bubbles + particles
+- **Lock screen** — slide-to-unlock with a live clock and the latest GitHub commit / Medium post
+- **Spotlight** — cursor-following glow (pointer devices only)
+- **Sound** — synthesized Web Audio UI effects, toggle persisted to `localStorage`
+
+**Backgrounds & media**
+
+- Ambient nature **video background** (dimmed, site-wide) + a video lock screen
+- Frosted-glass sections composited over the video
+- Static, data-driven **Open Graph image** rendered from `heroData`
+
+**Data sources**
+
+- GitHub repos & latest commit via the unauthenticated GitHub API (cached)
+- Medium posts via `rss2json`
+
+**Developer experience**
+
+- ESLint + Prettier · Husky + lint-staged · commitlint
+- Conventional Commits · Semantic Release for automated versioning
 
 ---
 
