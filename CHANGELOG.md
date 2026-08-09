@@ -1,3 +1,9 @@
+# [1.12.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.11.0...v1.12.0) (2026-08-09)
+
+### Features
+
+- add adda to full-stack projects and disable starter/backend categories ([e6b452a](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/e6b452ad1de20e552af7db2f0bdcc4460d9ce7f7))
+
 # [1.11.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.10.0...v1.11.0) (2026-07-19)
 
 ### Features
