@@ -1,6 +1,5 @@
 import { ImageResponse } from 'next/og';
 
-export const runtime = 'edge';
 export const alt = 'Shahadath Hossen Sajib — Backend Engineer Portfolio';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
@@ -15,7 +14,8 @@ export default function OpengraphImage() {
         flexDirection: 'column',
         justifyContent: 'space-between',
         background:
-          'radial-gradient(circle at 20% 0%, rgba(16, 185, 129, 0.18) 0%, transparent 50%), radial-gradient(circle at 80% 100%, rgba(99, 102, 241, 0.15) 0%, transparent 50%), #0a0a0a',
+          'radial-gradient(circle at 20% 0%, rgba(16, 185, 129, 0.18) 0%, transparent 50%), radial-gradient(circle at 80% 100%, rgba(99, 102, 241, 0.15) 0%, transparent 50%)',
+        backgroundColor: '#0a0a0a',
         padding: 80,
         color: '#fafafa',
         fontFamily: 'IBM Plex Mono, ui-monospace, monospace',
