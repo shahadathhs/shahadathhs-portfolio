@@ -1,3 +1,9 @@
+## [1.15.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.15.0...v1.15.1) (2026-08-10)
+
+### Bug Fixes
+
+- default assistive button to bottom-left to avoid mobile navbar ([91a0e5b](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/91a0e5b377e2e716f4036ad240f898f78d6425fc))
+
 # [1.15.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.14.0...v1.15.0) (2026-08-09)
 
 ### Features
