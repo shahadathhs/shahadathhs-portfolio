@@ -37,7 +37,7 @@ export default function AssistiveButton() {
   // Source of truth is stored as a fraction of the viewport (0..1), so the
   // button keeps the same relative spot across screen sizes and snaps back to
   // its desktop position when you return from mobile.
-  const fraction = useRef<{ fx: number; fy: number }>({ fx: 1, fy: 0 });
+  const fraction = useRef<{ fx: number; fy: number }>({ fx: 0, fy: 1 });
 
   const toPixels = useCallback((fx: number, fy: number) => {
     const left = Math.max(
@@ -51,7 +51,8 @@ export default function AssistiveButton() {
     return { left, top };
   }, []);
 
-  // Load saved fraction; default to the top-right corner.
+  // Load saved fraction; default to the bottom-left corner (keeps it clear of
+  // the mobile navbar, which sits at the top).
   useEffect(() => {
     let fx: number | undefined;
     let fy: number | undefined;
@@ -66,8 +67,8 @@ export default function AssistiveButton() {
       // ignore
     }
     if (fx == null || fy == null || fx < 0 || fx > 1 || fy < 0 || fy > 1) {
-      fx = (window.innerWidth - SIZE - 16) / window.innerWidth;
-      fy = 16 / window.innerHeight;
+      fx = 16 / window.innerWidth;
+      fy = (window.innerHeight - SIZE - 16) / window.innerHeight;
     }
     fraction.current = { fx, fy };
     setPos(toPixels(fx, fy));
