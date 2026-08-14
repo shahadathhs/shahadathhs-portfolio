@@ -1,3 +1,11 @@
+# [1.16.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.15.1...v1.16.0) (2026-08-14)
+
+### Features
+
+- redesign all deck sections with unified design system ([beac0cf](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/beac0cfcc5332e48ba2fce3222fe7865914c4173))
+- rethink portfolio as a one-section-at-a-time deck ([233584b](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/233584bb0b3704f28e8da207938cbf2f4607b0f1))
+- update heroData structure to use array notation for code snippets ([b4f1f51](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/b4f1f515185eafe2028a7163379875a598610e52))
+
 ## [1.15.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.15.0...v1.15.1) (2026-08-10)
 
 ### Bug Fixes
