@@ -4,25 +4,12 @@ import { Button } from '@/components/ui/button';
 import { socialLinks } from '@/constant/socialLinks';
 import { contactEmail } from '@/constant/contactInfo';
 import { heroData } from '@/constant/heroData';
-import {
-  ArrowUpRight,
-  CheckCircle,
-  Copy,
-  FileText,
-  // LucideIcon, // Commented out as it's only used for Fiverr
-  // Server,
-  // Terminal,
-  Mail,
-} from 'lucide-react';
+import { ArrowUpRight, CheckCircle, Copy, FileText, Mail } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 import { motion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
-// import { otherVersions } from '@/constant/otherVersions'; // Commented out
-// import { fiverrGigs, fiverrProfileUrl } from '@/constant/fiverr'; // Commented out
-
-// const fiverrGigIcons: LucideIcon[] = [Server, Terminal]; // Commented out
 
 export default function ContactSection() {
   const [copied, setCopied] = useState(false);
@@ -41,7 +28,7 @@ export default function ContactSection() {
   return (
     <div
       id="contact"
-      className="relative w-full mt-10 min-h-[60vh] flex items-center overflow-hidden mb-10"
+      className="relative w-full min-h-[60vh] flex items-center overflow-hidden"
     >
       {/* Special Borders (Matching Hero) */}
       <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
@@ -175,76 +162,6 @@ export default function ContactSection() {
             </motion.div>
           </div>
 
-          {/* Fiverr section commented out */}
-          {/* <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-            className="mt-16 group relative p-8 rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-[#1DBF73]/40 transition-all duration-300 shadow-sm overflow-hidden"
-          >
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#1DBF73]/30 to-transparent group-hover:via-[#1DBF73]/50 transition-all" />
-            <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-              <div className="max-w-xl">
-                <p className="text-xs font-bold text-[#1DBF73] uppercase tracking-[0.2em] mb-3">
-                  Freelance
-                </p>
-                <h3 className="text-2xl font-black text-neutral-900 dark:text-neutral-50 mb-2">
-                  Hire me on Fiverr
-                </h3>
-                <p className="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                  DevOps and backend API gigs: server setup, deploys, CI/CD, and
-                  production-ready APIs. View my profile or open a specific
-                  service below.
-                </p>
-                <Button
-                  asChild
-                  className="mt-6 h-11 rounded-md font-bold bg-[#1DBF73] text-white hover:bg-[#19a866] shadow-sm"
-                >
-                  <a
-                    href={fiverrProfileUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Fiverr profile
-                    <ArrowUpRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              </div>
-              <div className="grid grid-cols-1 gap-4 lg:shrink-0 lg:max-w-sm w-full">
-                {fiverrGigs.map((gig, i) => {
-                  const Icon = fiverrGigIcons[i] ?? Server;
-                  return (
-                    <a
-                      key={gig.href}
-                      href={gig.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="grid grid-cols-1 gap-3 p-5 rounded-md border border-neutral-200 dark:border-neutral-800 bg-black/[0.02] dark:bg-white/[0.02] hover:border-[#1DBF73]/35 hover:bg-[#1DBF73]/5 transition-all duration-300 w-full"
-                    >
-                      <div className="p-2.5 rounded-md bg-primary/10 text-primary w-fit">
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <div>
-                        <p className="text-xs font-black uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-1">
-                          {gig.label}
-                        </p>
-                        <p className="text-sm font-semibold text-neutral-900 dark:text-neutral-100 leading-snug">
-                          {gig.description}
-                        </p>
-                        <span className="inline-flex items-center gap-1 mt-2 text-xs font-bold text-[#1DBF73]">
-                          View gig
-                          <ArrowUpRight className="h-3 w-3" />
-                        </span>
-                      </div>
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
-            <div className="absolute -bottom-10 -right-10 h-32 w-32 bg-[#1DBF73]/5 rounded-full blur-3xl pointer-events-none" />
-          </motion.div> */}
-
           {/* Social Grid */}
           <div className="mt-16">
             <p className="text-center text-xs font-bold text-neutral-400 dark:text-neutral-600 uppercase tracking-[0.2em] mb-10">
@@ -284,41 +201,6 @@ export default function ContactSection() {
               ))}
             </div>
           </div>
-
-          {/* Other Portfolio Versions Grid - Aligned with Social Grid - Commented out */}
-          {/* <div className="mt-16 pt-16 border-t border-neutral-200 dark:border-neutral-800">
-            <p className="text-center text-xs font-bold text-neutral-400 dark:text-neutral-600 uppercase tracking-[0.2em] mb-10">
-              Visit All Versions of My Portfolio
-            </p>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-              {otherVersions.map((version, idx) => (
-                <motion.a
-                  key={version.name}
-                  href={version.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  whileHover={{ y: -5 }}
-                  transition={{ duration: 0.3, delay: idx * 0.05 }}
-                  viewport={{ once: true }}
-                  className={cn(
-                    'group/version flex flex-row items-center gap-3 p-3 rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 hover:bg-neutral-50/50 dark:hover:bg-neutral-900/50 transition-all duration-300 shadow-sm relative overflow-hidden',
-                    idx === 4 &&
-                      'max-md:col-span-2 max-md:mx-auto max-md:w-[calc(50%-8px)] md:w-full',
-                  )}
-                >
-                  <div className="p-2 rounded-md bg-white dark:bg-neutral-900 shadow-sm text-neutral-500 group-hover/version:text-primary transition-colors shrink-0 group-hover/version:scale-110 group-hover/version:bg-primary/5">
-                    <version.icon className="h-4 w-4" />
-                  </div>
-                  <span className="text-xs font-black text-neutral-800 dark:text-neutral-200 truncate uppercase tracking-widest group-hover/version:text-primary transition-colors">
-                    {version.name}
-                  </span>
-                  <div className="absolute -bottom-4 -right-4 h-8 w-8 bg-primary/5 rounded-full blur-xl group-hover/version:bg-primary/10 transition-colors" />
-                </motion.a>
-              ))}
-            </div>
-          </div> */}
         </div>
       </section>
     </div>

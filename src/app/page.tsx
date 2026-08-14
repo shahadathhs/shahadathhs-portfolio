@@ -60,7 +60,8 @@ export default function Home() {
           transition={{ duration: 0.3, ease: 'easeOut' }}
           className="h-dvh overflow-y-auto"
         >
-          <div className="flex min-h-full items-center">
+          {/* Global slide gap — sections never touch the viewport edges */}
+          <div className="mx-auto w-full max-w-6xl overflow-y-auto px-2 py-4 sm:px-4 md:py-10">
             <ActiveSection />
           </div>
         </motion.div>

@@ -34,7 +34,7 @@ function FeatureCard({ feature }: { feature: AboutHighlightCard }) {
 
 export default function AboutMeSection() {
   return (
-    <div id="about" className="relative w-full mt-10 overflow-hidden">
+    <div id="about" className="relative w-full overflow-hidden">
       {/* Special Borders (Matching Hero) */}
       <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
         <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-stone-500 to-transparent" />

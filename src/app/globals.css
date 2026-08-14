@@ -125,16 +125,6 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-/* Ensure consistent scroll margin for section anchors */
-section[id],
-div[id]:has(> section) {
-  scroll-margin-top: 5.5rem;
-}
-
 @layer base {
   * {
     @apply border-border outline-ring/50;

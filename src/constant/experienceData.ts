@@ -34,18 +34,6 @@ export const experienceData: TimelineEntry[] = [
       'Owned PostgreSQL schemas (Prisma/Drizzle), Redis caching, and AWS EC2 + S3 infrastructure with monitoring and optimization.',
     ],
   },
-  // {
-  //   title: 'May 2025 - Jun 2025',
-  //   company: 'Career Break',
-  //   location: 'Chattogram, Bangladesh',
-  //   designation: 'Backend Engineering Transition',
-  //   responsibilities: [
-  //     'Focused on backend architecture using Node.js and NestJS.',
-  //     'Strengthened knowledge of relational database design and querying with PostgreSQL.',
-  //     'Built experimental backend services to practice authentication flows, API design, and scalable application structure.',
-  //     'Explored modern backend tooling, including Prisma ORM, OAuth-based authentication, and real-time communication patterns.',
-  //   ],
-  // },
   {
     title: 'Aug 2024 - Apr 2025',
     company: 'Monster Studio',

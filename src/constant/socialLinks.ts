@@ -2,17 +2,7 @@ import { Github, Linkedin } from 'lucide-react';
 import { IconBrandMedium, IconBrandX } from '@tabler/icons-react';
 import { LeetCodeIcon } from '@/components/shared/icons/LeetCodeIcon';
 
-// Fiverr import commented out
-// import { fiverrProfileUrl } from '@/constant/fiverr';
-
 export const socialLinks = [
-  // Fiverr entry commented out
-  // {
-  //   name: 'Fiverr',
-  //   href: fiverrProfileUrl,
-  //   icon: Briefcase,
-  //   color: 'text-[#1DBF73]',
-  // },
   {
     name: 'LinkedIn',
     href: 'https://www.linkedin.com/in/shahadathhs/',

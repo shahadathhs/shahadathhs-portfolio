@@ -8,7 +8,7 @@ export default function ExperienceSection() {
   return (
     <div
       id="experience"
-      className="relative w-full mt-10 min-h-[60vh] flex items-center overflow-hidden"
+      className="relative w-full min-h-[60vh] flex items-center overflow-hidden"
     >
       {/* Special Borders (Matching Hero) - Preserved */}
       <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">

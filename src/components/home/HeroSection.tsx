@@ -18,10 +18,7 @@ const segmentColor: Record<string, string> = {
 
 export default function HeroSection() {
   return (
-    <div
-      id="hero"
-      className="relative w-full my-4 md:my-10 min-h-[60vh] flex items-center"
-    >
+    <div id="hero" className="relative w-full min-h-[60vh] flex items-center">
       {/* Special Borders (Kept as requested) */}
       <div className="absolute inset-x-0 top-0 h-px w-full bg-neutral-200/80 dark:bg-neutral-800/80">
         <div className="absolute mx-auto h-px w-40 bg-gradient-to-r from-transparent via-stone-500 to-transparent" />
