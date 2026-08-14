@@ -42,12 +42,12 @@ export default function HeroSection() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center gap-3"
+            className="flex flex-wrap items-center gap-3"
           >
             <span className="inline-block px-4 py-1.5 rounded-md bg-primary/10 text-primary text-sm font-bold tracking-wider uppercase">
               {heroData.greeting}
             </span>
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+            <span className="inline-flex items-center gap-2 rounded-md border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-bold tracking-wider uppercase text-emerald-600 dark:text-emerald-400">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
@@ -98,14 +98,14 @@ export default function HeroSection() {
             {heroData.tagline}
           </motion.p>
 
-          {/* Quick Stats */}
+          {/* Focus stats — Microservices & AI/LLM share one row */}
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.9 }}
-            className="flex flex-wrap gap-6 md:gap-10"
+            transition={{ duration: 0.5, delay: 0.95 }}
+            className="flex flex-wrap items-center gap-x-8 gap-y-3"
           >
-            {heroData.quickStats.map((stat) => (
+            {heroData.quickStats.slice(1).map((stat) => (
               <div key={stat.label} className="flex flex-col">
                 <span className="text-2xl font-extrabold text-primary">
                   {stat.value}
@@ -166,41 +166,46 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Right Side: Visual Element (data-driven code window) */}
-        <div className="hidden md:flex w-full md:w-2/5 justify-center items-center relative">
+        {/* Right Side: experience + code window (visible on all sizes) */}
+        <div className="relative flex w-full flex-col items-start justify-center gap-5 lg:w-2/5">
+          {/* Experience — About-card style left accent bar */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{
-              duration: 1,
-              delay: 0.5,
-              repeat: Infinity,
-              repeatType: 'reverse',
-            }}
-            className="absolute h-80 w-80 bg-primary/20 rounded-full blur-[100px] -z-10"
-          />
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.85 }}
+            className="relative w-full max-w-sm overflow-hidden border border-neutral-200 bg-transparent py-2 pl-5 pr-4 backdrop-blur-sm transition-all duration-300 hover:border-primary/50 dark:border-neutral-800 group"
+          >
+            <div className="absolute top-0 left-0 h-full w-1 bg-primary transition-opacity group-hover:opacity-100" />
+            <span className="text-2xl font-extrabold leading-none text-primary md:text-3xl">
+              {heroData.quickStats[0].value}
+            </span>
+            <span className="ml-3 text-xs font-medium uppercase tracking-widest text-neutral-500 dark:text-neutral-400">
+              {heroData.quickStats[0].label}
+            </span>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="p-8 rounded-md border border-neutral-200 dark:border-neutral-800 bg-white/10 dark:bg-black/30 backdrop-blur-md shadow-2xl overflow-hidden relative group"
+            className="w-full max-w-sm p-5 border border-neutral-200 dark:border-neutral-800 bg-white/10 dark:bg-black/30 backdrop-blur-md shadow-2xl overflow-hidden relative group"
           >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
-            <div className="space-y-4 font-mono text-sm">
+            <div className="space-y-3 font-mono text-xs">
               <div className="flex gap-2">
-                <div className="h-3 w-3 rounded-full bg-red-500" />
-                <div className="h-3 w-3 rounded-full bg-yellow-500" />
-                <div className="h-3 w-3 rounded-full bg-green-500" />
+                <div className="h-2.5 w-2.5 rounded-full bg-red-500" />
+                <div className="h-2.5 w-2.5 rounded-full bg-yellow-500" />
+                <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
               </div>
-              <div className="space-y-1.5">
-                <p className="text-primary">
+              <div className="space-y-1">
+                <p className="whitespace-nowrap text-primary">
                   class {heroData.codeSnippet.className} {'{'}
                 </p>
                 {heroData.codeSnippet.lines.map((line, idx) => (
                   <p
                     key={idx}
-                    className="text-neutral-600 dark:text-neutral-400"
-                    style={{ paddingLeft: `${(line.indent ?? 0) * 16}px` }}
+                    className="whitespace-nowrap text-neutral-600 dark:text-neutral-400"
+                    style={{ paddingLeft: `${(line.indent ?? 0) * 12}px` }}
                   >
                     {line.segments.map((seg, i) => (
                       <span
@@ -212,7 +217,7 @@ export default function HeroSection() {
                     ))}
                   </p>
                 ))}
-                <p className="text-primary">{'}'}</p>
+                <p className="whitespace-nowrap text-primary">{'}'}</p>
               </div>
             </div>
             <div className="absolute -bottom-10 -right-10 h-40 w-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-500" />

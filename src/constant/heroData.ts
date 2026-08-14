@@ -51,16 +51,18 @@ export const heroData = {
         indent: 1,
         segments: [
           { text: 'name', variant: 'key' },
-          { text: ' = ', variant: 'punct' },
+          { text: ' = [', variant: 'punct' },
           { text: "'Sajib'", variant: 'string' },
+          { text: ']', variant: 'punct' },
         ],
       },
       {
         indent: 1,
         segments: [
           { text: 'role', variant: 'key' },
-          { text: ' = ', variant: 'punct' },
+          { text: ' = [', variant: 'punct' },
           { text: "'Backend Engineer'", variant: 'string' },
+          { text: ']', variant: 'punct' },
         ],
       },
       {
@@ -86,7 +88,7 @@ export const heroData = {
         segments: [
           { text: 'databases', variant: 'key' },
           { text: ' = [', variant: 'punct' },
-          { text: "'PostgreSQL', 'MongoDB', 'Redis'", variant: 'string' },
+          { text: "'PostgreSQL', 'MongoDB'", variant: 'string' },
           { text: ']', variant: 'punct' },
         ],
       },
@@ -94,8 +96,9 @@ export const heroData = {
         indent: 1,
         segments: [
           { text: 'architecture', variant: 'key' },
-          { text: ' = ', variant: 'punct' },
+          { text: ' = [', variant: 'punct' },
           { text: "'Microservices'", variant: 'string' },
+          { text: ']', variant: 'punct' },
         ],
       },
       {
@@ -111,8 +114,9 @@ export const heroData = {
         indent: 1,
         segments: [
           { text: 'deploy', variant: 'key' },
-          { text: ' = ', variant: 'punct' },
-          { text: "'Docker · AWS · CI/CD'", variant: 'string' },
+          { text: ' = [', variant: 'punct' },
+          { text: "'Docker', 'AWS', 'CI/CD'", variant: 'string' },
+          { text: ']', variant: 'punct' },
         ],
       },
     ] as CodeLine[],
