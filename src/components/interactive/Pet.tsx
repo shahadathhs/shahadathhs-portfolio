@@ -27,7 +27,7 @@ const pick = (arr: string[]) => arr[Math.floor(Math.random() * arr.length)];
 export default function Pet() {
   const { petVisible, selectedPet } = useUI();
   const [pos, setPos] = useState<{ left: number; top: number } | null>(null);
-  const fraction = useRef({ fx: 0.8, fy: 0.82 });
+  const fraction = useRef({ fx: 0.8, fy: 0.7 });
   const latest = useRef({ left: 0, top: 0 });
   const drag = useRef<{
     startX: number;
@@ -56,8 +56,9 @@ export default function Pet() {
   }, []);
 
   useEffect(() => {
+    // Default bottom-right, raised clear of the bottom dock.
     let fx = 0.8;
-    let fy = 0.82;
+    let fy = 0.7;
     try {
       const saved = localStorage.getItem(POS_KEY);
       if (saved) {

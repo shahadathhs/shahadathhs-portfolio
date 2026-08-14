@@ -29,7 +29,9 @@ const HELP = `Available commands:
   blog        open blog (new tab)
   neofetch    system info
   clear       clear screen
-  exit        close terminal`;
+  exit        close terminal
+
+Tip: Tab autocompletes commands, ArrowUp/Down cycles history.`;
 
 const NEOFETCH = `${heroData.name} @ ${heroData.role}
 -------------------------------------------
@@ -142,10 +144,43 @@ export default function Terminal() {
     setInput('');
   };
 
+  const commandNames = useMemo(
+    () => [...Object.keys(commands), 'clear', 'exit'].sort(),
+    [commands],
+  );
+
+  /** Tab completion: unique match completes; ambiguous completes to the
+   *  common prefix, or lists the candidates if the prefix is already exact. */
+  const complete = () => {
+    const prefix = input.trim().toLowerCase();
+    if (!prefix) {
+      setLines((l) => [...l, { kind: 'out', text: commandNames.join('  ') }]);
+      return;
+    }
+    const matches = commandNames.filter((c) => c.startsWith(prefix));
+    if (matches.length === 0) return;
+    if (matches.length === 1) {
+      setInput(`${matches[0]} `);
+      return;
+    }
+    let common = matches[0];
+    for (const m of matches) {
+      while (!m.startsWith(common)) common = common.slice(0, -1);
+    }
+    if (common.length > prefix.length) {
+      setInput(common);
+    } else {
+      setLines((l) => [...l, { kind: 'out', text: matches.join('  ') }]);
+    }
+  };
+
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       onSubmit();
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      complete();
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (!history.length) return;

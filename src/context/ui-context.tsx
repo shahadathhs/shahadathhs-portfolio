@@ -9,19 +9,17 @@ import {
   type ReactNode,
 } from 'react';
 import { playSound } from '@/lib/sound';
+import { SECTIONS, type SectionId } from '@/constant/sections';
 
-const DOCK_VIS_KEY = 'dock-visible';
-const LOCKED_KEY = 'portfolio-locked';
 const PET_VISIBLE_KEY = 'pet-visible';
 const PET_SELECTED_KEY = 'pet-selected';
 const PET_COUNT = 5;
 
 type UIContextValue = {
-  dockVisible: boolean;
-  toggleDock: () => void;
-  locked: boolean;
-  lock: () => void;
-  unlock: () => void;
+  activeSection: SectionId;
+  navigate: (id: SectionId) => void;
+  nextSection: () => void;
+  prevSection: () => void;
   terminalOpen: boolean;
   openTerminal: () => void;
   closeTerminal: () => void;
@@ -49,10 +47,8 @@ const readBool = (key: string, fallback: boolean): boolean => {
 };
 
 export function UIProvider({ children }: { children: ReactNode }) {
-  const [dockVisible, setDockVisible] = useState(() =>
-    readBool(DOCK_VIS_KEY, false),
-  );
-  const [locked, setLocked] = useState(() => readBool(LOCKED_KEY, true));
+  // Always start the deck on the hero for a predictable first impression.
+  const [activeSection, setActiveSection] = useState<SectionId>('hero');
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [petPanelOpen, setPetPanelOpen] = useState(false);
   const [petVisible, setPetVisibleState] = useState<boolean>(() =>
@@ -70,22 +66,6 @@ export function UIProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     try {
-      localStorage.setItem(DOCK_VIS_KEY, dockVisible ? '1' : '0');
-    } catch {
-      // ignore
-    }
-  }, [dockVisible]);
-
-  useEffect(() => {
-    try {
-      localStorage.setItem(LOCKED_KEY, locked ? '1' : '0');
-    } catch {
-      // ignore
-    }
-  }, [locked]);
-
-  useEffect(() => {
-    try {
       localStorage.setItem(PET_VISIBLE_KEY, petVisible ? '1' : '0');
     } catch {
       // ignore
@@ -100,18 +80,30 @@ export function UIProvider({ children }: { children: ReactNode }) {
     }
   }, [selectedPet]);
 
-  const toggleDock = useCallback(() => {
-    playSound('toggle');
-    setDockVisible((v) => !v);
-  }, []);
-  const lock = useCallback(() => {
-    playSound('lock');
-    setLocked(true);
-  }, []);
-  const unlock = useCallback(() => {
-    playSound('unlock');
-    setLocked(false);
-  }, []);
+  const navigate = useCallback(
+    (id: SectionId) => {
+      if (id === activeSection) return;
+      playSound('click');
+      // Section changes close overlays so the new slide reads clean.
+      setTerminalOpen(false);
+      setPetPanelOpen(false);
+      setActiveSection(id);
+    },
+    [activeSection],
+  );
+
+  const step = useCallback(
+    (delta: number) => {
+      const idx = SECTIONS.findIndex((s) => s.id === activeSection);
+      const next = Math.max(0, Math.min(SECTIONS.length - 1, idx + delta));
+      navigate(SECTIONS[next].id);
+    },
+    [activeSection, navigate],
+  );
+
+  const nextSection = useCallback(() => step(1), [step]);
+  const prevSection = useCallback(() => step(-1), [step]);
+
   const openTerminal = useCallback(() => {
     playSound('open');
     setTerminalOpen(true);
@@ -140,11 +132,10 @@ export function UIProvider({ children }: { children: ReactNode }) {
   return (
     <UIContext.Provider
       value={{
-        dockVisible,
-        toggleDock,
-        locked,
-        lock,
-        unlock,
+        activeSection,
+        navigate,
+        nextSection,
+        prevSection,
         terminalOpen,
         openTerminal,
         closeTerminal,

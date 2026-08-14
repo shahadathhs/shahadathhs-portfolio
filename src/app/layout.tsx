@@ -2,13 +2,11 @@ import type { Metadata, Viewport } from 'next';
 import { IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
 import { Toaster } from '@/components/ui/sonner';
-import Navbar from '@/components/shared/nav/Navbar';
-import Footer from '@/components/shared/Footer';
-import ScrollToTop from '@/components/shared/ScrollToTop';
 import { UIProvider } from '@/context/ui-context';
+import SectionBackground from '@/components/interactive/SectionBackground';
 import Spotlight from '@/components/interactive/Spotlight';
+import Dock from '@/components/interactive/Dock';
 import AssistiveButton from '@/components/interactive/AssistiveButton';
-import LockOverlay from '@/components/interactive/LockOverlay';
 import Terminal from '@/components/interactive/Terminal';
 import Pet from '@/components/interactive/Pet';
 import PetPanel from '@/components/interactive/PetPanel';
@@ -268,38 +266,16 @@ export default function RootLayout({
         ))}
       </head>
       <body className={`${ibmPlexMono.variable} antialiased font-mono`}>
-        {/* Ambient background video — fixed and dimmed; visible through
-            transparent sections (e.g. the hero) */}
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            preload="metadata"
-            className="h-full w-full object-cover"
-          >
-            <source src="/page-bg.mp4" type="video/mp4" />
-          </video>
-          <div className="absolute inset-0 bg-background/80" />
-        </div>
         <Toaster />
         <UIProvider>
+          <SectionBackground />
           <Spotlight />
+          <Dock />
           <AssistiveButton />
-          <LockOverlay />
           <Terminal />
           <Pet />
           <PetPanel />
-          <main className="container mx-auto max-w-6xl px-2 lg:px-4 min-h-screen">
-            <Navbar />
-            {children}
-            <Footer />
-            <ScrollToTop />
-          </main>
+          <main className="min-h-dvh">{children}</main>
         </UIProvider>
       </body>
     </html>

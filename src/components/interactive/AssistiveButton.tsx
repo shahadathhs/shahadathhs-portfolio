@@ -3,10 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   FileText,
-  Lock,
   Plus,
-  Terminal,
-  Unlock,
+  Terminal as TerminalIcon,
   Volume2,
   VolumeX,
   X,
@@ -22,8 +20,7 @@ const DRAG_THRESHOLD = 5;
 const POS_KEY = 'assistive-pos';
 
 export default function AssistiveButton() {
-  const { locked, lock, unlock, openTerminal, selectedPet, openPetPanel } =
-    useUI();
+  const { openTerminal, selectedPet, openPetPanel } = useUI();
   const [pos, setPos] = useState<{ left: number; top: number } | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [soundOn, setSoundOn] = useState(isSoundEnabled());
@@ -67,8 +64,9 @@ export default function AssistiveButton() {
       // ignore
     }
     if (fx == null || fy == null || fx < 0 || fx > 1 || fy < 0 || fy > 1) {
+      // Bottom-left, raised clear of the bottom dock.
       fx = 16 / window.innerWidth;
-      fy = (window.innerHeight - SIZE - 16) / window.innerHeight;
+      fy = (window.innerHeight - SIZE - 96) / window.innerHeight;
     }
     fraction.current = { fx, fy };
     setPos(toPixels(fx, fy));
@@ -202,22 +200,12 @@ export default function AssistiveButton() {
     {
       key: 'terminal',
       label: 'Terminal',
-      icon: <Terminal className="h-5 w-5" />,
+      icon: <TerminalIcon className="h-5 w-5" />,
       action: () => openTerminal(),
-    },
-    {
-      key: 'lock',
-      label: locked ? 'Unlock portfolio' : 'Lock portfolio',
-      icon: locked ? (
-        <Unlock className="h-5 w-5" />
-      ) : (
-        <Lock className="h-5 w-5" />
-      ),
-      action: () => (locked ? unlock() : lock()),
     },
   ];
 
-  // Six real options, evenly around a full ring (AssistiveTouch feel).
+  // All options, evenly around a full ring (AssistiveTouch feel).
   const options = baseSlots.map((slot, i) => {
     const angle = ((-90 + (i * 360) / baseSlots.length) * Math.PI) / 180;
     return {
