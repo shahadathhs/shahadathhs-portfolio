@@ -45,15 +45,15 @@ export default function ContactSection() {
         <div className="absolute h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
       </div>
 
-      <section className="w-full py-12 md:py-16 px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto relative z-10">
+      <section className="w-full py-10 md:py-12 px-6 md:px-12 lg:px-20">
+        <div className="max-w-5xl mx-auto relative z-10">
           {/* Header Block */}
-          <div className="flex flex-col mb-12 text-left items-start">
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
+          <div className="flex flex-col mb-8 text-left items-start">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-3">
               Get in touch
             </h2>
-            <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
-            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
+            <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
+            <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
               Email works great for a direct line. Prefer a structured
               collaboration? I&apos;m active on open source communities and
               platforms like GitHub. I&apos;m always open to a thoughtful
@@ -163,10 +163,7 @@ export default function ContactSection() {
           </div>
 
           {/* Social Grid */}
-          <div className="mt-16">
-            <p className="text-center text-xs font-bold text-neutral-400 dark:text-neutral-600 uppercase tracking-[0.2em] mb-10">
-              Connect with me on Socials
-            </p>
+          <div className="mt-8">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
               {socialLinks.map((link, idx) => (
                 <motion.a

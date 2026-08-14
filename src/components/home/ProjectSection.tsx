@@ -1,45 +1,44 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import { AnimatePresence, motion } from 'motion/react';
+import {
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  GitFork,
+  Star,
+} from 'lucide-react';
 import {
   fetchGithubRepos,
   fetchMultipleRepos,
   GithubRepo,
 } from '@/services/github-service';
-import ProjectCard from '../card/ProjectCard';
-import { motion } from 'motion/react';
-import { AlertCircle } from 'lucide-react';
-
-import ProjectSkeleton from '../skeleton/ProjectSkeleton';
-
-import { PINNED_REPOS, repoCategories } from '@/constant/projectConfig';
+import { PINNED_REPOS, projectHighlights } from '@/constant/projectConfig';
 
 export default function ProjectSection() {
   const [repos, setRepos] = useState<GithubRepo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  /** True if at least one GitHub request returned 403 (may still have data from cache). */
-  const [isRateLimited, setIsRateLimited] = useState(false);
-  /** True only when every pinned repo failed and we show placeholder cards (no API metadata). */
+  /** True only when every pinned repo failed and we show placeholder data (no API metadata). */
   const [usedSyntheticFallback, setUsedSyntheticFallback] = useState(false);
+  const [active, setActive] = useState(0);
+
+  const total = PINNED_REPOS.length;
 
   useEffect(() => {
     const loadRepos = async () => {
-      const response = await fetchMultipleRepos('shahadathhs', PINNED_REPOS);
+      const response = await fetchMultipleRepos(
+        'shahadathhs',
+        PINNED_REPOS as unknown as string[],
+      );
 
-      setIsRateLimited(!!response.isRateLimited);
-      setUsedSyntheticFallback(false);
-
-      // No successful repo payloads and GitHub said 403: no cache to use → link-only placeholders
+      // No successful repo payloads and GitHub said 403: no cache to use → placeholders
       if (response.data.length === 0 && response.isRateLimited) {
         setUsedSyntheticFallback(true);
         const fallbackRepos: GithubRepo[] = PINNED_REPOS.map((name, index) => ({
           id: index,
           name,
-          description:
-            'API rate limit exceeded. View repository directly on GitHub.',
+          description: 'View repository directly on GitHub.',
           html_url: `https://github.com/shahadathhs/${name}`,
           stargazers_count: 0,
           forks_count: 0,
@@ -55,29 +54,29 @@ export default function ProjectSection() {
         setRepos(
           fallbackResponse.data
             .sort((a, b) => b.stargazers_count - a.stargazers_count)
-            .slice(0, 5),
+            .slice(0, total),
         );
-        setIsRateLimited(!!fallbackResponse.isRateLimited);
-        setError(fallbackResponse.error || null);
       } else {
         setRepos(response.data);
-        setError(response.error || null);
       }
       setLoading(false);
     };
     loadRepos();
-  }, []);
-
-  if (error) {
-    console.error(error, 'error in project section');
-  }
+  }, [total]);
 
   const repoByName = useMemo(
     () => new Map(repos.map((r) => [r.name, r])),
     [repos],
   );
 
-  const categoryEntries = Object.entries(repoCategories);
+  const safeIdx = Math.min(active, total - 1);
+  const name = PINNED_REPOS[safeIdx];
+  const repo = repoByName.get(name);
+  const highlights = projectHighlights[name] ?? [];
+  const url = repo?.html_url ?? `https://github.com/shahadathhs/${name}`;
+
+  const prev = () => setActive((i) => (i - 1 + total) % total);
+  const next = () => setActive((i) => (i + 1) % total);
 
   return (
     <div
@@ -99,124 +98,164 @@ export default function ProjectSection() {
         <div className="absolute h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
       </div>
 
-      <section className="w-full py-12 md:py-16 px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto relative z-10">
+      <section className="w-full py-10 md:py-12 px-6 md:px-12 lg:px-20">
+        <div className="max-w-5xl mx-auto relative z-10 flex flex-col">
           {/* Header Block */}
-          <div className="flex flex-col mb-12 text-left items-start">
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
+          <div className="flex flex-col mb-8 text-left items-start">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-3">
               Open Source Projects
             </h2>
-            <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
-            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
-              A collection of my recent backend tools, infrastructure templates,
-              and full-stack experiments. Need something built or deployed?
-              I&apos;m active on GitHub and open source communities. See
-              Contact.
+            <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
+            <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
+              Microservices, self-hosted infrastructure, and platforms I&apos;ve
+              designed and shipped in the open.
             </p>
           </div>
 
-          {usedSyntheticFallback && (
-            <div className="mb-10 p-6 rounded-md bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/50 flex items-start gap-4">
-              <div className="p-2 rounded-md bg-amber-100 dark:bg-amber-900/50">
-                <AlertCircle className="w-6 h-6 text-amber-600 dark:text-amber-400" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-amber-900 dark:text-amber-100">
-                  GitHub API rate limit
-                </h3>
-                <p className="mt-1 text-amber-800 dark:text-amber-200 text-sm">
-                  Live metadata could not be loaded (nothing in local cache
-                  yet). The cards below are placeholders with working links to
-                  each repo. Try again after the limit resets, or open a repo on
-                  GitHub for full details.
-                </p>
-              </div>
-            </div>
+          {/* Rate-limit notice */}
+          {usedSyntheticFallback && !loading && (
+            <p className="mb-6 rounded-md border border-amber-200/80 bg-amber-50/80 px-4 py-2.5 text-xs text-amber-800 dark:border-amber-900/40 dark:bg-amber-950/20 dark:text-amber-200">
+              GitHub API rate limit hit — live stats unavailable. Links still
+              work; metadata returns after the limit resets.
+            </p>
           )}
 
-          {!usedSyntheticFallback && isRateLimited && (
-            <div className="mb-10 p-4 rounded-md bg-amber-50/80 dark:bg-amber-950/20 border border-amber-200/80 dark:border-amber-900/40 flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
-              <div className="flex-1">
-                <p className="text-sm text-amber-900 dark:text-amber-100 font-medium">
-                  Some requests hit the GitHub rate limit
-                </p>
-                <p className="mt-1 text-amber-800/95 dark:text-amber-200/90 text-sm leading-relaxed">
-                  Repos you see with real descriptions and stats were served
-                  from cache or a successful response. Any missing project in a
-                  category failed to refresh and should appear again after the
-                  limit resets (often within an hour for unauthenticated API
-                  use).
-                </p>
-              </div>
-            </div>
-          )}
+          {/* Project slider — one project per slide */}
+          <div className="relative flex-1">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={name}
+                initial={{ opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -24 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                className="group relative border border-neutral-200/80 dark:border-neutral-800/80 hover:border-primary/50 transition-all duration-300"
+              >
+                {/* Gradient accent — matching Contact/Blogs cards */}
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:via-primary/50 transition-all" />
 
-          <div className="flex flex-col gap-12 md:gap-16 max-w-7xl mx-auto">
-            {categoryEntries.map(([category, names], categoryIdx) => {
-              const resolved = names
-                .map((name) => repoByName.get(name))
-                .filter((r): r is GithubRepo => r != null);
-
-              if (!loading && resolved.length === 0) {
-                return null;
-              }
-
-              return (
-                <div key={category}>
-                  <h3 className="text-xl md:text-2xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-2">
-                    {category}
-                  </h3>
-                  <div className="h-1 w-14 bg-primary/80 rounded-md mb-6" />
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {loading
-                      ? names.map((_, i) => (
-                          <ProjectSkeleton key={`${category}-${i}`} />
-                        ))
-                      : resolved.map((repo, idx) => {
-                          const stagger = (categoryIdx * 6 + idx) * 0.05;
-                          return (
-                            <motion.div
-                              key={repo.id}
-                              initial={{ opacity: 0, y: 10 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              transition={{
-                                duration: 0.4,
-                                delay: stagger,
-                              }}
-                              viewport={{ once: true }}
-                              className="h-full"
-                            >
-                              <ProjectCard
-                                name={repo.name}
-                                description={repo.description}
-                                url={repo.html_url}
-                                stars={repo.stargazers_count}
-                                forks={repo.forks_count}
-                                language={repo.language}
-                              />
-                            </motion.div>
-                          );
-                        })}
+                {/* Identity row — p-6/p-8 rhythm, matching Contact/Blogs cards */}
+                <div className="flex flex-col gap-3 border-b border-neutral-200/80 px-6 py-6 dark:border-neutral-800/80 sm:flex-row sm:items-center sm:justify-between md:px-8">
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-primary tabular-nums">
+                      {String(safeIdx + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="text-xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 md:text-2xl">
+                      {name}
+                    </h3>
+                    {repo?.language && (
+                      <span className="rounded-sm bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
+                        {repo.language}
+                      </span>
+                    )}
+                  </div>
+                  <div className="flex items-center gap-4 font-mono text-xs text-neutral-500 dark:text-neutral-400">
+                    {loading ? (
+                      <span className="animate-pulse">loading…</span>
+                    ) : (
+                      <>
+                        <span className="inline-flex items-center gap-1.5">
+                          <Star className="h-3.5 w-3.5" />
+                          {repo?.stargazers_count ?? 0}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <GitFork className="h-3.5 w-3.5" />
+                          {repo?.forks_count ?? 0}
+                        </span>
+                      </>
+                    )}
                   </div>
                 </div>
-              );
-            })}
+
+                {/* Description + highlights */}
+                <div className="px-6 py-6 md:px-8">
+                  {repo?.description && (
+                    <p className="mb-5 text-sm leading-normal text-neutral-600 dark:text-neutral-400 md:text-base">
+                      {repo.description}
+                    </p>
+                  )}
+                  <ul className="flex flex-col gap-3">
+                    {highlights.map((h) => (
+                      <li
+                        key={h}
+                        className="flex items-start gap-3 text-sm text-neutral-600 dark:text-neutral-400"
+                      >
+                        <span className="mt-2 h-1 w-1 shrink-0 bg-primary/40" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Footer */}
+                <div className="border-t border-neutral-200/80 px-6 py-4 dark:border-neutral-800/80 md:px-8">
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary transition-opacity hover:opacity-80"
+                  >
+                    View on GitHub
+                    <ArrowUpRight className="h-3.5 w-3.5" />
+                  </a>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
 
-          <div className="flex justify-center mt-16">
-            <Button
-              asChild
-              variant="outline"
-              className="rounded-md h-12 px-8 font-bold border-2 border-primary/20 bg-primary/5 text-primary hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-all duration-300"
-            >
-              <Link
+          {/* Slider controls — click only (arrows/swipe belong to the deck) */}
+          <div className="mt-8 flex items-center justify-between border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4">
+            {/* Dots */}
+            <div className="flex items-center gap-2">
+              {PINNED_REPOS.map((r, i) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  aria-label={`Show ${r}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === safeIdx
+                      ? 'w-5 bg-primary'
+                      : 'w-1.5 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600'
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Counter + arrows + all-repos */}
+            <div className="flex items-center gap-4">
+              <span className="font-mono text-[11px] font-bold tabular-nums tracking-widest text-neutral-500 dark:text-neutral-400">
+                {String(safeIdx + 1).padStart(2, '0')} /{' '}
+                {String(total).padStart(2, '0')}
+              </span>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={prev}
+                  aria-label="Previous project"
+                  className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
+                >
+                  <ChevronLeft className="h-4 w-4" />
+                </button>
+                <button
+                  type="button"
+                  onClick={next}
+                  aria-label="Next project"
+                  className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
+                >
+                  <ChevronRight className="h-4 w-4" />
+                </button>
+              </div>
+              <a
                 href="https://github.com/shahadathhs?tab=repositories"
                 target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-bold text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
               >
-                View All Repositories
-              </Link>
-            </Button>
+                All Repos
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
         </div>
       </section>

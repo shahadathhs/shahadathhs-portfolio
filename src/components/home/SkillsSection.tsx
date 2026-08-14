@@ -1,12 +1,23 @@
 'use client';
 
-import { cn } from '@/lib/utils';
-import { Badge } from '../ui/badge';
-
+import { useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { skills } from '@/constant/skillsData';
-import { motion } from 'motion/react';
+
+const PER_SLIDE = 4;
 
 export default function SkillsSection() {
+  const [active, setActive] = useState(0);
+  const total = Math.ceil(skills.length / PER_SLIDE);
+  const slide = skills.slice(
+    active * PER_SLIDE,
+    active * PER_SLIDE + PER_SLIDE,
+  );
+
+  const prev = () => setActive((i) => (i - 1 + total) % total);
+  const next = () => setActive((i) => (i + 1) % total);
+
   return (
     <div
       id="skills"
@@ -27,142 +38,129 @@ export default function SkillsSection() {
         <div className="absolute h-60 w-px bg-gradient-to-b from-transparent via-stone-500 to-transparent" />
       </div>
 
-      <section className="w-full py-12 md:py-16 px-6 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          {/* Header Block */}
-          <div className="mb-10 flex flex-col max-w-4xl text-left">
-            <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-4">
+      <section className="w-full py-10 md:py-12 px-6 md:px-12 lg:px-20">
+        <div className="max-w-5xl mx-auto flex flex-col">
+          {/* Header */}
+          <div className="mb-8 flex flex-col max-w-2xl text-left">
+            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-3">
               Technical Skills
             </h2>
-            <div className="h-1.5 w-20 bg-primary mb-6 rounded-md" />
-            <p className="text-lg text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
+            <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
+            <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 leading-normal">
               I focus on backend systems and getting them to production
               reliably. Here&apos;s a snapshot of the stack I use most —
               languages, frameworks, data layers, AI tooling, and delivery.
             </p>
           </div>
 
-          {/* Compact 2-column bento grid (7 cards: 3 rows of 2 + 1 featured full-width) */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
-            {skills.map((skill, idx) => (
-              <SkillCard
-                key={skill.title}
-                title={skill.title}
-                summary={skill.summary}
-                icon={skill.icon}
-                description={skill.description}
-                index={idx}
-                isFeatured={idx === skills.length - 1}
-              />
-            ))}
+          {/* Rows slider — 4 categories per slide */}
+          <div className="relative flex-1">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -24 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+                className="flex flex-col divide-y divide-neutral-200/80 dark:divide-neutral-800/80 border-y border-neutral-200/80 dark:border-neutral-800/80"
+              >
+                {slide.map((skill) => {
+                  const idx = skills.indexOf(skill);
+                  const Icon = skill.icon;
+                  return (
+                    <motion.div
+                      key={skill.title}
+                      initial={{ opacity: 0, x: -16 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.35, delay: idx * 0.05 }}
+                      className="group flex flex-col gap-2.5 py-4 sm:py-3.5"
+                    >
+                      {/* Category + tech — one full-width row */}
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-6">
+                        <div className="flex items-center gap-3 sm:w-52 sm:shrink-0">
+                          <span className="font-mono text-[11px] font-bold tabular-nums text-primary/70">
+                            {String(idx + 1).padStart(2, '0')}
+                          </span>
+                          <span className="inline-flex p-2 rounded-md bg-primary/5 text-primary transition-all duration-300 group-hover:bg-primary/10">
+                            <Icon className="h-4 w-4" />
+                          </span>
+                          <h3 className="text-xs font-black uppercase tracking-[0.18em] text-neutral-900 dark:text-neutral-50 transition-colors group-hover:text-primary">
+                            {skill.title}
+                          </h3>
+                        </div>
+
+                        <div className="flex flex-wrap gap-2 pl-8 sm:pl-0">
+                          {skill.description.map((tech) => (
+                            <span
+                              key={tech}
+                              className="rounded-md border border-neutral-200/60 bg-black/5 px-2.5 py-1 text-xs font-bold tracking-wide text-neutral-700 transition-colors duration-200 hover:border-primary/40 hover:text-primary dark:border-neutral-800/60 dark:bg-white/5 dark:text-neutral-300 dark:hover:text-primary"
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Description — full row width */}
+                      <p className="text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
+                        {skill.summary}
+                      </p>
+                    </motion.div>
+                  );
+                })}
+              </motion.div>
+            </AnimatePresence>
           </div>
+
+          {/* Slider controls — click only (arrows/swipe belong to the deck) */}
+          {total > 1 && (
+            <div className="mt-8 flex items-center justify-between border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4">
+              {/* Dots */}
+              <div className="flex items-center gap-2">
+                {Array.from({ length: total }).map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActive(i)}
+                    aria-label={`Show skills ${i + 1}`}
+                    className={`h-1.5 rounded-full transition-all duration-300 ${
+                      i === active
+                        ? 'w-5 bg-primary'
+                        : 'w-1.5 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600'
+                    }`}
+                  />
+                ))}
+              </div>
+
+              {/* Counter + arrows */}
+              <div className="flex items-center gap-4">
+                <span className="font-mono text-[11px] font-bold tabular-nums tracking-widest text-neutral-500 dark:text-neutral-400">
+                  {String(active + 1).padStart(2, '0')} /{' '}
+                  {String(total).padStart(2, '0')}
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    type="button"
+                    onClick={prev}
+                    aria-label="Previous skills"
+                    className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={next}
+                    aria-label="Next skills"
+                    className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
+                  >
+                    <ChevronRight className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
     </div>
   );
 }
-
-const SkillCard = ({
-  title,
-  summary,
-  description,
-  icon: Icon,
-  index,
-  isFeatured = false,
-}: {
-  title: string;
-  summary: string;
-  description: string[];
-  icon: React.ComponentType<{ className?: string }>;
-  index: number;
-  isFeatured?: boolean;
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: (index % 4) * 0.08 }}
-      viewport={{ once: true }}
-      className={cn(
-        'group relative rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm overflow-hidden flex flex-col p-8 min-h-[200px]',
-        isFeatured && 'md:col-span-2',
-      )}
-    >
-      {/* Subtle Gradient Accent */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:via-primary/50 transition-all z-20" />
-
-      {/* Animated SVG Pattern Background (Hidden on Mobile) */}
-      <div className="absolute inset-0 z-0 opacity-0 group-hover:opacity-10 transition-opacity duration-700 hidden md:block">
-        <svg
-          className="h-full w-full"
-          xmlns="http://www.w3.org/2000/svg"
-          width="100%"
-          height="100%"
-        >
-          <defs>
-            <pattern
-              id={`pattern-${index}`}
-              x="0"
-              y="0"
-              width="40"
-              height="40"
-              patternUnits="userSpaceOnUse"
-            >
-              <path
-                d="M 40 0 L 0 0 0 40"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="0.5"
-                className="text-primary"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill={`url(#pattern-${index})`} />
-        </svg>
-      </div>
-
-      <div className="relative z-10 flex flex-col h-full">
-        {/* Icon + Title Header */}
-        <div className="flex items-center gap-4 mb-6">
-          <div className="inline-flex p-3 rounded-md bg-primary/5 text-primary group-hover:scale-110 group-hover:bg-primary/10 transition-all duration-500">
-            <Icon className="h-6 w-6" />
-          </div>
-          <h3 className="text-sm font-black uppercase tracking-[0.2em] text-neutral-900 dark:text-neutral-50 group-hover:text-primary transition-colors">
-            {title}
-          </h3>
-        </div>
-
-        {/* One-line context summary */}
-        <p className="text-sm leading-relaxed text-neutral-500 dark:text-neutral-400 mb-6">
-          {summary}
-        </p>
-
-        {/* Tech Badges */}
-        <div className="flex flex-wrap gap-2 md:gap-2.5 mt-auto">
-          {description.map((tech) => (
-            <motion.div
-              key={tech}
-              whileHover={{ y: -3, scale: 1.05 }}
-              transition={{ type: 'spring', stiffness: 400, damping: 12 }}
-            >
-              <Badge
-                variant="outline"
-                className="rounded-md px-3 py-1 text-xs font-black uppercase tracking-widest bg-black/5 dark:bg-white/5 border-neutral-200/50 dark:border-neutral-800/50 group-hover:border-primary/20 group-hover:text-primary transition-all duration-300 whitespace-nowrap"
-              >
-                {tech}
-              </Badge>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-
-      {/* Decorative Corner Accent */}
-      <div className="absolute top-4 right-4 text-[10px] font-mono font-black text-neutral-200 dark:text-neutral-800 select-none opacity-50 group-hover:opacity-100 transition-opacity">
-        0{index + 1}
-      </div>
-
-      {/* Background Glow */}
-      <div className="absolute -bottom-10 -right-10 h-40 w-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-700 pointer-events-none" />
-    </motion.div>
-  );
-};

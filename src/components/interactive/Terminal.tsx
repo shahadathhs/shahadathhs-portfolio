@@ -5,7 +5,7 @@ import { Terminal as TerminalIcon, X } from 'lucide-react';
 import { useUI } from '@/context/ui-context';
 import { heroData } from '@/constant/heroData';
 import { skills } from '@/constant/skillsData';
-import { repoCategories } from '@/constant/projectConfig';
+import { PINNED_REPOS } from '@/constant/projectConfig';
 import { experienceData } from '@/constant/experienceData';
 import { contactEmail } from '@/constant/contactInfo';
 import { socialLinks } from '@/constant/socialLinks';
@@ -61,9 +61,9 @@ export default function Terminal() {
       skills: () =>
         skills.map((s) => `${s.title}: ${s.description.join(', ')}`).join('\n'),
       projects: () =>
-        Object.entries(repoCategories)
-          .map(([cat, repos]) => `${cat}\n  ${repos.join(', ')}`)
-          .join('\n\n'),
+        PINNED_REPOS.map(
+          (name) => `https://github.com/shahadathhs/${name}`,
+        ).join('\n'),
       experience: () =>
         experienceData
           .map(

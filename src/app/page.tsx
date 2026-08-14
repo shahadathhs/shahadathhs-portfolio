@@ -60,9 +60,12 @@ export default function Home() {
           transition={{ duration: 0.3, ease: 'easeOut' }}
           className="h-dvh overflow-y-auto"
         >
-          {/* Global slide gap — sections never touch the viewport edges */}
-          <div className="mx-auto w-full max-w-6xl overflow-y-auto px-2 py-4 sm:px-4 md:py-10">
-            <ActiveSection />
+          {/* Global slide gap — sections never touch the viewport edges.
+              Short sections center vertically; tall ones scroll. */}
+          <div className="mx-auto flex min-h-full w-full max-w-6xl flex-col px-2 pb-14 pt-4 sm:px-4 md:py-10">
+            <div className="my-auto w-full">
+              <ActiveSection />
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>

@@ -4,8 +4,9 @@ import {
   Database,
   Layers,
   Cloud,
-  Zap,
+  Radio,
   BrainCircuit,
+  ShieldCheck,
 } from 'lucide-react';
 
 export type Skill = {
@@ -58,11 +59,11 @@ export const skills: Skill[] = [
     icon: Cloud,
   },
   {
-    title: 'Messaging & Real-time',
+    title: 'Realtime',
     summary:
-      'Live updates, signaling, and queue-driven background processing for product-scale features.',
-    description: ['Socket.IO', 'WebRTC', 'BullMQ'],
-    icon: Zap,
+      'Live streaming (RTMP → HLS via mediamtx), signaling, and queue-driven background processing at product scale.',
+    description: ['Socket.IO', 'WebRTC', 'BullMQ', 'Redis Pub/Sub', 'mediamtx'],
+    icon: Radio,
   },
   {
     title: 'AI & LLM',
@@ -70,5 +71,12 @@ export const skills: Skill[] = [
       'Production AI features — RAG pipelines, tool calling, and vector search over self-hosted or OpenAI models.',
     description: ['OpenAI API', 'Ollama', 'RAG', 'Vector Search'],
     icon: BrainCircuit,
+  },
+  {
+    title: 'Security & Auth',
+    summary:
+      'Auth flows shipped to production — JWT, Google OAuth with JWKS verification, Redis-backed OTP, 2FA, and RBAC.',
+    description: ['JWT', 'OAuth 2.0', '2FA & OTP', 'RBAC'],
+    icon: ShieldCheck,
   },
 ];
