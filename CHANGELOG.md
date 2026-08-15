@@ -1,3 +1,9 @@
+## [1.16.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.0...v1.16.1) (2026-08-15)
+
+### Bug Fixes
+
+- dock snap centering and mobile slider control layout ([7cca977](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/7cca9773d668d0d0f5fe0678e3f1021770a3cccf))
+
 # [1.16.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.15.1...v1.16.0) (2026-08-14)
 
 ### Features
