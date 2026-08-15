@@ -203,8 +203,8 @@ export default function ProjectSection() {
             </AnimatePresence>
           </div>
 
-          {/* Slider controls — click only (arrows/swipe belong to the deck) */}
-          <div className="mt-8 flex flex-col gap-3 border-t border-neutral-200/80 dark:border-neutral-800/80 sm:flex-row sm:items-center sm:justify-between sm:gap-4 pt-4">
+          {/* Slider controls — dots left, pagination + link right */}
+          <div className="mt-8 flex flex-col gap-3 border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4 sm:flex-row sm:items-center sm:justify-between">
             {/* Dots */}
             <div className="flex items-center gap-2">
               {PINNED_REPOS.map((r, i) => (
@@ -222,12 +222,13 @@ export default function ProjectSection() {
               ))}
             </div>
 
-            {/* Counter + arrows */}
-            <div className="flex items-center gap-4">
+            {/* Counter + arrows + link */}
+            <div className="flex flex-wrap items-center justify-end gap-x-4 gap-y-2">
               <span className="font-mono text-[11px] font-bold tabular-nums tracking-widest text-neutral-500 dark:text-neutral-400">
                 {String(safeIdx + 1).padStart(2, '0')} /{' '}
                 {String(total).padStart(2, '0')}
               </span>
+
               <div className="flex gap-2">
                 <button
                   type="button"
@@ -246,18 +247,17 @@ export default function ProjectSection() {
                   <ChevronRight className="h-4 w-4" />
                 </button>
               </div>
-            </div>
 
-            {/* All repos — full-width row on mobile */}
-            <a
-              href="https://github.com/shahadathhs?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-bold text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300 sm:w-auto"
-            >
-              All Repos
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </a>
+              <a
+                href="https://github.com/shahadathhs?tab=repositories"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-bold text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300 sm:w-auto"
+              >
+                All Repos
+                <ArrowUpRight className="h-3.5 w-3.5" />
+              </a>
+            </div>
           </div>
         </div>
       </section>

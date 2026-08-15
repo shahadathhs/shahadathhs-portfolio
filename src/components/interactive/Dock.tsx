@@ -48,8 +48,9 @@ const ICONS: Record<SectionId, LucideIcon> = {
 type Edge = 'left' | 'right' | 'top' | 'bottom';
 const EDGES: Edge[] = ['left', 'right', 'top', 'bottom'];
 const EDGE_KEY = 'dock-edge';
-const DOCK_W = 336; // ~7 buttons + padding
-const DOCK_H = 48;
+const DOCK_W = 336; // horizontal dock width (7 buttons + grip + padding)
+const DOCK_V = 320; // vertical dock height (same buttons stacked)
+const DOCK_H = 48; // dock thickness (cross-axis)
 const MARGIN = 12;
 const DRAG_THRESHOLD = 6;
 
@@ -86,7 +87,7 @@ export default function Dock() {
         ? MARGIN
         : e === 'bottom'
           ? window.innerHeight - DOCK_H - MARGIN
-          : Math.max(MARGIN, Math.round((window.innerHeight - DOCK_H) / 2));
+          : Math.max(MARGIN, Math.round((window.innerHeight - DOCK_V) / 2));
     return { left, top };
   }, []);
 
