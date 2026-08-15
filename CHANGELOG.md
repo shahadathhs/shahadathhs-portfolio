@@ -1,3 +1,9 @@
+## [1.16.4](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.3...v1.16.4) (2026-08-15)
+
+### Bug Fixes
+
+- match skills-style justify-between control bars in projects and blogs ([929a559](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/929a559fd7094beb379d9328fab4f41fd10d220b))
+
 ## [1.16.3](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.2...v1.16.3) (2026-08-15)
 
 ### Bug Fixes
