@@ -1,6 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
 import {
@@ -48,9 +54,9 @@ const ICONS: Record<SectionId, LucideIcon> = {
 type Edge = 'left' | 'right' | 'top' | 'bottom';
 const EDGES: Edge[] = ['left', 'right', 'top', 'bottom'];
 const EDGE_KEY = 'dock-edge';
-const DOCK_W = 336; // horizontal dock width (7 buttons + grip + padding)
-const DOCK_V = 320; // vertical dock height (same buttons stacked)
-const DOCK_H = 48; // dock thickness (cross-axis)
+const DOCK_W = 336; // fallback: horizontal dock width
+const DOCK_V = 320; // fallback: vertical dock height
+const DOCK_H = 48; // fallback: dock thickness (cross-axis)
 const MARGIN = 12;
 const DRAG_THRESHOLD = 6;
 
@@ -66,6 +72,7 @@ export default function Dock() {
 
   const [edge, setEdge] = useState<Edge>('bottom');
   const [pos, setPos] = useState<{ left: number; top: number } | null>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{
     startX: number;
     startY: number;
@@ -74,20 +81,27 @@ export default function Dock() {
   } | null>(null);
   const didDrag = useRef(false);
 
-  // Derive pixel position — the dock always sits dead-center along its edge.
+  // Derive pixel position — dead-center along the edge, measured from the
+  // real dock size (orientation-aware) so it's exact, not estimated.
   const toPixels = useCallback((e: Edge) => {
+    const el = pillRef.current;
+    const horiz = e === 'top' || e === 'bottom';
+    const along = horiz
+      ? (el?.offsetWidth ?? DOCK_W)
+      : (el?.offsetHeight ?? DOCK_V);
+    const cross = horiz
+      ? (el?.offsetHeight ?? DOCK_H)
+      : (el?.offsetWidth ?? DOCK_H);
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const alongPos = Math.max(
+      MARGIN,
+      Math.round(((horiz ? vw : vh) - along) / 2),
+    );
     const left =
-      e === 'left'
-        ? MARGIN
-        : e === 'right'
-          ? window.innerWidth - DOCK_H - MARGIN
-          : Math.max(MARGIN, Math.round((window.innerWidth - DOCK_W) / 2));
+      e === 'left' ? MARGIN : e === 'right' ? vw - cross - MARGIN : alongPos;
     const top =
-      e === 'top'
-        ? MARGIN
-        : e === 'bottom'
-          ? window.innerHeight - DOCK_H - MARGIN
-          : Math.max(MARGIN, Math.round((window.innerHeight - DOCK_V) / 2));
+      e === 'top' ? MARGIN : e === 'bottom' ? vh - cross - MARGIN : alongPos;
     return { left, top };
   }, []);
 
@@ -104,6 +118,11 @@ export default function Dock() {
     setEdge(savedEdge);
     setPos(toPixels(savedEdge));
   }, [toPixels]);
+
+  // Re-measure after the dock renders so centering uses real sizes.
+  useLayoutEffect(() => {
+    setPos(toPixels(edge));
+  }, [edge, toPixels]);
 
   // Re-derive on viewport changes so the dock stays centered on its edge.
   useEffect(() => {
@@ -212,6 +231,7 @@ export default function Dock() {
       className="fixed z-50 cursor-grab active:cursor-grabbing"
     >
       <div
+        ref={pillRef}
         className={`flex items-center gap-1 rounded-full border border-border bg-background/70 p-1.5 shadow-lg backdrop-blur-xl ${
           isVertical ? 'flex-col' : 'flex-row'
         }`}
