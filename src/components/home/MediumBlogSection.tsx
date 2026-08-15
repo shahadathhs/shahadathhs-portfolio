@@ -60,16 +60,27 @@ export default function MediumBlogSection() {
 
       <section className="w-full py-10 md:py-12 px-6 md:px-12 lg:px-20">
         <div className="max-w-5xl mx-auto relative z-10 flex flex-col">
-          {/* Header Block */}
-          <div className="flex flex-col mb-8 text-left items-start">
-            <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-3">
-              Latest Blogs
-            </h2>
-            <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
-            <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
-              Insights on backend architecture, API design, and modern web
-              development.
-            </p>
+          {/* Header + action */}
+          <div className="mb-8 flex flex-col gap-4 text-left sm:flex-row sm:items-end sm:justify-between">
+            <div className="flex flex-col items-start">
+              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-3">
+                Latest Blogs
+              </h2>
+              <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
+              <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
+                Insights on backend architecture, API design, and modern web
+                development.
+              </p>
+            </div>
+            <a
+              href="https://medium.com/@shahadathhs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex shrink-0 items-center justify-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-bold text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
+            >
+              All on Medium
+              <ExternalLink className="h-3.5 w-3.5" />
+            </a>
           </div>
 
           {/* Blog slider — two cards per slide */}
@@ -194,17 +205,6 @@ export default function MediumBlogSection() {
                   </button>
                 </div>
               </div>
-
-              {/* All on Medium — full-width row on mobile */}
-              <a
-                href="https://medium.com/@shahadathhs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-bold text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300 sm:w-auto"
-              >
-                All on Medium
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
             </div>
           )}
 
