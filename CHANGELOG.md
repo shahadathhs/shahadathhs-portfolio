@@ -1,3 +1,9 @@
+## [1.16.3](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.2...v1.16.3) (2026-08-15)
+
+### Bug Fixes
+
+- measure dock for exact edge centering; single-line mobile pagination ([c9d2d2f](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/c9d2d2fc659483dfa8301be1eae9261a252b6dad))
+
 ## [1.16.2](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.1...v1.16.2) (2026-08-15)
 
 ### Bug Fixes
