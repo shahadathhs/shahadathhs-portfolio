@@ -214,31 +214,31 @@ export default function ProjectSection() {
             </AnimatePresence>
           </div>
 
-          {/* Slider controls — one pagination line, link wraps on mobile */}
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4">
-            {/* Pagination: dots + counter + arrows — single line */}
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-              <div className="flex items-center gap-2">
-                {PINNED_REPOS.map((r, i) => (
-                  <button
-                    key={r}
-                    type="button"
-                    onClick={() => setActive(i)}
-                    aria-label={`Show ${r}`}
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === safeIdx
-                        ? 'w-5 bg-primary'
-                        : 'w-1.5 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600'
-                    }`}
-                  />
-                ))}
-              </div>
+          {/* Slider controls — click only (arrows/swipe belong to the deck) */}
+          <div className="mt-8 flex items-center justify-between border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4">
+            {/* Dots */}
+            <div className="flex items-center gap-2">
+              {PINNED_REPOS.map((r, i) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  aria-label={`Show ${r}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === safeIdx
+                      ? 'w-5 bg-primary'
+                      : 'w-1.5 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600'
+                  }`}
+                />
+              ))}
+            </div>
 
+            {/* Counter + arrows */}
+            <div className="flex items-center gap-4">
               <span className="font-mono text-[11px] font-bold tabular-nums tracking-widest text-neutral-500 dark:text-neutral-400">
                 {String(safeIdx + 1).padStart(2, '0')} /{' '}
                 {String(total).padStart(2, '0')}
               </span>
-
               <div className="flex gap-2">
                 <button
                   type="button"
@@ -258,8 +258,6 @@ export default function ProjectSection() {
                 </button>
               </div>
             </div>
-
-            {/* All on GitHub removed from control bar — now in the header */}
           </div>
         </div>
       </section>
