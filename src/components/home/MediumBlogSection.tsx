@@ -151,7 +151,7 @@ export default function MediumBlogSection() {
 
           {/* Slider controls — click only (arrows/swipe belong to the deck) */}
           {!loading && total > 1 && (
-            <div className="mt-8 flex items-center justify-between border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4">
+            <div className="mt-8 flex flex-col gap-3 border-t border-neutral-200/80 dark:border-neutral-800/80 sm:flex-row sm:items-center sm:justify-between sm:gap-4 pt-4">
               {/* Dots */}
               <div className="flex items-center gap-2">
                 {Array.from({ length: total }).map((_, i) => (
@@ -197,7 +197,7 @@ export default function MediumBlogSection() {
                   href="https://medium.com/@shahadathhs"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-bold text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
+                  className="inline-flex w-full items-center justify-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-bold text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300 sm:w-auto"
                 >
                   All on Medium
                   <ExternalLink className="h-3.5 w-3.5" />

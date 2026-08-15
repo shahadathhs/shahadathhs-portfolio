@@ -47,7 +47,6 @@ const ICONS: Record<SectionId, LucideIcon> = {
 
 type Edge = 'left' | 'right' | 'top' | 'bottom';
 const EDGES: Edge[] = ['left', 'right', 'top', 'bottom'];
-const POS_KEY = 'dock-position';
 const EDGE_KEY = 'dock-edge';
 const DOCK_W = 336; // ~7 buttons + padding
 const DOCK_H = 48;
@@ -64,7 +63,7 @@ export default function Dock() {
   // The dock only makes sense where the deck lives.
   const isHome = pathname === '/';
 
-  const [edge, setEdge] = useState<Edge>('left');
+  const [edge, setEdge] = useState<Edge>('bottom');
   const [pos, setPos] = useState<{ left: number; top: number } | null>(null);
   const drag = useRef<{
     startX: number;
@@ -73,63 +72,41 @@ export default function Dock() {
     origTop: number;
   } | null>(null);
   const didDrag = useRef(false);
-  // Position along the edge, stored as a fraction (0..1) so it survives resizes.
-  const fraction = useRef(0.5);
 
-  const dockSize = edge === 'left' || edge === 'right' ? DOCK_H : DOCK_W;
+  // Derive pixel position — the dock always sits dead-center along its edge.
+  const toPixels = useCallback((e: Edge) => {
+    const left =
+      e === 'left'
+        ? MARGIN
+        : e === 'right'
+          ? window.innerWidth - DOCK_H - MARGIN
+          : Math.max(MARGIN, Math.round((window.innerWidth - DOCK_W) / 2));
+    const top =
+      e === 'top'
+        ? MARGIN
+        : e === 'bottom'
+          ? window.innerHeight - DOCK_H - MARGIN
+          : Math.max(MARGIN, Math.round((window.innerHeight - DOCK_H) / 2));
+    return { left, top };
+  }, []);
 
-  // Derive pixel position from edge + fraction of the free axis.
-  const toPixels = useCallback(
-    (e: Edge, f: number) => {
-      const left =
-        e === 'left'
-          ? MARGIN
-          : e === 'right'
-            ? window.innerWidth - DOCK_H - MARGIN
-            : Math.max(
-                MARGIN,
-                Math.min(
-                  window.innerWidth - DOCK_W - MARGIN,
-                  f * (window.innerWidth - DOCK_W),
-                ),
-              );
-      const top =
-        e === 'top'
-          ? MARGIN
-          : e === 'bottom'
-            ? window.innerHeight - DOCK_H - MARGIN
-            : Math.max(
-                MARGIN,
-                Math.min(
-                  window.innerHeight - DOCK_H - MARGIN,
-                  f * (window.innerHeight - dockSize),
-                ),
-              );
-      return { left, top };
-    },
-    [dockSize],
-  );
-
-  // Load saved edge + fraction; default to the left edge, centered.
+  // Load saved edge; default to the bottom edge. The dock always sits
+  // dead-center along its edge — no fractional offset.
   useEffect(() => {
-    let savedEdge: Edge = 'left';
-    let f = 0.5;
+    let savedEdge: Edge = 'bottom';
     try {
       const e = localStorage.getItem(EDGE_KEY);
       if (isEdge(e)) savedEdge = e;
-      const savedF = Number(localStorage.getItem(POS_KEY));
-      if (Number.isFinite(savedF) && savedF >= 0 && savedF <= 1) f = savedF;
     } catch {
       // ignore
     }
     setEdge(savedEdge);
-    fraction.current = f;
-    setPos(toPixels(savedEdge, f));
+    setPos(toPixels(savedEdge));
   }, [toPixels]);
 
-  // Re-derive on viewport changes.
+  // Re-derive on viewport changes so the dock stays centered on its edge.
   useEffect(() => {
-    const onResize = () => setPos(toPixels(edge, fraction.current));
+    const onResize = () => setPos(toPixels(edge));
     window.addEventListener('resize', onResize);
     window.addEventListener('orientationchange', onResize);
     return () => {
@@ -158,23 +135,15 @@ export default function Dock() {
     return () => window.removeEventListener('keydown', onKey);
   }, [isHome, navigate, nextSection, prevSection, terminalOpen]);
 
-  /** Snap to whichever edge is nearest and keep the along-edge fraction. */
-  const snap = useCallback((x: number, y: number) => {
+  /** Snap to whichever edge is nearest; the dock centers along it. */
+  const snap = useCallback((x: number, y: number): Edge => {
     const dists: Record<Edge, number> = {
       left: x,
       right: window.innerWidth - x,
       top: y,
       bottom: window.innerHeight - y,
     };
-    const nearest = EDGES.reduce((a, b) =>
-      dists[a] <= dists[b] ? a : b,
-    ) as Edge;
-    const f =
-      nearest === 'left' || nearest === 'right'
-        ? (y - DOCK_H / 2) / (window.innerHeight - DOCK_H)
-        : (x - DOCK_W / 2) / (window.innerWidth - DOCK_W);
-    const clamped = Math.max(0, Math.min(1, Number.isFinite(f) ? f : 0.5));
-    return { edge: nearest, fraction: clamped };
+    return EDGES.reduce((a, b) => (dists[a] <= dists[b] ? a : b)) as Edge;
   }, []);
 
   const onPointerDown = useCallback(
@@ -213,14 +182,12 @@ export default function Dock() {
   const onPointerUp = useCallback(
     (e: React.PointerEvent<HTMLElement>) => {
       if (drag.current && didDrag.current) {
-        const { edge: newEdge, fraction: f } = snap(e.clientX, e.clientY);
+        const newEdge = snap(e.clientX, e.clientY);
         playSound('toggle');
         setEdge(newEdge);
-        fraction.current = f;
-        setPos(toPixels(newEdge, f));
+        setPos(toPixels(newEdge));
         try {
           localStorage.setItem(EDGE_KEY, newEdge);
-          localStorage.setItem(POS_KEY, String(f));
         } catch {
           // ignore
         }
