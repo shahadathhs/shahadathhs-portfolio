@@ -1,3 +1,9 @@
+## [1.16.2](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.1...v1.16.2) (2026-08-15)
+
+### Bug Fixes
+
+- dock vertical centering and slider control bar layout ([cc5ec30](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/cc5ec30b6ec1e7c097d3551efc89779bfc0f6ec2))
+
 ## [1.16.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.0...v1.16.1) (2026-08-15)
 
 ### Bug Fixes
