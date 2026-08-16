@@ -5,6 +5,9 @@ import { useEffect, useRef, useState } from 'react';
 /** Ambient background videos — rotate in order, each plays one full cycle. */
 const BG_VIDEOS = ['/bg-1.mp4', '/bg-2.mp4', '/bg-3.mp4'];
 
+/** Static poster shown while a video loads — or if it fails to. */
+const POSTER = '/bg-poster.jpg';
+
 /** Crossfade between outgoing and incoming video. */
 const FADE_MS = 1200;
 
@@ -54,6 +57,7 @@ export default function SectionBackground() {
             videoRefs.current[i] = el;
           }}
           src={src}
+          poster={POSTER}
           muted
           playsInline
           preload={i === 0 ? 'auto' : 'metadata'}
