@@ -6,6 +6,8 @@ export interface MediumPost {
   content: string;
   contentSnippet: string;
   categories: string[];
+  /** Medium CDN preview image, when the post has one. */
+  thumbnail: string;
 }
 
 const CACHE_DURATION = 3600 * 1000; // 1 hour
@@ -60,17 +62,38 @@ export const fetchMediumPosts = async (
     }
 
     // Map to MediumPost interface
-    const posts: MediumPost[] = data.items.map((item: any) => ({
-      title: item.title,
-      link: item.link,
-      pubDate: item.pubDate,
-      author: item.author,
-      content: item.content,
-      contentSnippet: item.description
-        .replace(/<[^>]*>?/gm, '')
-        .substring(0, 200),
-      categories: item.categories,
-    }));
+    const posts: MediumPost[] = data.items.map((item: any) => {
+      const stripTags = (html: string) =>
+        html
+          .replace(/<[^>]*>?/gm, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+
+      // Excerpt: prefer the first editorial lead block in the description
+      // (h4 subheading, blockquote, or figcaption); fall back to its text.
+      const desc: string = item.description ?? '';
+      const lead =
+        desc.match(/<h4[^>]*>([\s\S]*?)<\/h4>/) ??
+        desc.match(/<blockquote[^>]*>([\s\S]*?)<\/blockquote>/) ??
+        desc.match(/<figcaption[^>]*>([\s\S]*?)<\/figcaption>/);
+      // Strip nested tags inside the lead (e.g. <em>), remove "N min read".
+      const excerpt = lead
+        ? stripTags(lead[1])
+            .replace(/\d+\s*min read\s*/i, '')
+            .trim()
+        : stripTags(desc).substring(0, 260);
+
+      return {
+        title: item.title,
+        link: item.link,
+        pubDate: item.pubDate,
+        author: item.author,
+        content: item.content,
+        contentSnippet: excerpt.substring(0, 260),
+        categories: item.categories ?? [],
+        thumbnail: item.thumbnail ?? '',
+      };
+    });
 
     setCache(cacheKey, posts);
     return posts;

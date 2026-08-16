@@ -61,8 +61,8 @@ export default function Home() {
           className="h-dvh overflow-y-auto"
         >
           {/* Global slide gap — sections never touch the viewport edges.
-              Short sections center vertically; tall ones scroll. */}
-          <div className="mx-auto flex min-h-full w-full max-w-6xl flex-col px-2 pb-14 pt-4 sm:px-4 md:py-10">
+              Bottom clears the fixed dock (48px + 16px margin). */}
+          <div className="mx-auto flex min-h-full w-full max-w-6xl flex-col px-2 pb-20 pt-4 sm:px-4 md:pb-20 md:pt-10">
             <div className="my-auto w-full">
               <ActiveSection />
             </div>

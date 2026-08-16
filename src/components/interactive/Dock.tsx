@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { motion } from 'motion/react';
 import {
@@ -21,25 +15,6 @@ import {
 } from 'lucide-react';
 import { useUI } from '@/context/ui-context';
 import { SECTIONS, type SectionId } from '@/constant/sections';
-import { playSound } from '@/lib/sound';
-
-/** Two-by-two grip dots — the standard "draggable" affordance. */
-function GripIcon() {
-  return (
-    <svg
-      width="10"
-      height="10"
-      viewBox="0 0 10 10"
-      fill="currentColor"
-      aria-hidden
-    >
-      <circle cx="2.5" cy="2.5" r="1.2" />
-      <circle cx="7.5" cy="2.5" r="1.2" />
-      <circle cx="2.5" cy="7.5" r="1.2" />
-      <circle cx="7.5" cy="7.5" r="1.2" />
-    </svg>
-  );
-}
 
 const ICONS: Record<SectionId, LucideIcon> = {
   hero: Home,
@@ -51,17 +26,6 @@ const ICONS: Record<SectionId, LucideIcon> = {
   contact: Mail,
 };
 
-type Edge = 'left' | 'right' | 'top' | 'bottom';
-const EDGES: Edge[] = ['left', 'right', 'top', 'bottom'];
-const EDGE_KEY = 'dock-edge';
-const DOCK_W = 336; // fallback: horizontal dock width
-const DOCK_V = 320; // fallback: vertical dock height
-const DOCK_H = 48; // fallback: dock thickness (cross-axis)
-const MARGIN = 12;
-const DRAG_THRESHOLD = 6;
-
-const isEdge = (v: unknown): v is Edge => EDGES.includes(v as Edge);
-
 export default function Dock() {
   const { activeSection, navigate, nextSection, prevSection, terminalOpen } =
     useUI();
@@ -69,71 +33,6 @@ export default function Dock() {
 
   // The dock only makes sense where the deck lives.
   const isHome = pathname === '/';
-
-  const [edge, setEdge] = useState<Edge>('bottom');
-  const [pos, setPos] = useState<{ left: number; top: number } | null>(null);
-  const pillRef = useRef<HTMLDivElement>(null);
-  const drag = useRef<{
-    startX: number;
-    startY: number;
-    origLeft: number;
-    origTop: number;
-  } | null>(null);
-  const didDrag = useRef(false);
-
-  // Derive pixel position — dead-center along the edge, measured from the
-  // real dock size (orientation-aware) so it's exact, not estimated.
-  const toPixels = useCallback((e: Edge) => {
-    const el = pillRef.current;
-    const horiz = e === 'top' || e === 'bottom';
-    const along = horiz
-      ? (el?.offsetWidth ?? DOCK_W)
-      : (el?.offsetHeight ?? DOCK_V);
-    const cross = horiz
-      ? (el?.offsetHeight ?? DOCK_H)
-      : (el?.offsetWidth ?? DOCK_H);
-    const vw = window.innerWidth;
-    const vh = window.innerHeight;
-    const alongPos = Math.max(
-      MARGIN,
-      Math.round(((horiz ? vw : vh) - along) / 2),
-    );
-    const left =
-      e === 'left' ? MARGIN : e === 'right' ? vw - cross - MARGIN : alongPos;
-    const top =
-      e === 'top' ? MARGIN : e === 'bottom' ? vh - cross - MARGIN : alongPos;
-    return { left, top };
-  }, []);
-
-  // Load saved edge; default to the bottom edge. The dock always sits
-  // dead-center along its edge — no fractional offset.
-  useEffect(() => {
-    let savedEdge: Edge = 'bottom';
-    try {
-      const e = localStorage.getItem(EDGE_KEY);
-      if (isEdge(e)) savedEdge = e;
-    } catch {
-      // ignore
-    }
-    setEdge(savedEdge);
-    setPos(toPixels(savedEdge));
-  }, [toPixels]);
-
-  // Re-measure after the dock renders so centering uses real sizes.
-  useLayoutEffect(() => {
-    setPos(toPixels(edge));
-  }, [edge, toPixels]);
-
-  // Re-derive on viewport changes so the dock stays centered on its edge.
-  useEffect(() => {
-    const onResize = () => setPos(toPixels(edge));
-    window.addEventListener('resize', onResize);
-    window.addEventListener('orientationchange', onResize);
-    return () => {
-      window.removeEventListener('resize', onResize);
-      window.removeEventListener('orientationchange', onResize);
-    };
-  }, [edge, toPixels]);
 
   // Keyboard: 1-7 jump, arrows step. Ignored while typing in the terminal.
   useEffect(() => {
@@ -155,98 +54,14 @@ export default function Dock() {
     return () => window.removeEventListener('keydown', onKey);
   }, [isHome, navigate, nextSection, prevSection, terminalOpen]);
 
-  /** Snap to whichever edge is nearest; the dock centers along it. */
-  const snap = useCallback((x: number, y: number): Edge => {
-    const dists: Record<Edge, number> = {
-      left: x,
-      right: window.innerWidth - x,
-      top: y,
-      bottom: window.innerHeight - y,
-    };
-    return EDGES.reduce((a, b) => (dists[a] <= dists[b] ? a : b)) as Edge;
-  }, []);
-
-  const onPointerDown = useCallback(
-    (e: React.PointerEvent<HTMLElement>) => {
-      // Only the dock chrome (not the buttons) starts a drag.
-      if ((e.target as HTMLElement).closest('button')) return;
-      e.currentTarget.setPointerCapture(e.pointerId);
-      const { left, top } = pos ?? { left: 0, top: 0 };
-      drag.current = {
-        startX: e.clientX,
-        startY: e.clientY,
-        origLeft: left,
-        origTop: top,
-      };
-      didDrag.current = false;
-    },
-    [pos],
-  );
-
-  const onPointerMove = useCallback((e: React.PointerEvent<HTMLElement>) => {
-    const d = drag.current;
-    if (!d) return;
-    const dx = e.clientX - d.startX;
-    const dy = e.clientY - d.startY;
-    if (
-      !didDrag.current &&
-      Math.abs(dx) <= DRAG_THRESHOLD &&
-      Math.abs(dy) <= DRAG_THRESHOLD
-    ) {
-      return;
-    }
-    didDrag.current = true;
-    setPos({ left: d.origLeft + dx, top: d.origTop + dy });
-  }, []);
-
-  const onPointerUp = useCallback(
-    (e: React.PointerEvent<HTMLElement>) => {
-      if (drag.current && didDrag.current) {
-        const newEdge = snap(e.clientX, e.clientY);
-        playSound('toggle');
-        setEdge(newEdge);
-        setPos(toPixels(newEdge));
-        try {
-          localStorage.setItem(EDGE_KEY, newEdge);
-        } catch {
-          // ignore
-        }
-      }
-      drag.current = null;
-    },
-    [snap, toPixels],
-  );
-
-  if (!isHome || !pos) return null;
-
-  const isVertical = edge === 'left' || edge === 'right';
+  if (!isHome) return null;
 
   return (
     <nav
       aria-label="Section navigation"
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-      style={{ left: pos.left, top: pos.top, touchAction: 'none' }}
-      className="fixed z-50 cursor-grab active:cursor-grabbing"
+      className="fixed inset-x-0 bottom-4 z-50 flex justify-center px-4"
     >
-      <div
-        ref={pillRef}
-        className={`flex items-center gap-1 rounded-full border border-border bg-background/70 p-1.5 shadow-lg backdrop-blur-xl ${
-          isVertical ? 'flex-col' : 'flex-row'
-        }`}
-      >
-        {/* Grip handle — signals the dock is draggable */}
-        <span
-          aria-hidden
-          title="Drag to move"
-          className={`flex h-4 w-4 shrink-0 cursor-grab items-center justify-center text-muted-foreground/50 active:cursor-grabbing ${
-            isVertical ? 'mb-0.5 rotate-90' : 'mr-0.5'
-          }`}
-        >
-          <GripIcon />
-        </span>
-
+      <div className="flex items-center gap-1 rounded-full border border-border bg-background/70 p-1.5 shadow-lg backdrop-blur-xl">
         {SECTIONS.map((s, i) => {
           const Icon = ICONS[s.id];
           const isActive = activeSection === s.id;
@@ -273,18 +88,8 @@ export default function Dock() {
               )}
               <Icon className="relative z-10 h-4 w-4" strokeWidth={2.2} />
 
-              {/* Tooltip — points toward the screen center (away from the docked edge) */}
-              <span
-                className={`pointer-events-none absolute whitespace-nowrap rounded-md border border-border bg-background px-2 py-1 text-xs font-bold uppercase tracking-widest text-foreground opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 ${
-                  edge === 'left'
-                    ? 'left-full ml-3 top-1/2 -translate-y-1/2'
-                    : edge === 'right'
-                      ? 'right-full mr-3 top-1/2 -translate-y-1/2'
-                      : edge === 'top'
-                        ? 'top-full mt-3 left-1/2 -translate-x-1/2'
-                        : 'bottom-full mb-3 left-1/2 -translate-x-1/2'
-                }`}
-              >
+              {/* Tooltip — dock is bottom-fixed, so it always opens upward */}
+              <span className="pointer-events-none absolute bottom-full mb-3 whitespace-nowrap rounded-md border border-border bg-background px-2 py-1 text-xs font-bold uppercase tracking-widest text-foreground opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100">
                 {s.label}
               </span>
             </button>

@@ -16,6 +16,50 @@ const segmentColor: Record<string, string> = {
   punct: 'text-neutral-500',
 };
 
+/** Hero code window — data-driven from heroData.codeSnippet. */
+function CodeWindow({ className = '' }: { className?: string }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.8 }}
+      className={`w-full max-w-sm p-5 border border-neutral-200 dark:border-neutral-800 bg-white/10 dark:bg-black/30 backdrop-blur-md shadow-2xl overflow-hidden relative group ${className}`}
+    >
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+      <div className="space-y-3 font-mono text-xs">
+        <div className="flex gap-2">
+          <div className="h-2.5 w-2.5 rounded-full bg-red-500" />
+          <div className="h-2.5 w-2.5 rounded-full bg-yellow-500" />
+          <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
+        </div>
+        <div className="space-y-1">
+          <p className="whitespace-nowrap text-primary">
+            class {heroData.codeSnippet.className} {'{'}
+          </p>
+          {heroData.codeSnippet.lines.map((line, idx) => (
+            <p
+              key={idx}
+              className="whitespace-nowrap text-neutral-600 dark:text-neutral-400"
+              style={{ paddingLeft: `${(line.indent ?? 0) * 12}px` }}
+            >
+              {line.segments.map((seg, i) => (
+                <span
+                  key={i}
+                  className={segmentColor[seg.variant ?? 'default']}
+                >
+                  {seg.text}
+                </span>
+              ))}
+            </p>
+          ))}
+          <p className="whitespace-nowrap text-primary">{'}'}</p>
+        </div>
+      </div>
+      <div className="absolute -bottom-10 -right-10 h-40 w-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-500" />
+    </motion.div>
+  );
+}
+
 export default function HeroSection() {
   return (
     <div id="hero" className="relative w-full min-h-[60vh] flex items-center">
@@ -72,7 +116,7 @@ export default function HeroSection() {
         </div>
 
         {/* Body — text left, visual right; both bottom-aligned */}
-        <div className="flex flex-col items-stretch gap-8 md:flex-row md:items-end md:gap-10">
+        <div className="flex flex-col items-stretch gap-8 md:flex-row md:items-center md:gap-10">
           {/* Left Side: Text Content */}
           <div className="w-full md:w-3/5 flex flex-col items-start gap-4 md:gap-5 text-left">
             <div className="h-10 md:h-12 flex items-center">
@@ -110,8 +154,13 @@ export default function HeroSection() {
               transition={{ duration: 0.5, delay: 0.95 }}
               className="flex flex-wrap items-center gap-x-8 gap-y-3"
             >
-              {heroData.quickStats.slice(1).map((stat) => (
-                <div key={stat.label} className="flex flex-col">
+              {heroData.quickStats.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className={
+                    i === 0 ? 'flex flex-col md:hidden' : 'flex flex-col'
+                  }
+                >
                   <span className="text-2xl font-extrabold text-primary">
                     {stat.value}
                   </span>
@@ -121,6 +170,9 @@ export default function HeroSection() {
                 </div>
               ))}
             </motion.div>
+
+            {/* Code window — directly after the focus stats (mobile only) */}
+            <CodeWindow className="md:hidden" />
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -172,7 +224,7 @@ export default function HeroSection() {
           </div>
 
           {/* Right Side: experience + code window (visible on all sizes) */}
-          <div className="relative flex w-full flex-col items-start justify-center gap-5 lg:w-2/5">
+          <div className="relative hidden md:flex w-full flex-col items-start justify-center gap-5 lg:w-2/5">
             {/* Experience — About-card style left accent bar */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -189,44 +241,7 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
-              className="w-full max-w-sm p-5 border border-neutral-200 dark:border-neutral-800 bg-white/10 dark:bg-black/30 backdrop-blur-md shadow-2xl overflow-hidden relative group"
-            >
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
-              <div className="space-y-3 font-mono text-xs">
-                <div className="flex gap-2">
-                  <div className="h-2.5 w-2.5 rounded-full bg-red-500" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-yellow-500" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-green-500" />
-                </div>
-                <div className="space-y-1">
-                  <p className="whitespace-nowrap text-primary">
-                    class {heroData.codeSnippet.className} {'{'}
-                  </p>
-                  {heroData.codeSnippet.lines.map((line, idx) => (
-                    <p
-                      key={idx}
-                      className="whitespace-nowrap text-neutral-600 dark:text-neutral-400"
-                      style={{ paddingLeft: `${(line.indent ?? 0) * 12}px` }}
-                    >
-                      {line.segments.map((seg, i) => (
-                        <span
-                          key={i}
-                          className={segmentColor[seg.variant ?? 'default']}
-                        >
-                          {seg.text}
-                        </span>
-                      ))}
-                    </p>
-                  ))}
-                  <p className="whitespace-nowrap text-primary">{'}'}</p>
-                </div>
-              </div>
-              <div className="absolute -bottom-10 -right-10 h-40 w-40 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-colors duration-500" />
-            </motion.div>
+            <CodeWindow />
           </div>
         </div>
       </div>

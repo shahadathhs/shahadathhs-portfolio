@@ -131,7 +131,7 @@ export default function ProjectSection() {
             </p>
           )}
 
-          {/* Project slider — one project per slide */}
+          {/* Project slider — one project per slide, flat like Experience */}
           <div className="relative flex-1">
             <AnimatePresence mode="wait">
               <motion.div
@@ -140,27 +140,32 @@ export default function ProjectSection() {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
-                className="group relative border border-neutral-200/80 dark:border-neutral-800/80 hover:border-primary/50 transition-all duration-300"
+                className="group flex flex-col gap-6"
               >
-                {/* Gradient accent — matching Contact/Blogs cards */}
-                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:via-primary/50 transition-all" />
-
-                {/* Identity row — p-6/p-8 rhythm, matching Contact/Blogs cards */}
-                <div className="flex flex-col gap-3 border-b border-neutral-200/80 px-6 py-6 dark:border-neutral-800/80 sm:flex-row sm:items-center sm:justify-between md:px-8">
-                  <div className="flex items-center gap-3">
-                    <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-primary tabular-nums">
-                      {String(safeIdx + 1).padStart(2, '0')}
-                    </span>
-                    <h3 className="text-xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 md:text-2xl">
-                      {name}
-                    </h3>
-                    {repo?.language && (
-                      <span className="rounded-sm bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
-                        {repo.language}
+                {/* Project header — title + meta, like the role header */}
+                <div className="flex flex-col justify-between gap-2 border-b border-neutral-100 pb-6 dark:border-neutral-900 md:flex-row md:items-baseline">
+                  <div className="space-y-1">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-primary tabular-nums">
+                        {String(safeIdx + 1).padStart(2, '0')}
                       </span>
+                      <h3 className="text-xl font-black tracking-tight text-neutral-900 transition-colors group-hover:text-primary md:text-2xl dark:text-neutral-50">
+                        {name}
+                      </h3>
+                      {repo?.language && (
+                        <span className="bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
+                          {repo.language}
+                        </span>
+                      )}
+                    </div>
+                    {repo?.description && (
+                      <p className="max-w-2xl pl-8 text-sm text-neutral-600 dark:text-neutral-400 md:text-base">
+                        {repo.description}
+                      </p>
                     )}
                   </div>
-                  <div className="flex items-center gap-4 font-mono text-xs text-neutral-500 dark:text-neutral-400">
+
+                  <div className="flex items-center gap-4 font-mono text-xs text-neutral-500 dark:text-neutral-400 md:justify-end">
                     {loading ? (
                       <span className="animate-pulse">loading…</span>
                     ) : (
@@ -173,43 +178,32 @@ export default function ProjectSection() {
                           <GitFork className="h-3.5 w-3.5" />
                           {repo?.forks_count ?? 0}
                         </span>
+                        <a
+                          href={url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-primary transition-opacity hover:opacity-80"
+                        >
+                          GitHub
+                          <ArrowUpRight className="h-3 w-3" />
+                        </a>
                       </>
                     )}
                   </div>
                 </div>
 
-                {/* Description + highlights */}
-                <div className="px-6 py-6 md:px-8">
-                  {repo?.description && (
-                    <p className="mb-5 text-sm leading-normal text-neutral-600 dark:text-neutral-400 md:text-base">
-                      {repo.description}
-                    </p>
-                  )}
-                  <ul className="flex flex-col gap-3">
-                    {highlights.map((h) => (
-                      <li
-                        key={h}
-                        className="flex items-start gap-3 text-sm text-neutral-600 dark:text-neutral-400"
-                      >
-                        <span className="mt-2 h-1 w-1 shrink-0 bg-primary/40" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Footer */}
-                <div className="border-t border-neutral-200/80 px-6 py-4 dark:border-neutral-800/80 md:px-8">
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-primary transition-opacity hover:opacity-80"
-                  >
-                    View on GitHub
-                    <ArrowUpRight className="h-3.5 w-3.5" />
-                  </a>
-                </div>
+                {/* Highlights — single column bullets */}
+                <ul className="flex flex-col gap-3.5">
+                  {highlights.map((h) => (
+                    <li
+                      key={h}
+                      className="flex items-start gap-3 text-sm text-neutral-600 dark:text-neutral-400 md:text-base"
+                    >
+                      <span className="mt-2.5 h-1 w-1 shrink-0 bg-primary/30" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             </AnimatePresence>
           </div>

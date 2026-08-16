@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { fetchMediumPosts, type MediumPost } from '@/services/medium-service';
 import { AnimatePresence, motion } from 'motion/react';
 import {
+  ArrowUpRight,
   Calendar,
   ChevronLeft,
   ChevronRight,
@@ -11,8 +12,6 @@ import {
 } from 'lucide-react';
 
 import BlogSkeleton from '../skeleton/BlogSkeleton';
-
-const PER_SLIDE = 2;
 
 export default function MediumBlogSection() {
   const [posts, setPosts] = useState<MediumPost[]>([]);
@@ -22,14 +21,15 @@ export default function MediumBlogSection() {
   useEffect(() => {
     const loadPosts = async () => {
       const data = await fetchMediumPosts('shahadathhs');
-      setPosts(data.slice(0, 4));
+      setPosts(data);
       setLoading(false);
     };
     loadPosts();
   }, []);
 
-  const total = Math.ceil(posts.length / PER_SLIDE);
-  const slide = posts.slice(active * PER_SLIDE, active * PER_SLIDE + PER_SLIDE);
+  const total = posts.length;
+  const safeIdx = Math.min(active, Math.max(total - 1, 0));
+  const post = posts[safeIdx];
 
   const prev = () => setActive((i) => (i - 1 + total) % total);
   const next = () => setActive((i) => (i + 1) % total);
@@ -83,81 +83,88 @@ export default function MediumBlogSection() {
             </a>
           </div>
 
-          {/* Blog slider — two cards per slide */}
+          {/* Blog slider — one post per slide, flat like Experience */}
           <div className="relative flex-1">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, x: 24 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -24 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-6"
-              >
-                {loading
-                  ? Array.from({ length: PER_SLIDE }).map((_, i) => (
-                      <BlogSkeleton key={i} />
-                    ))
-                  : slide.map((post) => (
-                      <div key={post.link} className="group h-full">
+            {loading ? (
+              <BlogSkeleton />
+            ) : (
+              post && (
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={post.link}
+                    initial={{ opacity: 0, x: 24 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -24 }}
+                    transition={{ duration: 0.3, ease: 'easeOut' }}
+                    className="group flex flex-col gap-6"
+                  >
+                    {/* Post header — meta row */}
+                    <div className="flex flex-col justify-between gap-2 border-b border-neutral-100 pb-6 dark:border-neutral-900 md:flex-row md:items-baseline">
+                      <div className="space-y-1">
+                        <div className="flex flex-wrap items-center gap-3 font-mono text-xs text-neutral-500 dark:text-neutral-400">
+                          <span className="font-bold tracking-[0.2em] text-primary tabular-nums">
+                            {String(safeIdx + 1).padStart(2, '0')}
+                          </span>
+                          <span className="inline-flex items-center gap-1.5">
+                            <Calendar className="h-3.5 w-3.5" />
+                            {new Date(post.pubDate).toLocaleDateString(
+                              'en-US',
+                              {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric',
+                              },
+                            )}
+                          </span>
+                        </div>
+                        <h3 className="max-w-2xl pl-8 text-xl font-black leading-tight tracking-tight text-neutral-900 transition-colors group-hover:text-primary md:text-2xl dark:text-neutral-50">
+                          {post.title}
+                        </h3>
+                      </div>
+
+                      <a
+                        href={post.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-1 self-start text-[10px] font-bold uppercase tracking-widest text-primary transition-opacity hover:opacity-80 md:self-auto"
+                      >
+                        Read
+                        <ArrowUpRight className="h-3 w-3" />
+                      </a>
+                    </div>
+
+                    {/* Excerpt + tags */}
+                    <div className="flex flex-col gap-4">
+                      <p className="max-w-3xl text-sm leading-normal text-neutral-600 dark:text-neutral-400 md:text-base">
+                        {post.contentSnippet}
+                        {'… '}
                         <a
                           href={post.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex flex-col h-full p-6 rounded-md bg-transparent border border-neutral-200 dark:border-neutral-800 hover:border-primary/50 transition-all duration-300 shadow-sm relative overflow-hidden"
+                          className="font-bold text-primary transition-opacity hover:opacity-80"
                         >
-                          {/* Subtle Gradient Accent */}
-                          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/20 to-transparent group-hover:via-primary/50 transition-all" />
-
-                          <div className="flex-1 space-y-4">
-                            <div className="flex items-center justify-between gap-4">
-                              <span className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
-                                <Calendar className="h-3.5 w-3.5" />
-                                {new Date(post.pubDate).toLocaleDateString(
-                                  'en-US',
-                                  {
-                                    month: 'short',
-                                    day: 'numeric',
-                                    year: 'numeric',
-                                  },
-                                )}
-                              </span>
-                              <div className="flex flex-wrap gap-2 justify-end">
-                                {post.categories.slice(0, 1).map((category) => (
-                                  <span
-                                    key={category}
-                                    className="px-2 py-0.5 bg-primary/5 text-primary border border-primary/10 rounded-md text-[10px] font-bold uppercase tracking-tighter"
-                                  >
-                                    {category}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-
-                            <h3 className="text-xl font-black text-neutral-900 dark:text-neutral-50 group-hover:text-primary transition-colors leading-tight line-clamp-2">
-                              {post.title}
-                            </h3>
-
-                            <p className="text-neutral-500 dark:text-neutral-400 line-clamp-3 text-sm leading-relaxed italic">
-                              {post.contentSnippet ||
-                                'Read the full deep dive on Medium for more technical insights...'}
-                            </p>
-                          </div>
-
-                          <div className="mt-6 pt-6 border-t border-neutral-100 dark:border-neutral-900 flex items-center justify-between">
-                            <div className="flex items-center text-primary font-black text-xs uppercase tracking-widest group-hover:translate-x-1 transition-transform">
-                              Read Story
-                              <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-                            </div>
-                          </div>
-
-                          {/* Background Glow */}
-                          <div className="absolute -bottom-10 -right-10 h-24 w-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-colors duration-500" />
+                          read full story
+                          <ArrowUpRight className="ml-0.5 inline h-3.5 w-3.5" />
                         </a>
-                      </div>
-                    ))}
-              </motion.div>
-            </AnimatePresence>
+                      </p>
+                      {post.categories.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                          {post.categories.map((tag) => (
+                            <span
+                              key={tag}
+                              className="rounded-md border border-neutral-200/60 bg-black/5 px-2.5 py-1 text-xs font-bold tracking-wide text-neutral-700 dark:border-neutral-800/60 dark:bg-white/5 dark:text-neutral-300"
+                            >
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              )
+            )}
           </div>
 
           {/* Slider controls — click only (arrows/swipe belong to the deck) */}
@@ -165,14 +172,14 @@ export default function MediumBlogSection() {
             <div className="mt-8 flex items-center justify-between border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4">
               {/* Dots */}
               <div className="flex items-center gap-2">
-                {Array.from({ length: total }).map((_, i) => (
+                {posts.map((p, i) => (
                   <button
-                    key={i}
+                    key={p.link}
                     type="button"
                     onClick={() => setActive(i)}
-                    aria-label={`Show blogs ${i + 1}`}
+                    aria-label={`Show post ${i + 1}`}
                     className={`h-1.5 rounded-full transition-all duration-300 ${
-                      i === active
+                      i === safeIdx
                         ? 'w-5 bg-primary'
                         : 'w-1.5 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600'
                     }`}
@@ -183,14 +190,14 @@ export default function MediumBlogSection() {
               {/* Counter + arrows */}
               <div className="flex items-center gap-4">
                 <span className="font-mono text-[11px] font-bold tabular-nums tracking-widest text-neutral-500 dark:text-neutral-400">
-                  {String(active + 1).padStart(2, '0')} /{' '}
+                  {String(safeIdx + 1).padStart(2, '0')} /{' '}
                   {String(total).padStart(2, '0')}
                 </span>
                 <div className="flex gap-2">
                   <button
                     type="button"
                     onClick={prev}
-                    aria-label="Previous blogs"
+                    aria-label="Previous post"
                     className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
                   >
                     <ChevronLeft className="h-4 w-4" />
@@ -198,28 +205,13 @@ export default function MediumBlogSection() {
                   <button
                     type="button"
                     onClick={next}
-                    aria-label="Next blogs"
+                    aria-label="Next post"
                     className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
                   >
                     <ChevronRight className="h-4 w-4" />
                   </button>
                 </div>
               </div>
-            </div>
-          )}
-
-          {/* Single-slide fallback: just the Medium link */}
-          {!loading && total <= 1 && (
-            <div className="mt-8 flex justify-center border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4">
-              <a
-                href="https://medium.com/@shahadathhs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 px-3 py-1.5 text-xs font-bold text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
-              >
-                All on Medium
-                <ExternalLink className="h-3.5 w-3.5" />
-              </a>
             </div>
           )}
         </div>
