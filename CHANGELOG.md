@@ -1,3 +1,9 @@
+# [1.19.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.18.0...v1.19.0) (2026-08-16)
+
+### Features
+
+- blog covers, pet loop, and SSH-style terminal ([aea2070](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/aea20704438806e8d48b8df6e9c064676e3a8a18))
+
 # [1.18.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.17.0...v1.18.0) (2026-08-16)
 
 ### Features
