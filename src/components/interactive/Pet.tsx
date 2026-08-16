@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useUI } from '@/context/ui-context';
 import { playSound } from '@/lib/sound';
 import { PetSprite } from './PetSprite';
+import { DragCoach, useDragCoach, useIdleWiggle } from './DragCoach';
 
 const SIZE = 72;
 const POS_KEY = 'pet-pos';
@@ -36,6 +37,14 @@ export default function Pet() {
     origTop: number;
   } | null>(null);
   const didDrag = useRef(false);
+  const { show: showCoach, dismiss: dismissCoach } = useDragCoach(
+    'pet-drag-hint',
+    POS_KEY,
+  );
+  const { wiggling, stop: stopWiggle } = useIdleWiggle(
+    'pet-idle-wiggle',
+    POS_KEY,
+  );
 
   // Interaction state
   const [hovered, setHovered] = useState(false);
@@ -144,6 +153,8 @@ export default function Pet() {
         return;
       }
       didDrag.current = true;
+      dismissCoach();
+      stopWiggle();
       const next = toPixels(
         (d.origLeft + dx) / window.innerWidth,
         (d.origTop + dy) / window.innerHeight,
@@ -155,7 +166,7 @@ export default function Pet() {
       latest.current = next;
       setPos(next);
     },
-    [toPixels],
+    [toPixels, dismissCoach, stopWiggle],
   );
 
   const onPointerUp = useCallback(() => {
@@ -187,7 +198,7 @@ export default function Pet() {
 
   return (
     <div
-      className="fixed z-[60] select-none"
+      className={`fixed z-[60] select-none ${wiggling ? 'idle-wiggle' : ''}`}
       style={{ left: pos.left, top: pos.top, touchAction: 'none' }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -215,9 +226,10 @@ export default function Pet() {
 
       {/* Pet */}
       <div
-        className="pet-bob cursor-grab active:cursor-grabbing"
+        className="pet-bob relative cursor-grab active:cursor-grabbing"
         title="Pet me"
       >
+        <DragCoach show={showCoach} side="left" />
         <div
           style={{
             transform: reacting ? 'scale(1.15)' : 'scale(1)',

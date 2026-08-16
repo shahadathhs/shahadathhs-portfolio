@@ -202,6 +202,33 @@
   animation: pet-bob 3s ease-in-out infinite;
 }
 
+@keyframes idle-wiggle {
+  0%,
+  100% {
+    transform: translateX(0) rotate(0);
+  }
+
+  20% {
+    transform: translateX(-5px) rotate(-7deg);
+  }
+
+  40% {
+    transform: translateX(5px) rotate(7deg);
+  }
+
+  60% {
+    transform: translateX(-4px) rotate(-4deg);
+  }
+
+  80% {
+    transform: translateX(3px) rotate(3deg);
+  }
+}
+
+.idle-wiggle {
+  animation: idle-wiggle 0.65s ease-in-out;
+}
+
 @keyframes pet-particle {
   0% {
     transform: translateX(-50%) translateY(0) scale(0.5);

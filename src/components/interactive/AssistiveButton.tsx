@@ -16,6 +16,7 @@ import { heroData } from '@/constant/heroData';
 import { socialLinks } from '@/constant/socialLinks';
 import { isSoundEnabled, playSound, toggleSound } from '@/lib/sound';
 import { PetSprite } from './PetSprite';
+import { DragCoach, useDragCoach, useIdleWiggle } from './DragCoach';
 
 const github = socialLinks.find((s) => s.name === 'GitHub');
 const linkedin = socialLinks.find((s) => s.name === 'LinkedIn');
@@ -36,6 +37,14 @@ export default function AssistiveButton() {
     origTop: number;
   } | null>(null);
   const didDrag = useRef(false);
+  const { show: showCoach, dismiss: dismissCoach } = useDragCoach(
+    'assistive-drag-hint',
+    POS_KEY,
+  );
+  const { wiggling, stop: stopWiggle } = useIdleWiggle(
+    'assistive-idle-wiggle',
+    POS_KEY,
+  );
   // Source of truth is stored as a fraction of the viewport (0..1), so the
   // button keeps the same relative spot across screen sizes and snaps back to
   // its desktop position when you return from mobile.
@@ -123,6 +132,8 @@ export default function AssistiveButton() {
       if (!didDrag.current) {
         didDrag.current = true;
         setMenuOpen(false);
+        dismissCoach();
+        stopWiggle();
       }
       const next = toPixels(
         (d.origLeft + dx) / window.innerWidth,
@@ -134,7 +145,7 @@ export default function AssistiveButton() {
       };
       setPos(next);
     },
-    [toPixels],
+    [toPixels, dismissCoach, stopWiggle],
   );
 
   const onPointerUp = useCallback(() => {
@@ -314,22 +325,31 @@ export default function AssistiveButton() {
         })}
 
         {/* Main floating button */}
-        <button
-          type="button"
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onClick={onClick}
-          aria-label={menuOpen ? 'Close quick actions' : 'Open quick actions'}
-          title={menuOpen ? 'Close' : 'Quick actions'}
-          style={{
-            touchAction: 'none',
-            transform: menuOpen ? `translate(${offX}px, ${offY}px)` : 'none',
-          }}
-          className="relative flex h-12 w-12 cursor-grab items-center justify-center rounded-full border border-border bg-background/80 text-muted-foreground shadow-lg backdrop-blur-md transition-[transform,colors] duration-200 ease-out hover:text-foreground active:cursor-grabbing"
+        <div
+          className={`relative ${wiggling && !menuOpen ? 'idle-wiggle' : ''}`}
         >
-          {menuOpen ? <X className="h-5 w-5" /> : <Plus className="h-5 w-5" />}
-        </button>
+          <DragCoach show={showCoach} side="right" />
+          <button
+            type="button"
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onClick={onClick}
+            aria-label={menuOpen ? 'Close quick actions' : 'Open quick actions'}
+            title={menuOpen ? 'Close' : 'Quick actions'}
+            style={{
+              touchAction: 'none',
+              transform: menuOpen ? `translate(${offX}px, ${offY}px)` : 'none',
+            }}
+            className="relative flex h-12 w-12 cursor-grab items-center justify-center rounded-full border border-border bg-background/80 text-muted-foreground shadow-lg backdrop-blur-md transition-[transform,colors] duration-200 ease-out hover:text-foreground active:cursor-grabbing"
+          >
+            {menuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Plus className="h-5 w-5" />
+            )}
+          </button>
+        </div>
       </div>
     </>
   );
