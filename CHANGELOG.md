@@ -1,3 +1,9 @@
+# [1.17.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.4...v1.17.0) (2026-08-16)
+
+### Features
+
+- performance pass and flat section redesigns ([c88e71b](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/c88e71b42a55a90d1b6453d8f841f127cb2bb344))
+
 ## [1.16.4](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.3...v1.16.4) (2026-08-15)
 
 ### Bug Fixes
