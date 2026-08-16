@@ -1,3 +1,9 @@
+# [1.18.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.17.0...v1.18.0) (2026-08-16)
+
+### Features
+
+- poster fallback ([109beb2](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/109beb2a1f1c0f7e9ef71badc6597524799f591f))
+
 # [1.17.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.16.4...v1.17.0) (2026-08-16)
 
 ### Features
