@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { fetchMediumPosts, type MediumPost } from '@/services/medium-service';
 import { AnimatePresence, motion } from 'motion/react';
 import {
@@ -9,6 +10,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ExternalLink,
+  X,
 } from 'lucide-react';
 
 import BlogSkeleton from '../skeleton/BlogSkeleton';
@@ -17,6 +19,8 @@ export default function MediumBlogSection() {
   const [posts, setPosts] = useState<MediumPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [active, setActive] = useState(0);
+  const [lightbox, setLightbox] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     const loadPosts = async () => {
@@ -27,12 +31,34 @@ export default function MediumBlogSection() {
     loadPosts();
   }, []);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const total = posts.length;
   const safeIdx = Math.min(active, Math.max(total - 1, 0));
   const post = posts[safeIdx];
 
   const prev = () => setActive((i) => (i - 1 + total) % total);
   const next = () => setActive((i) => (i + 1) % total);
+
+  useEffect(() => {
+    setLightbox(false);
+  }, [post?.link]);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightbox(false);
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [lightbox]);
 
   if (posts.length === 0 && !loading) {
     return null;
@@ -133,33 +159,55 @@ export default function MediumBlogSection() {
                       </a>
                     </div>
 
-                    {/* Excerpt + tags */}
-                    <div className="flex flex-col gap-4">
-                      <p className="max-w-3xl text-sm leading-normal text-neutral-600 dark:text-neutral-400 md:text-base">
-                        {post.contentSnippet}
-                        {'… '}
-                        <a
-                          href={post.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-bold text-primary transition-opacity hover:opacity-80"
+                    {/* Thumbnail + excerpt/tags — one col on mobile */}
+                    <div
+                      className={`grid grid-cols-1 gap-5 ${
+                        post.thumbnail
+                          ? 'md:grid-cols-[minmax(0,16rem)_minmax(0,1fr)] md:items-start md:gap-8 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)]'
+                          : ''
+                      }`}
+                    >
+                      {post.thumbnail ? (
+                        <button
+                          type="button"
+                          onClick={() => setLightbox(true)}
+                          aria-label="View cover image"
+                          className="w-full cursor-zoom-in overflow-hidden rounded-md border border-neutral-200/80 bg-transparent p-0 dark:border-neutral-800/80"
                         >
-                          read full story
-                          <ArrowUpRight className="ml-0.5 inline h-3.5 w-3.5" />
-                        </a>
-                      </p>
-                      {post.categories.length > 0 && (
-                        <div className="flex flex-wrap gap-2">
-                          {post.categories.map((tag) => (
-                            <span
-                              key={tag}
-                              className="rounded-md border border-neutral-200/60 bg-black/5 px-2.5 py-1 text-xs font-bold tracking-wide text-neutral-700 dark:border-neutral-800/60 dark:bg-white/5 dark:text-neutral-300"
-                            >
-                              #{tag}
-                            </span>
-                          ))}
-                        </div>
-                      )}
+                          <img
+                            src={post.thumbnail}
+                            alt=""
+                            className="h-auto w-full object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                          />
+                        </button>
+                      ) : null}
+                      <div className="flex flex-col gap-4">
+                        <p className="text-sm leading-normal text-neutral-600 dark:text-neutral-400 md:text-base">
+                          {post.contentSnippet}
+                          {'… '}
+                          <a
+                            href={post.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="font-bold text-primary transition-opacity hover:opacity-80"
+                          >
+                            read full story
+                            <ArrowUpRight className="ml-0.5 inline h-3.5 w-3.5" />
+                          </a>
+                        </p>
+                        {post.categories.length > 0 && (
+                          <div className="flex flex-wrap gap-2">
+                            {post.categories.map((tag) => (
+                              <span
+                                key={tag}
+                                className="rounded-md border border-neutral-200/60 bg-black/5 px-2.5 py-1 text-xs font-bold tracking-wide text-neutral-700 dark:border-neutral-800/60 dark:bg-white/5 dark:text-neutral-300"
+                              >
+                                #{tag}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </motion.div>
                 </AnimatePresence>
@@ -216,6 +264,72 @@ export default function MediumBlogSection() {
           )}
         </div>
       </section>
+
+      {mounted &&
+        createPortal(
+          <AnimatePresence>
+            {lightbox && post?.thumbnail ? (
+              <motion.div
+                key="blog-lightbox"
+                role="dialog"
+                aria-modal="true"
+                aria-label={post.title}
+                className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-10"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                onClick={() => setLightbox(false)}
+              >
+                <div aria-hidden className="absolute inset-0 overflow-hidden">
+                  <img
+                    src="/bg-poster.jpg"
+                    alt=""
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-background/70" />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setLightbox(false)}
+                  aria-label="Close image"
+                  className="absolute right-4 top-4 z-10 inline-flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+                <motion.figure
+                  initial={{ opacity: 0, scale: 0.96, y: 8 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.28, ease: 'easeOut' }}
+                  className="relative z-10 m-0 flex max-h-full max-w-5xl flex-col items-center gap-4"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <img
+                    src={post.thumbnail}
+                    alt={post.title}
+                    className="max-h-[76vh] w-auto max-w-full rounded-lg object-contain shadow-2xl"
+                  />
+                  <figcaption className="flex max-w-xl flex-col items-center gap-3 text-center">
+                    <span className="text-sm font-medium text-white/80">
+                      {post.title}
+                    </span>
+                    <a
+                      href={post.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-1.5 rounded-md border border-white/20 bg-white/10 px-4 py-2 text-[10px] font-bold uppercase tracking-widest text-white transition-all hover:border-white/40 hover:bg-white/20"
+                    >
+                      Read
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </a>
+                  </figcaption>
+                </motion.figure>
+              </motion.div>
+            ) : null}
+          </AnimatePresence>,
+          document.body,
+        )}
     </div>
   );
 }

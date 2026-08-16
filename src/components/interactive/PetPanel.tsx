@@ -1,6 +1,6 @@
 'use client';
 
-import { Eye, EyeOff, Move, X } from 'lucide-react';
+import { Eye, EyeOff, Move, Repeat, X } from 'lucide-react';
 import { useUI } from '@/context/ui-context';
 import { PetSprite, PET_NAMES } from './PetSprite';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,8 @@ export default function PetPanel() {
     closePetPanel,
     petVisible,
     setPetVisible,
+    petLoop,
+    setPetLoop,
     selectedPet,
     setSelectedPet,
   } = useUI();
@@ -32,14 +34,14 @@ export default function PetPanel() {
           type="button"
           onClick={closePetPanel}
           aria-label="Close"
-          className="absolute right-4 top-4 rounded-md p-1 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+          className="absolute right-4 top-4 cursor-pointer rounded-md p-1 text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
         >
           <X className="h-4 w-4" />
         </button>
 
         <h2 className="text-lg font-semibold">Companion</h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          Pick a pet and drag it anywhere on your screen.
+          Pick a pet, loop through them, and drag it anywhere on your screen.
         </p>
 
         <div className="mt-5">
@@ -52,7 +54,7 @@ export default function PetPanel() {
                 onClick={() => setSelectedPet(i)}
                 aria-label={name}
                 title={name}
-                className={`flex flex-col items-center gap-1 rounded-md border p-2 transition-colors ${
+                className={`flex cursor-pointer flex-col items-center gap-1 rounded-md border p-2 transition-colors ${
                   selectedPet === i
                     ? 'border-primary bg-primary/10 text-foreground'
                     : 'text-muted-foreground hover:bg-accent hover:text-foreground'
@@ -69,9 +71,19 @@ export default function PetPanel() {
 
         <Button
           type="button"
+          variant={petLoop ? 'default' : 'outline'}
+          onClick={() => setPetLoop(!petLoop)}
+          className="mt-6 w-full cursor-pointer"
+        >
+          <Repeat className="h-4 w-4" />
+          {petLoop ? 'Looping pets' : 'Loop pets'}
+        </Button>
+
+        <Button
+          type="button"
           variant="outline"
           onClick={() => setPetVisible(!petVisible)}
-          className="mt-6 w-full"
+          className="mt-2 w-full cursor-pointer"
         >
           {petVisible ? (
             <>

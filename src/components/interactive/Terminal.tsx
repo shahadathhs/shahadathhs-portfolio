@@ -3,178 +3,269 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Terminal as TerminalIcon, X } from 'lucide-react';
 import { useUI } from '@/context/ui-context';
-import { heroData } from '@/constant/heroData';
-import { skills } from '@/constant/skillsData';
+import { SECTIONS } from '@/constant/sections';
 import { PINNED_REPOS } from '@/constant/projectConfig';
-import { experienceData } from '@/constant/experienceData';
-import { contactEmail } from '@/constant/contactInfo';
-import { socialLinks } from '@/constant/socialLinks';
+import {
+  COMMANDS,
+  HOME,
+  NEOFETCH_ART,
+  dirEntries,
+  neofetchStats,
+  runCommand,
+  shortPath,
+  sshMotdLines,
+  type Line,
+  type Seg,
+  type Tone,
+} from '@/lib/portfolio-shell';
 
-type Line = { kind: 'in' | 'out'; text: string };
+const TONE: Record<Tone, string> = {
+  plain: 'text-foreground',
+  muted: 'text-muted-foreground',
+  error: 'text-red-400',
+  ok: 'text-emerald-400',
+  accent: 'text-cyan-400',
+  dir: 'font-semibold text-blue-400',
+  cmd: 'text-amber-300',
+};
 
-const PROMPT = 'visitor@portfolio:~$';
-const BLOG_URL = 'https://medium.com/@shahadathhs';
+function Segs({ segs }: { segs: Seg[] }) {
+  return (
+    <>
+      {segs.map((seg, i) =>
+        seg.href ? (
+          <a
+            key={i}
+            href={seg.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`${TONE[seg.tone ?? 'accent']} underline decoration-cyan-400/40 underline-offset-2 hover:decoration-cyan-400`}
+          >
+            {seg.text}
+          </a>
+        ) : (
+          <span key={i} className={TONE[seg.tone ?? 'muted']}>
+            {seg.text}
+          </span>
+        ),
+      )}
+    </>
+  );
+}
 
-const HELP = `Available commands:
-  help        list commands
-  whoami      who I am
-  about       short bio
-  skills      tech stack
-  projects    pinned repos
-  experience  work history
-  contact     email + socials
-  social      social links
-  resume      open resume (new tab)
-  github      open GitHub (new tab)
-  blog        open blog (new tab)
-  neofetch    system info
-  clear       clear screen
-  exit        close terminal
-
-Tip: Tab autocompletes commands, ArrowUp/Down cycles history.`;
-
-const NEOFETCH = `${heroData.name} @ ${heroData.role}
--------------------------------------------
-role:        ${heroData.role}
-location:    ${heroData.location}
-focus:       Microservices & AI backends
-stack:       Node.js · NestJS · TypeScript · Python
-databases:   PostgreSQL · MongoDB · Redis
-os:          PortfolioOS 1.0
-shell:       zsh
-uptime:     ${new Date().getFullYear() - 2022}+ years`;
+function Prompt({
+  path,
+  who = 'visitor@portfolio',
+}: {
+  path: string;
+  who?: string;
+}) {
+  return (
+    <span className="shrink-0">
+      <span className="text-emerald-400">{who}</span>
+      <span className="text-muted-foreground">:</span>
+      <span className="text-blue-400">{path}</span>
+      <span className="text-foreground">$</span>
+    </span>
+  );
+}
 
 export default function Terminal() {
-  const { terminalOpen, closeTerminal } = useUI();
+  const { terminalOpen, closeTerminal, navigate, openPetPanel } = useUI();
   const [lines, setLines] = useState<Line[]>([]);
   const [input, setInput] = useState('');
   const [history, setHistory] = useState<string[]>([]);
-  const [histIndex, setHistIndex] = useState<number>(-1);
+  const [histIndex, setHistIndex] = useState(-1);
+  const [bootLock, setBootLock] = useState(false);
+  const [cwd, setCwd] = useState(HOME);
+  const [win, setWin] = useState<'normal' | 'min' | 'max'>('normal');
+  const [who, setWho] = useState('visitor@portfolio');
   const bodyRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const cwdRef = useRef(HOME);
 
-  const commands = useMemo(
-    () => ({
-      help: () => HELP,
-      whoami: () => `${heroData.name} — ${heroData.role}\n${heroData.tagline}`,
-      about: () => heroData.tagline,
-      skills: () =>
-        skills.map((s) => `${s.title}: ${s.description.join(', ')}`).join('\n'),
-      projects: () =>
-        PINNED_REPOS.map(
-          (name) => `https://github.com/shahadathhs/${name}`,
-        ).join('\n'),
-      experience: () =>
-        experienceData
-          .map(
-            (e) =>
-              `${e.title} — ${e.designation} @ ${e.company} (${e.location})`,
-          )
-          .join('\n\n'),
-      contact: () =>
-        `Email: ${contactEmail}\n` +
-        socialLinks.map((s) => `${s.name}: ${s.href}`).join('\n'),
-      social: () => socialLinks.map((s) => `${s.name}: ${s.href}`).join('\n'),
-      resume: () => {
-        window.open(heroData.resumeLink, '_blank', 'noopener,noreferrer');
-        return 'Opening resume...';
-      },
-      github: () => {
-        window.open(heroData.githubLink, '_blank', 'noopener,noreferrer');
-        return 'Opening GitHub...';
-      },
-      blog: () => {
-        window.open(BLOG_URL, '_blank', 'noopener,noreferrer');
-        return 'Opening blog...';
-      },
-      neofetch: () => NEOFETCH,
-    }),
-    [],
-  );
+  const path = shortPath(cwd);
+  const commandNames = useMemo(() => [...COMMANDS].sort(), []);
 
-  // Fresh session each time the terminal opens.
+  useEffect(() => {
+    cwdRef.current = cwd;
+  }, [cwd]);
+
   useEffect(() => {
     if (!terminalOpen) return;
-    setLines([
-      {
-        kind: 'out',
-        text: `PortfolioOS 1.0 — ${heroData.name}\nType 'help' for available commands.`,
-      },
-    ]);
+
+    let cancelled = false;
+    const ids: number[] = [];
+    const wait = (ms: number) =>
+      new Promise<void>((resolve) => {
+        ids.push(window.setTimeout(resolve, ms));
+      });
+
+    setBootLock(true);
+    setWin('normal');
+    setWho('guest@localhost');
+    setCwd(HOME);
+    cwdRef.current = HOME;
+    setLines([]);
     setInput('');
     setHistory([]);
     setHistIndex(-1);
+
+    const cmd = 'ssh visitor@portfolio';
+
+    (async () => {
+      await wait(280);
+      if (cancelled) return;
+      for (let i = 0; i < cmd.length; i++) {
+        await wait(38);
+        if (cancelled) return;
+        setInput(cmd.slice(0, i + 1));
+      }
+      await wait(400);
+      if (cancelled) return;
+
+      let lastLogin = 'Last login: never — welcome aboard.';
+      try {
+        const prev = localStorage.getItem('terminal-last-login');
+        if (prev) lastLogin = `Last login: ${prev}`;
+        localStorage.setItem(
+          'terminal-last-login',
+          new Date().toUTCString().replace('GMT', 'UTC'),
+        );
+      } catch {
+        // ignore
+      }
+
+      setLines([
+        { kind: 'in', path: '~', cmd, who: 'guest@localhost' },
+        {
+          kind: 'out',
+          segs: [
+            {
+              text: "visitor@portfolio's password: ********\n",
+              tone: 'muted',
+            },
+          ],
+        },
+        ...sshMotdLines(lastLogin),
+      ]);
+      setInput('');
+      setWho('visitor@portfolio');
+      setBootLock(false);
+      inputRef.current?.focus();
+    })();
+
+    return () => {
+      cancelled = true;
+      ids.forEach(clearTimeout);
+      setBootLock(false);
+    };
   }, [terminalOpen]);
 
-  // Focus + scroll on open / new output.
   useEffect(() => {
-    if (terminalOpen) inputRef.current?.focus();
-  }, [terminalOpen]);
+    if (terminalOpen && win !== 'min') inputRef.current?.focus();
+  }, [terminalOpen, win]);
 
   useEffect(() => {
     if (bodyRef.current)
       bodyRef.current.scrollTop = bodyRef.current.scrollHeight;
-  }, [lines, terminalOpen]);
+  }, [lines, terminalOpen, win]);
 
-  const run = (raw: string): Line[] => {
-    const cmd = raw.trim();
-    if (!cmd) return [];
-    const [name] = cmd.split(/\s+/);
-    if (name === 'clear') {
-      setLines([]);
-      return [];
-    }
-    if (name === 'exit') {
+  const applyResult = (raw: string, echo: boolean) => {
+    const prevPath = shortPath(cwdRef.current);
+    const result = runCommand(raw, cwdRef.current);
+    if (result.exit) {
       closeTerminal();
-      return [];
+      return;
     }
-    const fn = (commands as Record<string, () => string>)[name];
-    const out = fn
-      ? fn()
-      : `command not found: ${name}\nType 'help' for available commands.`;
-    return [{ kind: 'out', text: out }];
+    if (result.clear) {
+      setLines([]);
+      return;
+    }
+    if (result.cwd) {
+      setCwd(result.cwd);
+      cwdRef.current = result.cwd;
+    }
+    if (result.openUrl) {
+      window.open(result.openUrl, '_blank', 'noopener,noreferrer');
+    }
+    if (result.navigate) navigate(result.navigate);
+    if (result.openPet) {
+      closeTerminal();
+      openPetPanel();
+    }
+    const next: Line[] = echo
+      ? [{ kind: 'in', path: prevPath, cmd: raw }, ...result.lines]
+      : result.lines;
+    setLines((l) => [...l, ...next]);
   };
 
   const onSubmit = () => {
-    const next: Line[] = [{ kind: 'in', text: `${PROMPT} ${input}` }];
-    const out = run(input);
-    if (input.trim()) setHistory((h) => [...h, input]);
+    const raw = input;
+    if (raw.trim()) setHistory((h) => [...h, raw]);
     setHistIndex(-1);
-    setLines((l) => [...l, ...next, ...out]);
     setInput('');
+    applyResult(raw, true);
   };
 
-  const commandNames = useMemo(
-    () => [...Object.keys(commands), 'clear', 'exit'].sort(),
-    [commands],
-  );
-
-  /** Tab completion: unique match completes; ambiguous completes to the
-   *  common prefix, or lists the candidates if the prefix is already exact. */
   const complete = () => {
-    const prefix = input.trim().toLowerCase();
-    if (!prefix) {
-      setLines((l) => [...l, { kind: 'out', text: commandNames.join('  ') }]);
+    const endsSpace = /\s$/.test(input);
+    const parts = input.trim().split(/\s+/).filter(Boolean);
+    const cmd = parts[0] ?? '';
+    const prefix = endsSpace ? '' : (parts[parts.length - 1] ?? '');
+
+    const applyMatch = (
+      candidates: string[],
+      tokenPrefix: string,
+      lead: string,
+    ) => {
+      const matches = candidates.filter((c) => c.startsWith(tokenPrefix));
+      if (matches.length === 0) return;
+      if (matches.length === 1) {
+        setInput(`${lead}${matches[0]}${matches[0].endsWith('/') ? '' : ' '}`);
+        return;
+      }
+      let common = matches[0];
+      for (const m of matches) {
+        while (!m.startsWith(common)) common = common.slice(0, -1);
+      }
+      if (common.length > tokenPrefix.length) setInput(`${lead}${common}`);
+      else {
+        setLines((l) => [
+          ...l,
+          {
+            kind: 'out',
+            segs: [{ text: matches.join('  '), tone: 'accent' }],
+          },
+        ]);
+      }
+    };
+
+    if (parts.length <= 1 && !endsSpace) {
+      applyMatch(commandNames, prefix.toLowerCase(), '');
       return;
     }
-    const matches = commandNames.filter((c) => c.startsWith(prefix));
-    if (matches.length === 0) return;
-    if (matches.length === 1) {
-      setInput(`${matches[0]} `);
+
+    const lead = `${cmd} `;
+    if (cmd === 'cd' || cmd === 'ls' || cmd === 'cat') {
+      applyMatch(
+        [...dirEntries(cwd), '../', '~'],
+        prefix,
+        parts.length > 2 ? `${cmd} ${parts.slice(1, -1).join(' ')} ` : lead,
+      );
       return;
     }
-    let common = matches[0];
-    for (const m of matches) {
-      while (!m.startsWith(common)) common = common.slice(0, -1);
-    }
-    if (common.length > prefix.length) {
-      setInput(common);
-    } else {
-      setLines((l) => [...l, { kind: 'out', text: matches.join('  ') }]);
+    if (cmd === 'open') {
+      applyMatch([...SECTIONS.map((s) => s.id), ...PINNED_REPOS], prefix, lead);
     }
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (bootLock) {
+      e.preventDefault();
+      if (e.key === 'Escape') closeTerminal();
+      return;
+    }
     if (e.key === 'Enter') {
       e.preventDefault();
       onSubmit();
@@ -206,25 +297,59 @@ export default function Terminal() {
 
   if (!terminalOpen) return null;
 
+  const frame =
+    win === 'min'
+      ? 'w-full max-w-md'
+      : win === 'max'
+        ? 'h-[88vh] w-full max-w-5xl'
+        : 'h-[72vh] w-full max-w-2xl';
+
+  const stats = neofetchStats();
+
   return (
     <div
-      className="fixed inset-0 z-[10001] flex items-center justify-center bg-black/80 p-4"
+      className={`fixed inset-0 z-[10001] flex p-4 ${
+        win === 'min'
+          ? 'items-end justify-center'
+          : 'items-center justify-center'
+      } bg-black/80`}
       onClick={closeTerminal}
     >
       <div
         role="dialog"
         aria-label="Terminal"
         onClick={(e) => e.stopPropagation()}
-        className="flex h-[72vh] w-full max-w-2xl flex-col overflow-hidden rounded-lg border bg-background shadow-lg"
+        className={`flex flex-col overflow-hidden rounded-lg border bg-background shadow-lg ${frame}`}
       >
-        {/* Title bar */}
         <div className="flex items-center gap-2 border-b border-border px-4 py-2">
-          <span className="h-3 w-3 rounded-full bg-red-500/80" />
-          <span className="h-3 w-3 rounded-full bg-yellow-500/80" />
-          <span className="h-3 w-3 rounded-full bg-green-500/80" />
+          <button
+            type="button"
+            aria-label="Close"
+            title="Close"
+            onClick={closeTerminal}
+            className="h-3 w-3 cursor-pointer rounded-full bg-red-500/90 hover:bg-red-400"
+          />
+          <button
+            type="button"
+            aria-label={win === 'min' ? 'Restore' : 'Minimize'}
+            title={win === 'min' ? 'Restore' : 'Minimize'}
+            onClick={() => setWin((w) => (w === 'min' ? 'normal' : 'min'))}
+            className="h-3 w-3 cursor-pointer rounded-full bg-yellow-500/90 hover:bg-yellow-400"
+          />
+          <button
+            type="button"
+            aria-label={win === 'max' ? 'Restore' : 'Maximize'}
+            title={win === 'max' ? 'Restore' : 'Maximize'}
+            onClick={() =>
+              setWin((w) =>
+                w === 'max' ? 'normal' : w === 'min' ? 'normal' : 'max',
+              )
+            }
+            className="h-3 w-3 cursor-pointer rounded-full bg-green-500/90 hover:bg-green-400"
+          />
           <span className="ml-2 flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
             <TerminalIcon className="h-3.5 w-3.5" />
-            shahadathhs@portfolio — zsh
+            {who}:{path} — ssh
           </span>
           <button
             type="button"
@@ -236,37 +361,81 @@ export default function Terminal() {
           </button>
         </div>
 
-        {/* Output */}
-        <div
-          ref={bodyRef}
-          className="flex-1 overflow-y-auto whitespace-pre-wrap break-words p-4 font-mono text-sm leading-relaxed"
-        >
-          {lines.map((line, i) => (
-            <div
-              key={i}
-              className={
-                line.kind === 'in' ? 'text-foreground' : 'text-muted-foreground'
+        {win !== 'min' ? (
+          <div
+            ref={bodyRef}
+            className="flex-1 overflow-y-auto whitespace-pre-wrap break-words p-4 font-mono text-sm leading-relaxed"
+          >
+            {lines.map((line, i) => {
+              if (line.kind === 'in') {
+                return (
+                  <div key={i} className="flex flex-wrap items-baseline gap-2">
+                    <Prompt path={line.path} who={line.who} />
+                    <span className="text-foreground">{line.cmd}</span>
+                  </div>
+                );
               }
-            >
-              {line.text}
+              if (line.kind === 'neofetch') {
+                return (
+                  <div
+                    key={i}
+                    className="my-2 flex flex-col gap-4 sm:flex-row sm:items-start"
+                  >
+                    <pre className="shrink-0 text-cyan-400">{NEOFETCH_ART}</pre>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-emerald-400">
+                        sajib@portfolio
+                      </div>
+                      <div className="mb-2 text-muted-foreground">
+                        ----------------
+                      </div>
+                      {stats.map((row) => (
+                        <div key={row.key} className="flex flex-wrap gap-2">
+                          <span className="text-cyan-400">{row.key}:</span>
+                          {row.value.startsWith('http') ? (
+                            <a
+                              href={row.value}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-foreground underline decoration-cyan-400/40 hover:decoration-cyan-400"
+                            >
+                              {row.value.replace(/^https?:\/\//, '')}
+                            </a>
+                          ) : (
+                            <span className="text-foreground">{row.value}</span>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+              return (
+                <div key={i}>
+                  <Segs segs={line.segs} />
+                </div>
+              );
+            })}
+            <div className="flex items-center gap-2">
+              <Prompt path={path} who={who} />
+              <input
+                ref={inputRef}
+                value={input}
+                onChange={(e) => {
+                  if (bootLock) return;
+                  setInput(e.target.value);
+                }}
+                onKeyDown={onKeyDown}
+                readOnly={bootLock}
+                spellCheck={false}
+                autoComplete="off"
+                autoCapitalize="off"
+                className="flex-1 bg-transparent font-mono text-sm text-foreground outline-none"
+                aria-label="Terminal input"
+              />
             </div>
-          ))}
-          {/* Active input line */}
-          <div className="flex items-center gap-2 text-foreground">
-            <span className="text-foreground">{PROMPT}</span>
-            <input
-              ref={inputRef}
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={onKeyDown}
-              spellCheck={false}
-              autoComplete="off"
-              autoCapitalize="off"
-              className="flex-1 bg-transparent font-mono text-sm outline-none"
-              aria-label="Terminal input"
-            />
           </div>
-        </div>
+        ) : null}
       </div>
     </div>
   );

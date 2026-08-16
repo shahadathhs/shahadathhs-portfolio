@@ -3,6 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import {
   FileText,
+  Github,
+  Linkedin,
   Plus,
   Terminal as TerminalIcon,
   Volume2,
@@ -11,9 +13,12 @@ import {
 } from 'lucide-react';
 import { useUI } from '@/context/ui-context';
 import { heroData } from '@/constant/heroData';
+import { socialLinks } from '@/constant/socialLinks';
 import { isSoundEnabled, playSound, toggleSound } from '@/lib/sound';
 import { PetSprite } from './PetSprite';
 
+const github = socialLinks.find((s) => s.name === 'GitHub');
+const linkedin = socialLinks.find((s) => s.name === 'LinkedIn');
 const SIZE = 48; // h-12 w-12
 const RADIUS = 72; // distance option centers sit from the main button center
 const DRAG_THRESHOLD = 5;
@@ -174,6 +179,18 @@ export default function AssistiveButton() {
       label: 'Resume',
       icon: <FileText className="h-5 w-5" />,
       href: heroData.resumeLink,
+    },
+    {
+      key: 'github',
+      label: 'GitHub',
+      icon: <Github className="h-5 w-5" />,
+      href: github?.href,
+    },
+    {
+      key: 'linkedin',
+      label: 'LinkedIn',
+      icon: <Linkedin className="h-5 w-5" />,
+      href: linkedin?.href,
     },
     {
       key: 'sound',
