@@ -1,3 +1,9 @@
+# [1.20.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.19.0...v1.20.0) (2026-08-16)
+
+### Features
+
+- coach marks and idle wiggle for draggable controls ([1212e15](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/1212e150230012bcedd3e5a21f7cadf4deb0fe14))
+
 # [1.19.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.18.0...v1.19.0) (2026-08-16)
 
 ### Features
