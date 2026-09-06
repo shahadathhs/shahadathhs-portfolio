@@ -1,14 +1,8 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import {
-  ArrowUpRight,
-  ChevronLeft,
-  ChevronRight,
-  GitFork,
-  Star,
-} from 'lucide-react';
+import { motion } from 'motion/react';
+import { ArrowUpRight, GitFork, Star } from 'lucide-react';
 import {
   fetchGithubRepos,
   fetchMultipleRepos,
@@ -21,7 +15,6 @@ export default function ProjectSection() {
   const [loading, setLoading] = useState(true);
   /** True only when every pinned repo failed and we show placeholder data (no API metadata). */
   const [usedSyntheticFallback, setUsedSyntheticFallback] = useState(false);
-  const [active, setActive] = useState(0);
 
   const total = PINNED_REPOS.length;
 
@@ -68,15 +61,6 @@ export default function ProjectSection() {
     () => new Map(repos.map((r) => [r.name, r])),
     [repos],
   );
-
-  const safeIdx = Math.min(active, total - 1);
-  const name = PINNED_REPOS[safeIdx];
-  const repo = repoByName.get(name);
-  const highlights = projectHighlights[name] ?? [];
-  const url = repo?.html_url ?? `https://github.com/shahadathhs/${name}`;
-
-  const prev = () => setActive((i) => (i - 1 + total) % total);
-  const next = () => setActive((i) => (i + 1) % total);
 
   return (
     <div
@@ -130,127 +114,88 @@ export default function ProjectSection() {
             </p>
           )}
 
-          {/* Project slider — one project per slide, flat like Experience */}
-          <div className="relative flex-1">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={name}
-                initial={{ opacity: 0, x: 24 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -24 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                className="group flex flex-col gap-6"
-              >
-                {/* Project header — title + meta, like the role header */}
-                <div className="flex flex-col justify-between gap-2 border-b border-neutral-100 pb-6 dark:border-neutral-900 md:flex-row md:items-baseline">
-                  <div className="space-y-1">
-                    <div className="flex flex-wrap items-center gap-3">
-                      <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-primary tabular-nums">
-                        {String(safeIdx + 1).padStart(2, '0')}
-                      </span>
-                      <h3 className="text-xl font-black tracking-tight text-neutral-900 transition-colors group-hover:text-primary md:text-2xl dark:text-neutral-50">
-                        {name}
-                      </h3>
-                      {repo?.language && (
-                        <span className="bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
-                          {repo.language}
+          {/* Projects — all pinned repos, original per-project design */}
+          <div className="flex flex-col gap-12">
+            {PINNED_REPOS.map((name, idx) => {
+              const repo = repoByName.get(name);
+              const highlights = projectHighlights[name] ?? [];
+              const url =
+                repo?.html_url ?? `https://github.com/shahadathhs/${name}`;
+
+              return (
+                <motion.div
+                  key={name}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.4, delay: (idx % 3) * 0.08 }}
+                  className="group flex flex-col gap-6"
+                >
+                  {/* Project header — title + meta, like the role header */}
+                  <div className="flex flex-col justify-between gap-2 border-b border-neutral-100 pb-6 dark:border-neutral-900 md:flex-row md:items-baseline">
+                    <div className="space-y-1">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-primary tabular-nums">
+                          {String(idx + 1).padStart(2, '0')}
                         </span>
+                        <h3 className="text-xl font-black tracking-tight text-neutral-900 transition-colors group-hover:text-primary md:text-2xl dark:text-neutral-50">
+                          {name}
+                        </h3>
+                        {repo?.language && (
+                          <span className="bg-primary/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-primary">
+                            {repo.language}
+                          </span>
+                        )}
+                      </div>
+                      {repo?.description && (
+                        <p className="max-w-2xl pl-8 text-sm text-neutral-600 dark:text-neutral-400 md:text-base">
+                          {repo.description}
+                        </p>
                       )}
                     </div>
-                    {repo?.description && (
-                      <p className="max-w-2xl pl-8 text-sm text-neutral-600 dark:text-neutral-400 md:text-base">
-                        {repo.description}
-                      </p>
-                    )}
+
+                    <div className="flex items-center gap-4 font-mono text-xs text-neutral-500 dark:text-neutral-400 md:justify-end">
+                      {loading ? (
+                        <span className="animate-pulse">loading…</span>
+                      ) : (
+                        <>
+                          <span className="inline-flex items-center gap-1.5">
+                            <Star className="h-3.5 w-3.5" />
+                            {repo?.stargazers_count ?? 0}
+                          </span>
+                          <span className="inline-flex items-center gap-1.5">
+                            <GitFork className="h-3.5 w-3.5" />
+                            {repo?.forks_count ?? 0}
+                          </span>
+                          <a
+                            href={url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-primary transition-opacity hover:opacity-80"
+                          >
+                            GitHub
+                            <ArrowUpRight className="h-3 w-3" />
+                          </a>
+                        </>
+                      )}
+                    </div>
                   </div>
 
-                  <div className="flex items-center gap-4 font-mono text-xs text-neutral-500 dark:text-neutral-400 md:justify-end">
-                    {loading ? (
-                      <span className="animate-pulse">loading…</span>
-                    ) : (
-                      <>
-                        <span className="inline-flex items-center gap-1.5">
-                          <Star className="h-3.5 w-3.5" />
-                          {repo?.stargazers_count ?? 0}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5">
-                          <GitFork className="h-3.5 w-3.5" />
-                          {repo?.forks_count ?? 0}
-                        </span>
-                        <a
-                          href={url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-primary transition-opacity hover:opacity-80"
-                        >
-                          GitHub
-                          <ArrowUpRight className="h-3 w-3" />
-                        </a>
-                      </>
-                    )}
-                  </div>
-                </div>
-
-                {/* Highlights — single column bullets */}
-                <ul className="flex flex-col gap-3.5">
-                  {highlights.map((h) => (
-                    <li
-                      key={h}
-                      className="flex items-start gap-3 text-sm text-neutral-600 dark:text-neutral-400 md:text-base"
-                    >
-                      <span className="mt-2.5 h-1 w-1 shrink-0 bg-primary/30" />
-                      <span>{h}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Slider controls — click only (arrows/swipe belong to the deck) */}
-          <div className="mt-8 flex items-center justify-between border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4">
-            {/* Dots */}
-            <div className="flex items-center gap-2">
-              {PINNED_REPOS.map((r, i) => (
-                <button
-                  key={r}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  aria-label={`Show ${r}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === safeIdx
-                      ? 'w-5 bg-primary'
-                      : 'w-1.5 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600'
-                  }`}
-                />
-              ))}
-            </div>
-
-            {/* Counter + arrows */}
-            <div className="flex items-center gap-4">
-              <span className="font-mono text-[11px] font-bold tabular-nums tracking-widest text-neutral-500 dark:text-neutral-400">
-                {String(safeIdx + 1).padStart(2, '0')} /{' '}
-                {String(total).padStart(2, '0')}
-              </span>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={prev}
-                  aria-label="Previous project"
-                  className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={next}
-                  aria-label="Next project"
-                  className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
+                  {/* Highlights — single column bullets */}
+                  <ul className="flex flex-col gap-3.5">
+                    {highlights.map((h) => (
+                      <li
+                        key={h}
+                        className="flex items-start gap-3 text-sm text-neutral-600 dark:text-neutral-400 md:text-base"
+                      >
+                        <span className="mt-2.5 h-1 w-1 shrink-0 bg-primary/30" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
