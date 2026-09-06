@@ -1,3 +1,9 @@
+## [1.26.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.26.0...v1.26.1) (2026-09-06)
+
+### Bug Fixes
+
+- **skills:** proper cell padding and inset hover tint ([36db605](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/36db6059f4c9a198e02e60197f83874676442ea8))
+
 # [1.26.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.25.0...v1.26.0) (2026-09-06)
 
 ### Features
