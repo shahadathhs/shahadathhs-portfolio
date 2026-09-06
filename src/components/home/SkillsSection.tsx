@@ -52,12 +52,12 @@ export default function SkillsSection() {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.3, delay: (idx % 2) * 0.05 }}
-                className="group relative cursor-default border-b border-neutral-200/60 pb-4 pt-4 transition-colors duration-200 first:pt-0 dark:border-neutral-800/60 sm:pb-4"
+                className="group relative cursor-default rounded-md border-b border-neutral-200/60 px-4 py-5 transition-colors duration-200 first:pt-5 dark:border-neutral-800/60"
               >
                 {/* Cell hover — full-cell tint */}
                 <span
                   aria-hidden
-                  className="absolute inset-0 -inset-x-3 -my-1 rounded-md bg-black/[0.03] opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-white/[0.03]"
+                  className="absolute inset-0 rounded-md bg-black/[0.03] opacity-0 transition-opacity duration-200 group-hover:opacity-100 dark:bg-white/[0.03]"
                 />
                 <div className="relative">
                   {/* Icon + category — one line */}
@@ -69,7 +69,7 @@ export default function SkillsSection() {
                   </div>
 
                   {/* Packages */}
-                  <p className="mt-1.5 font-mono text-xs leading-5 text-neutral-800 dark:text-neutral-200">
+                  <p className="mt-2 font-mono text-xs leading-5 text-neutral-800 dark:text-neutral-200">
                     {skill.description.map((tech, i) => (
                       <span key={tech}>
                         {i > 0 && (
@@ -83,7 +83,7 @@ export default function SkillsSection() {
                   </p>
 
                   {/* Summary */}
-                  <p className="mt-1 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
+                  <p className="mt-1.5 text-xs leading-relaxed text-neutral-500 dark:text-neutral-400">
                     {skill.summary}
                   </p>
                 </div>
