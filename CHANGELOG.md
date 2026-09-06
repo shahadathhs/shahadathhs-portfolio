@@ -1,3 +1,9 @@
+# [1.21.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.20.0...v1.21.0) (2026-09-06)
+
+### Features
+
+- add GitHub activity section with contribution stats ([8ed21d5](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/8ed21d505c3cdff57579985c612c48d3832337a8))
+
 # [1.20.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.19.0...v1.20.0) (2026-08-16)
 
 ### Features
