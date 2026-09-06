@@ -1,3 +1,9 @@
+# [1.26.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.25.0...v1.26.0) (2026-09-06)
+
+### Features
+
+- compact Skills section — dpkg-style manifest, pagination removed ([203044c](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/203044c1d9df3cb3fc4dff3f36f6c2ce00299468))
+
 # [1.25.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.24.0...v1.25.0) (2026-09-06)
 
 ### Features
