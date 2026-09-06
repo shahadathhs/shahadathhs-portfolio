@@ -40,6 +40,7 @@ type UIContextValue = {
   navigate: (id: SectionId) => void;
   nextSection: () => void;
   prevSection: () => void;
+  syncSectionFromScroll: () => void;
   terminalOpen: boolean;
   openTerminal: () => void;
   closeTerminal: () => void;
@@ -71,6 +72,8 @@ const readBool = (key: string, fallback: boolean): boolean => {
 export function UIProvider({ children }: { children: ReactNode }) {
   const [activeSection, setActiveSection] = useState<SectionId>('hero');
   const sectionHydrated = useRef(false);
+  const sectionReady = useRef(true);
+  const activeSectionRef = useRef<SectionId>('hero');
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [petPanelOpen, setPetPanelOpen] = useState(false);
   const [petVisible, setPetVisibleState] = useState<boolean>(() =>
@@ -145,6 +148,49 @@ export function UIProvider({ children }: { children: ReactNode }) {
     }
   }, [activeSection]);
 
+  // On load, line the target section up with the top of the viewport (the
+  // browser's native anchor jump leaves it under the fixed dock's reach).
+  useEffect(() => {
+    if (!sectionReady.current) return;
+    sectionReady.current = false;
+    const id = window.location.hash.replace(/^#/, '');
+    if (!isSectionId(id) || id === 'hero') return;
+    requestAnimationFrame(() => {
+      document
+        .getElementById(id)
+        ?.scrollIntoView({ behavior: 'instant', block: 'start' });
+    });
+  }, []);
+
+  // Scroll-spy: whichever section crosses the viewport's upper half becomes
+  // active. Runs on every scroll from page.tsx; cheap — one pass over 8 ids.
+  const syncSectionFromScroll = useCallback(() => {
+    const mark = window.innerHeight * 0.5;
+    let current: SectionId = 'hero';
+    for (const { id } of SECTIONS) {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= mark) current = id;
+    }
+    // Bottom of a short page can leave the last section short of the mark.
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 2) {
+      current = SECTIONS[SECTIONS.length - 1].id;
+    }
+    if (current !== activeSectionRef.current) {
+      activeSectionRef.current = current;
+      setActiveSection(current);
+      try {
+        localStorage.setItem(SECTION_KEY, current);
+      } catch {
+        // ignore
+      }
+      const hash = current === 'hero' ? '' : `#${current}`;
+      if (window.location.hash !== hash) {
+        const url = `${window.location.pathname}${window.location.search}${hash}`;
+        window.history.replaceState(null, '', url);
+      }
+    }
+  }, []);
+
   useEffect(() => {
     const onHash = () => {
       const hash = window.location.hash.replace(/^#/, '');
@@ -155,17 +201,16 @@ export function UIProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
-  const navigate = useCallback(
-    (id: SectionId) => {
-      if (id === activeSection) return;
-      playSound('click');
-      // Section changes close overlays so the new slide reads clean.
-      setTerminalOpen(false);
-      setPetPanelOpen(false);
-      setActiveSection(id);
-    },
-    [activeSection],
-  );
+  const navigate = useCallback((id: SectionId) => {
+    playSound('click');
+    // Overlays close so the target section reads clean.
+    setTerminalOpen(false);
+    setPetPanelOpen(false);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
 
   const step = useCallback(
     (delta: number) => {
@@ -215,6 +260,7 @@ export function UIProvider({ children }: { children: ReactNode }) {
         navigate,
         nextSection,
         prevSection,
+        syncSectionFromScroll,
         terminalOpen,
         openTerminal,
         closeTerminal,

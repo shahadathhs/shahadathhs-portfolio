@@ -1,7 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
+import { useEffect } from 'react';
 import { useUI } from '@/context/ui-context';
 import { SECTIONS } from '@/constant/sections';
 
@@ -25,55 +24,35 @@ const SECTION_COMPONENTS = {
   contact: ContactSection,
 } as const;
 
-export default function Home() {
-  const { activeSection, nextSection, prevSection } = useUI();
-  const ActiveSection = SECTION_COMPONENTS[activeSection];
+/** Bottom clearance so the fixed dock never covers section content. */
+const DOCK_CLEARANCE = 'pb-28 md:pb-24';
 
-  // Horizontal swipe changes sections; vertical swipes scroll the section.
-  const touch = useRef<{ x: number; y: number } | null>(null);
-  const onTouchStart = (e: React.TouchEvent) => {
-    touch.current = {
-      x: e.touches[0].clientX,
-      y: e.touches[0].clientY,
+export default function Home() {
+  const { syncSectionFromScroll } = useUI();
+
+  // Scroll-spy: report which section owns the viewport's upper half so the
+  // dock pill, hash, and terminal `open <section>` all follow the scroll.
+  useEffect(() => {
+    syncSectionFromScroll();
+    const onScroll = () => syncSectionFromScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
     };
-  };
-  const onTouchEnd = (e: React.TouchEvent) => {
-    if (!touch.current) return;
-    const dx = e.changedTouches[0].clientX - touch.current.x;
-    const dy = e.changedTouches[0].clientY - touch.current.y;
-    touch.current = null;
-    if (Math.abs(dx) < 64 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
-    if (dx < 0) nextSection();
-    else prevSection();
-  };
+  }, [syncSectionFromScroll]);
 
   return (
-    <div
-      className="h-dvh overflow-hidden"
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-    >
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeSection}
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -24 }}
-          transition={{ duration: 0.3, ease: 'easeOut' }}
-          className="h-dvh overflow-y-auto"
-        >
-          {/* Global slide gap — sections never touch the viewport edges.
-              Bottom clears the fixed dock (48px + 16px margin). */}
-          <div className="mx-auto flex min-h-full w-full max-w-6xl flex-col px-2 pb-20 pt-4 sm:px-4 md:pb-20 md:pt-10">
-            <div className="my-auto w-full">
-              <ActiveSection />
-            </div>
-          </div>
-        </motion.div>
-      </AnimatePresence>
-      <span className="sr-only" aria-live="polite">
-        {SECTIONS.find((s) => s.id === activeSection)?.label} section
-      </span>
+    <div className={DOCK_CLEARANCE}>
+      {/* Same max-width shell the deck used — sections never touch the
+          viewport edges; vertical gap replaces the old slide break. */}
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-2 pt-4 sm:px-4 md:gap-24 md:pt-10">
+        {SECTIONS.map(({ id }) => {
+          const Section = SECTION_COMPONENTS[id];
+          return <Section key={id} />;
+        })}
+      </div>
     </div>
   );
 }
