@@ -1,3 +1,9 @@
+# [1.27.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.26.1...v1.27.0) (2026-09-06)
+
+### Features
+
+- **projects,github:** drop projects pagination, command-style github heading ([7dcc7ec](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/7dcc7ecbba2dfe7f78c2b0160cc07ec5513cad20))
+
 ## [1.26.1](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.26.0...v1.26.1) (2026-09-06)
 
 ### Bug Fixes
