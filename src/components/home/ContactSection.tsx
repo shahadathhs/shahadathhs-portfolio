@@ -56,7 +56,7 @@ export default function ContactSection() {
             <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
               Email works great for a direct line. Prefer a structured
               collaboration? I&apos;m active on open source communities and
-              platforms like GitHub. I read every packet — and reply to most.
+              platforms like GitHub. I read every packet, and reply to most.
             </p>
           </div>
 

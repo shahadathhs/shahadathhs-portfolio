@@ -26,13 +26,11 @@ export const heroData = {
     'Backend Engineer',
     'Node.js & NestJS Specialist',
     'TypeScript & Python Developer',
-    'Microservices Architect',
     'AI-Integrated Systems Builder',
-    'Distributed Systems Engineer',
   ],
 
   tagline:
-    'Backend engineer at Digital Pylot, Dhaka. Writes TypeScript and Python, ships microservices, and trains the occasional chatbot. Lives between Postgres connections and chai refills. You are welcome to deploy.',
+    'Backend engineer building microservices and AI powered systems with Node.js, TypeScript, and Python. Writes about them after midnight. You are welcome to deploy.',
 
   resumeLink:
     'https://drive.google.com/file/d/1dtZCEgZyof-qrUreeVpXDlOovosegpuf/view',

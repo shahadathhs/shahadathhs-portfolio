@@ -48,7 +48,7 @@ export default function SkillsSection() {
             <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
             <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 leading-normal">
               Installed packages, refreshed often. Backend systems that reach
-              production — languages, frameworks, data layers, AI tooling, and
+              production: languages, frameworks, data layers, AI tooling, and
               the delivery pipeline that carries them.
             </p>
           </div>

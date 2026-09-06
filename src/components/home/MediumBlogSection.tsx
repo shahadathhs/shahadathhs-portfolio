@@ -94,7 +94,7 @@ export default function MediumBlogSection() {
               </h2>
               <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
               <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
-                Long-form notes on backend architecture and API design — mostly
+                Long-form notes on backend architecture and API design, mostly
                 written past midnight.
               </p>
             </div>

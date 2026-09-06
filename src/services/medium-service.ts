@@ -92,7 +92,7 @@ const excerptFromHtml = (html: string): string => {
   return excerpt.substring(0, EXCERPT_LEN);
 };
 
-/** First real cover image — skip rss2json empties and Medium 1×1 tracking pixels. */
+/** First real cover image, skip rss2json empties and Medium 1×1 tracking pixels. */
 export const thumbnailFromHtml = (html: string, fallback = ''): string => {
   const srcs = [...html.matchAll(/<img[^>]+src=["']([^"']+)["']/gi)].map(
     (m) => m[1],

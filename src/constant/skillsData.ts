@@ -34,7 +34,7 @@ export const skills: Skill[] = [
   {
     title: 'Databases',
     summary:
-      'Polyglot persistence — relational, document, and in-memory stores chosen per workload.',
+      'Polyglot persistence, relational, document, and in-memory stores chosen per workload.',
     description: ['PostgreSQL', 'MongoDB', 'Redis'],
     icon: Database,
   },
@@ -68,14 +68,14 @@ export const skills: Skill[] = [
   {
     title: 'AI & LLM',
     summary:
-      'Production AI features — RAG pipelines, tool calling, and vector search over self-hosted or OpenAI models.',
+      'Production AI features, RAG pipelines, tool calling, and vector search over self-hosted or OpenAI models.',
     description: ['OpenAI API', 'Ollama', 'RAG', 'Vector Search'],
     icon: BrainCircuit,
   },
   {
     title: 'Security & Auth',
     summary:
-      'Auth flows shipped to production — JWT, Google OAuth with JWKS verification, Redis-backed OTP, 2FA, and RBAC.',
+      'Auth flows shipped to production, JWT, Google OAuth with JWKS verification, Redis-backed OTP, 2FA, and RBAC.',
     description: ['JWT', 'OAuth 2.0', '2FA & OTP', 'RBAC'],
     icon: ShieldCheck,
   },

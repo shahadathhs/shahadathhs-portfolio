@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import fs from 'node:fs';
 import { heroData } from '@/constant/heroData';
 
-export const alt = `${heroData.name} — ${heroData.role} Portfolio`;
+export const alt = `${heroData.name} | ${heroData.role} Portfolio`;
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 

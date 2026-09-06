@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Shahadath Hossen Sajib — Backend Engineer Portfolio',
+    name: 'Shahadath Hossen Sajib | Backend Engineer Portfolio',
     short_name: 'Sajib · Backend',
     description:
       'Backend Engineer specializing in scalable APIs, distributed systems, and AI-powered backend services using Node.js, NestJS, TypeScript, and Python.',

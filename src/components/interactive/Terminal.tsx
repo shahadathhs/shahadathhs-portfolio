@@ -124,7 +124,7 @@ export default function Terminal() {
       await wait(400);
       if (cancelled) return;
 
-      let lastLogin = 'Last login: never — welcome aboard.';
+      let lastLogin = 'Last login: never, welcome aboard.';
       try {
         const prev = localStorage.getItem('terminal-last-login');
         if (prev) lastLogin = `Last login: ${prev}`;
@@ -349,7 +349,7 @@ export default function Terminal() {
           />
           <span className="ml-2 flex items-center gap-1.5 font-mono text-xs text-muted-foreground">
             <TerminalIcon className="h-3.5 w-3.5" />
-            {who}:{path} — ssh
+            {who}:{path}, ssh
           </span>
           <button
             type="button"

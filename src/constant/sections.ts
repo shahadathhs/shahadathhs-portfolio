@@ -13,7 +13,7 @@ export type SectionMeta = {
   label: string;
 };
 
-/** Ordered deck sections — also drives the dock and keyboard shortcuts (1-8). */
+/** Ordered deck sections, also drives the dock and keyboard shortcuts (1-8). */
 export const SECTIONS: SectionMeta[] = [
   { id: 'hero', label: 'Home' },
   { id: 'about', label: 'About' },

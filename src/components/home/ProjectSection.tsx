@@ -125,7 +125,7 @@ export default function ProjectSection() {
           {/* Rate-limit notice */}
           {usedSyntheticFallback && !loading && (
             <p className="mb-6 rounded-md border border-amber-200/80 bg-amber-50/80 px-4 py-2.5 text-xs text-amber-800 dark:border-amber-900/40 dark:bg-amber-950/20 dark:text-amber-200">
-              GitHub API rate limit hit — live stats unavailable. Links still
+              GitHub API rate limit hit, live stats unavailable. Links still
               work; metadata returns after the limit resets.
             </p>
           )}

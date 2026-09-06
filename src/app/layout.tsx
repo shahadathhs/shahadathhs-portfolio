@@ -23,16 +23,16 @@ const name = 'Shahadath Hossen Sajib';
 const shortDescription =
   'Backend Engineer specializing in scalable APIs, distributed systems, and AI-powered backend services using Node.js, NestJS, TypeScript, and Python.';
 const longDescription =
-  'Backend Engineer building scalable APIs, distributed systems, and AI-powered backend services with Node.js, NestJS, TypeScript, and Python. Experienced in designing high-performance RESTful APIs, real-time applications, and event-driven architectures — with hands-on expertise in PostgreSQL, MongoDB, Redis, Docker, AWS, and CI/CD for production-grade deployments.';
+  'Backend Engineer building scalable APIs, distributed systems, and AI-powered backend services with Node.js, NestJS, TypeScript, and Python. Experienced in designing high-performance RESTful APIs, real-time applications, and event-driven architectures, with hands-on expertise in PostgreSQL, MongoDB, Redis, Docker, AWS, and CI/CD for production-grade deployments.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${name} — Backend Engineer (Node.js, NestJS, Python)`,
+    default: `${name} | Backend Engineer (Node.js, NestJS, Python)`,
     template: `%s | ${name}`,
   },
   description: longDescription,
-  applicationName: `${name} — Portfolio`,
+  applicationName: `${name}, Portfolio`,
   authors: [{ name, url: siteUrl }],
   creator: name,
   publisher: name,
@@ -93,8 +93,8 @@ export const metadata: Metadata = {
     type: 'profile',
     locale: 'en_US',
     url: siteUrl,
-    siteName: `${name} — Backend Engineer`,
-    title: `${name} — Backend Engineer`,
+    siteName: `${name} | Backend Engineer`,
+    title: `${name} | Backend Engineer`,
     description: shortDescription,
     firstName: 'Shahadath',
     lastName: 'Hossen Sajib',
@@ -104,7 +104,7 @@ export const metadata: Metadata = {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: `${name} — Backend Engineer Portfolio`,
+        alt: `${name} | Backend Engineer Portfolio`,
         type: 'image/png',
       },
     ],
@@ -113,7 +113,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@shahadathhs',
     creator: '@shahadathhs',
-    title: `${name} — Backend Engineer`,
+    title: `${name} | Backend Engineer`,
     description: shortDescription,
     images: ['/opengraph-image'],
   },
@@ -225,7 +225,7 @@ export const metadata: Metadata = {
     'website-schema': JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'WebSite',
-      name: `${name} — Backend Engineer Portfolio`,
+      name: `${name} | Backend Engineer Portfolio`,
       url: siteUrl,
       author: { '@type': 'Person', name },
       inLanguage: 'en-US',

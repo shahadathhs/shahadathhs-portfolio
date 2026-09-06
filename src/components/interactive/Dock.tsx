@@ -93,7 +93,7 @@ export default function Dock() {
                 onClick={() => navigate(s.id)}
                 aria-label={`${s.label} (${i + 1})`}
                 aria-current={isActive ? 'page' : undefined}
-                title={`${s.label} — ${i + 1}`}
+                title={`${s.label} (${i + 1})`}
                 className={`group relative flex h-8 w-8 cursor-pointer items-center justify-center rounded-full transition-colors duration-200 sm:h-9 sm:w-9 ${
                   isActive
                     ? 'text-background'

@@ -48,7 +48,8 @@ export default function Home() {
       {/* Same max-width shell the deck used — sections never touch the
           viewport edges; vertical gap replaces the old slide break. */}
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-2 pt-4 sm:px-4 md:gap-24 md:pt-10">
-        {SECTIONS.map(({ id }) => {
+        <HeroSection />
+        {SECTIONS.slice(1).map(({ id }) => {
           const Section = SECTION_COMPONENTS[id];
           return <Section key={id} />;
         })}

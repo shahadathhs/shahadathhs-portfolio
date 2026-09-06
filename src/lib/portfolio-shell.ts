@@ -365,7 +365,7 @@ export function runCommand(raw: string, cwd: string): ShellResult {
   if (name === 'pwd') return { lines: out(cwd, 'plain') };
   if (name === 'whoami') {
     return {
-      lines: out(`${heroData.name} — ${heroData.role}\n${heroData.tagline}`),
+      lines: out(`${heroData.name} | ${heroData.role}\n${heroData.tagline}`),
     };
   }
   if (name === 'about') return { lines: out(heroData.tagline) };
@@ -399,7 +399,7 @@ export function runCommand(raw: string, cwd: string): ShellResult {
         experienceData
           .map(
             (e) =>
-              `${e.title} — ${e.designation} @ ${e.company} (${e.location})`,
+              `${e.title} | ${e.designation} @ ${e.company} (${e.location})`,
           )
           .join('\n\n'),
       ),
