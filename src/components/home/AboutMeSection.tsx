@@ -1,47 +1,59 @@
 'use client';
 
-import { useState } from 'react';
-import { AnimatePresence, motion } from 'motion/react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { aboutBands, aboutMeSubtitle } from '@/constant/aboutMe';
-import type { AboutHighlightCard } from '@/constant/aboutMe';
+import { motion } from 'motion/react';
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '../ui/card';
+  aboutCards,
+  aboutMeSubtitle,
+  aboutParagraphs,
+} from '@/constant/aboutMe';
+import type { AboutHighlightCard } from '@/constant/aboutMe';
 
-function FeatureCard({ feature }: { feature: AboutHighlightCard }) {
+/**
+ * FeatureCard styled as a systemd unit — SajibOS runs these services.
+ * Status dot pulses green; header reads like `systemctl status` output.
+ */
+function FeatureCard({
+  feature,
+  index,
+}: {
+  feature: AboutHighlightCard;
+  index: number;
+}) {
   return (
-    <Card className="h-full hover:shadow-lg hover:border-primary/50 transition-all duration-300 bg-transparent border-neutral-200 dark:border-neutral-800 rounded-md group overflow-hidden relative">
-      <div className="absolute top-0 left-0 w-1 h-full bg-primary opacity-0 group-hover:opacity-100 transition-opacity" />
-      <CardHeader className="pb-2">
-        <div className="p-2.5 rounded-md bg-primary/10 text-primary w-fit mb-2 group-hover:scale-110 transition-transform">
-          <feature.icon className="w-5 h-5" />
-        </div>
-        <CardTitle className="text-base font-bold text-neutral-800 dark:text-neutral-100">
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.4, delay: index * 0.07 }}
+      className="group relative h-full overflow-hidden rounded-md border border-neutral-200 bg-transparent p-4 transition-all duration-300 hover:border-primary/50 hover:shadow-lg dark:border-neutral-800"
+    >
+      <div className="absolute top-0 left-0 h-full w-1 bg-primary opacity-0 transition-opacity group-hover:opacity-100" />
+      <div className="mb-2 flex items-center justify-between gap-2">
+        <span className="font-mono text-xs font-bold text-neutral-800 dark:text-neutral-200">
+          {feature.service}
+        </span>
+        <span className="flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+            <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-500" />
+          </span>
+          active
+        </span>
+      </div>
+      <div className="mb-1 flex items-center gap-2">
+        <feature.icon className="h-4 w-4 shrink-0 text-primary" />
+        <h3 className="text-sm font-bold tracking-tight text-neutral-900 dark:text-neutral-50">
           {feature.title}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <CardDescription className="text-sm text-neutral-500 dark:text-neutral-400">
-          {feature.description}
-        </CardDescription>
-      </CardContent>
-    </Card>
+        </h3>
+      </div>
+      <p className="text-sm leading-normal text-neutral-500 dark:text-neutral-400">
+        {feature.description}
+      </p>
+    </motion.div>
   );
 }
 
 export default function AboutMeSection() {
-  const [active, setActive] = useState(0);
-  const total = aboutBands.length;
-  const band = aboutBands[active];
-
-  const prev = () => setActive((i) => (i - 1 + total) % total);
-  const next = () => setActive((i) => (i + 1) % total);
-
   return (
     <div
       id="about"
@@ -75,92 +87,51 @@ export default function AboutMeSection() {
             </p>
           </div>
 
-          {/* Band slider — one message per slide */}
-          <div className="relative flex-1">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={active}
-                initial={{ opacity: 0, x: 24 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -24 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
-                className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:items-center lg:gap-12"
-              >
-                {/* Cards swap sides each slide — even: right, odd: left */}
-                {active % 2 === 1 && (
-                  <div className="grid gap-4 min-w-0 sm:grid-cols-2 lg:order-first">
-                    {band.cards.map((card) => (
-                      <FeatureCard key={card.title} feature={card} />
-                    ))}
-                  </div>
-                )}
-
-                <div className="min-w-0">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className="font-mono text-[11px] font-bold tracking-[0.2em] text-primary tabular-nums">
-                      {String(active + 1).padStart(2, '0')}
-                    </span>
-                    <span className="h-px flex-1 max-w-[120px] bg-gradient-to-r from-primary/40 to-transparent" />
-                  </div>
-                  <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 leading-normal">
-                    {band.paragraph}
-                  </p>
-                </div>
-
-                {active % 2 === 0 && (
-                  <div className="grid gap-4 min-w-0 sm:grid-cols-2">
-                    {band.cards.map((card) => (
-                      <FeatureCard key={card.title} feature={card} />
-                    ))}
-                  </div>
-                )}
-              </motion.div>
-            </AnimatePresence>
-          </div>
-
-          {/* Slider controls — click only (arrows/swipe belong to the deck) */}
-          <div className="mt-8 flex items-center justify-between border-t border-neutral-200/80 dark:border-neutral-800/80 pt-4">
-            {/* Dots */}
-            <div className="flex items-center gap-2">
-              {aboutBands.map((b, i) => (
-                <button
-                  key={b.paragraph}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  aria-label={`Show band ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === active
-                      ? 'w-5 bg-primary'
-                      : 'w-1.5 bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-600'
-                  }`}
-                />
+          {/* Bio — man-page style, full section width */}
+          <div className="mb-10">
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              aria-hidden
+              className="mb-3 font-mono text-xs text-neutral-700 dark:text-neutral-300"
+            >
+              <span className="font-bold text-primary">$</span> man sajib
+            </motion.p>
+            <div className="flex flex-col gap-4 border-l-2 border-neutral-200 pl-4 dark:border-neutral-800">
+              {aboutParagraphs.map((paragraph, i) => (
+                <motion.p
+                  key={i}
+                  initial={{ opacity: 0, y: 12 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className="text-sm md:text-base leading-normal text-neutral-600 dark:text-neutral-400"
+                >
+                  {paragraph}
+                </motion.p>
               ))}
             </div>
+          </div>
 
-            {/* Counter + arrows */}
-            <div className="flex items-center gap-4">
-              <span className="font-mono text-[11px] font-bold tabular-nums tracking-widest text-neutral-500 dark:text-neutral-400">
-                {String(active + 1).padStart(2, '0')} /{' '}
-                {String(total).padStart(2, '0')}
-              </span>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={prev}
-                  aria-label="Previous"
-                  className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                </button>
-                <button
-                  type="button"
-                  onClick={next}
-                  aria-label="Next"
-                  className="inline-flex h-8 w-8 cursor-pointer items-center justify-center rounded-md border border-neutral-200 text-neutral-600 transition-all hover:border-primary/50 hover:text-primary dark:border-neutral-800 dark:text-neutral-300"
-                >
-                  <ChevronRight className="h-4 w-4" />
-                </button>
-              </div>
+          {/* Services — systemctl status output, 2x2 grid */}
+          <div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              aria-hidden
+              className="mb-3 font-mono text-xs text-neutral-700 dark:text-neutral-300"
+            >
+              <span className="font-bold text-primary">$</span> systemctl status
+              sajib
+            </motion.p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {aboutCards.map((card, i) => (
+                <FeatureCard key={card.service} feature={card} index={i} />
+              ))}
             </div>
           </div>
         </div>
