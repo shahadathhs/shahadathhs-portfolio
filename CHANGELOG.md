@@ -1,3 +1,9 @@
+# [1.24.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.23.0...v1.24.0) (2026-09-06)
+
+### Features
+
+- stacked scroll layout, hero redesign, and em-dash cleanup ([84077a4](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/84077a49c1ec13d032eaa9726af35982586ab03b))
+
 # [1.23.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.22.0...v1.23.0) (2026-09-06)
 
 ### Features
