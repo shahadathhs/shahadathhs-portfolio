@@ -53,6 +53,8 @@ const fileBody = (path: string): string | null => {
         .join('\n\n');
     case `${HOME}/blogs`:
       return 'Latest writing on Medium\nhttps://medium.com/@shahadathhs';
+    case `${HOME}/github`:
+      return 'Contribution activity, streaks, and language breakdown\n(weekly stats generated daily from public GitHub data)';
     case `${HOME}/contact`:
       return `Email: ${contactEmail}\n${socialLinks.map((s) => `${s.name}: ${s.href}`).join('\n')}`;
     default:
@@ -102,6 +104,7 @@ const listDir = (path: string): { name: string; dir: boolean }[] | null => {
       { name: 'blogs', dir: false },
       { name: 'contact', dir: false },
       { name: 'experience', dir: false },
+      { name: 'github', dir: false },
       { name: 'projects', dir: true },
       { name: 'skills', dir: false },
     ];
@@ -501,6 +504,10 @@ export function runCommand(raw: string, cwd: string): ShellResult {
       writing: 'blogs',
       blog: 'blogs',
     };
+    // 'github' navigates to the GitHub activity section, not the profile URL.
+    if (key === 'github') {
+      return { lines: out('Opening github...', 'ok'), navigate: 'github' };
+    }
     const id =
       alias[key] ??
       (SECTIONS.some((s) => s.id === key) ? (key as SectionId) : null);

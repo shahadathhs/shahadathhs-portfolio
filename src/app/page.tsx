@@ -10,6 +10,7 @@ import AboutMeSection from '@/components/home/AboutMeSection';
 import SkillsSection from '@/components/home/SkillsSection';
 import ExperienceSection from '@/components/home/ExperienceSection';
 import ProjectSection from '@/components/home/ProjectSection';
+import GithubSection from '@/components/home/GithubSection';
 import MediumBlogSection from '@/components/home/MediumBlogSection';
 import ContactSection from '@/components/home/ContactSection';
 
@@ -19,6 +20,7 @@ const SECTION_COMPONENTS = {
   skills: SkillsSection,
   experience: ExperienceSection,
   projects: ProjectSection,
+  github: GithubSection,
   blogs: MediumBlogSection,
   contact: ContactSection,
 } as const;

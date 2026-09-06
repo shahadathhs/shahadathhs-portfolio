@@ -145,6 +145,63 @@ export const fetchMultipleRepos = async (
 
 export const GITHUB_STATS_USERNAME = 'shahadathhs';
 
+/**
+ * Aggregate stats are pre-generated daily by the github-stats Action and
+ * published as a static JSON file, so reading them here never hits the GitHub
+ * API rate limit. Cached for a day to avoid refetching on every page load; the
+ * `generated_at` field is shown to the user as the data's freshness.
+ */
+
+export type ContributionLevel = 0 | 1 | 2 | 3 | 4;
+
+export interface StatsDay {
+  date: string;
+  count: number;
+  level: ContributionLevel;
+}
+
+export interface GithubStatsData {
+  generated_at: string;
+  username: string;
+  name: string;
+  summary: {
+    total: number;
+    current_streak: number;
+    current_streak_range?: [string | null, string | null];
+    longest_streak: number;
+    longest_streak_range?: [string | null, string | null];
+    best_day: { date: string | null; count: number };
+  };
+  weeks: StatsDay[][];
+  languages: { name: string; prop: number; color: string | null }[];
+}
+
+export interface GithubStatsResponse {
+  data: GithubStatsData | null;
+  error?: string;
+}
+
+export const GITHUB_STATS_URL = `https://raw.githubusercontent.com/${GITHUB_STATS_USERNAME}/github-stats/main/generated/stats.json`;
+
+export const fetchGithubStats = async (): Promise<GithubStatsResponse> => {
+  const cacheKey = `github_stats_${GITHUB_STATS_USERNAME}`;
+  const cachedData = getCache<GithubStatsData>(cacheKey, STATS_CACHE_DURATION);
+  if (cachedData) return { data: cachedData };
+
+  try {
+    const response = await fetch(GITHUB_STATS_URL, { cache: 'no-store' });
+    if (!response.ok) {
+      return { data: null, error: `HTTP ${response.status}` };
+    }
+    const data = (await response.json()) as GithubStatsData;
+    setCache(cacheKey, data);
+    return { data };
+  } catch (error: any) {
+    console.error('Error fetching GitHub stats:', error.message || error);
+    return { data: null, error: error.message };
+  }
+};
+
 export interface GithubCommit {
   repo: string;
   message: string;
