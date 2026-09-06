@@ -1,3 +1,9 @@
+# [1.22.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.21.0...v1.22.0) (2026-09-06)
+
+### Features
+
+- voice pass — SajibOS shell-command headers and result-first copy ([f634683](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/f634683e0c86ed24fadb9ec0231678c04346fd91))
+
 # [1.21.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.20.0...v1.21.0) (2026-09-06)
 
 ### Features
