@@ -1,3 +1,9 @@
+# [1.23.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.22.0...v1.23.0) (2026-09-06)
+
+### Features
+
+- implement scroll synchronization and scroll-to-top functionality in Dock and Home components ([cead553](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/cead553ffa50ef976db7838e52ff09df0d23af0d))
+
 # [1.22.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.21.0...v1.22.0) (2026-09-06)
 
 ### Features
