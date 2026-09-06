@@ -1,3 +1,9 @@
+# [1.25.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.24.0...v1.25.0) (2026-09-06)
+
+### Features
+
+- compact About section — pagination removed, SajibOS service styling ([7ac754d](https://github.com/shahadathhs/shahadathhs.vercel.app/commit/7ac754d9c70d8f212fc5ca7422e13aca395aa871))
+
 # [1.24.0](https://github.com/shahadathhs/shahadathhs.vercel.app/compare/v1.23.0...v1.24.0) (2026-09-06)
 
 ### Features
