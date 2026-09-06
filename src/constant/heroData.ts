@@ -32,7 +32,7 @@ export const heroData = {
   ],
 
   tagline:
-    'Backend Engineer building scalable APIs, distributed systems, and AI-powered services with Node.js, NestJS, TypeScript, and Python — shipped end-to-end, from data modeling to production.',
+    'Backend engineer at Digital Pylot, Dhaka. Writes TypeScript and Python, ships microservices, and trains the occasional chatbot. Lives between Postgres connections and chai refills. You are welcome to deploy.',
 
   resumeLink:
     'https://drive.google.com/file/d/1dtZCEgZyof-qrUreeVpXDlOovosegpuf/view',

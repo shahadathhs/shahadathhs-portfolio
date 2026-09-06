@@ -50,14 +50,13 @@ export default function ContactSection() {
           {/* Header Block */}
           <div className="flex flex-col mb-8 text-left items-start">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-3">
-              Get in touch
+              ping sajib
             </h2>
             <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
             <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
               Email works great for a direct line. Prefer a structured
               collaboration? I&apos;m active on open source communities and
-              platforms like GitHub. I&apos;m always open to a thoughtful
-              message either way.
+              platforms like GitHub. I read every packet — and reply to most.
             </p>
           </div>
 

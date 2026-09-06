@@ -43,13 +43,13 @@ export default function SkillsSection() {
           {/* Header */}
           <div className="mb-8 flex flex-col max-w-2xl text-left">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-3">
-              Technical Skills
+              stack --list
             </h2>
             <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
             <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 leading-normal">
-              I focus on backend systems and getting them to production
-              reliably. Here&apos;s a snapshot of the stack I use most —
-              languages, frameworks, data layers, AI tooling, and delivery.
+              Installed packages, refreshed often. Backend systems that reach
+              production — languages, frameworks, data layers, AI tooling, and
+              the delivery pipeline that carries them.
             </p>
           </div>
 

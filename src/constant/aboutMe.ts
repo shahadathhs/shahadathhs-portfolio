@@ -100,4 +100,4 @@ export const aboutMeBio = aboutBands.map((b) => b.paragraph);
 
 /** One-line intro under the "About Me" title. */
 export const aboutMeSubtitle =
-  'Backend engineer who takes systems from schema to production — architecture, real-time features, AI integration, and the infrastructure that runs them.';
+  'the human behind the shell — takes systems from schema to production.';

@@ -104,12 +104,11 @@ export default function ProjectSection() {
           <div className="mb-8 flex flex-col gap-4 text-left sm:flex-row sm:items-end sm:justify-between">
             <div className="flex flex-col items-start">
               <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-3">
-                Open Source Projects
+                ls ~/deployed
               </h2>
               <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
               <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 max-w-2xl leading-normal">
-                Microservices, self-hosted infrastructure, and platforms
-                I&apos;ve designed and shipped in the open.
+                Things running in production, not just sitting in repos.
               </p>
             </div>
             <a

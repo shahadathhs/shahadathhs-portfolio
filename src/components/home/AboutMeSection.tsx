@@ -67,7 +67,7 @@ export default function AboutMeSection() {
           {/* Header + subheader */}
           <div className="mb-8 flex flex-col max-w-2xl text-left">
             <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight text-neutral-900 dark:text-neutral-50 mb-3">
-              About Me
+              whoami
             </h2>
             <div className="h-1.5 w-20 bg-primary mb-4 rounded-md" />
             <p className="text-sm md:text-base text-neutral-600 dark:text-neutral-400 leading-normal">
